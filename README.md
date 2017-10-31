@@ -1,20 +1,36 @@
 # InstMeet
+
 ---
 
 ## Environments
 
-Node: version 6.9.0
-NPM: version 3.10.8 (with correct node version will suffice)
+Node: version 8.8.1
+NPM: version 5.4.2 (with correct node version will suffice)
+
+**if you use nvm, you can install node@8.8.1 by `nvm install 8.8.1` and alias as default node version `nvm alias default 8.8.1`, or you can simple download from [nodejs](https://nodejs.org/en/)**
 
 Download `create-react-native-app`: https://github.com/react-community/create-react-native-app
-Install Expo app on iOS/ Android: https://expo.io/
+Install Expo app on iOS / Android: https://expo.io/
+
+Install Yarn for package management: https://yarnpkg.com/en/docs/install
+
+**Whenever you try to add npm packages: do `yarn add package_name` instead of `npm install package_name`**
+
+**After you clone or pull the repo, make sure to run `yarn install` before proceeding to development**
 
 ## Develop Docs
 
 Facebook React-Native: https://facebook.github.io/react-native/docs/getting-started.html
-Native Base UI framework: https://nativebase.io/
 
-_The major steps to develop is on .js files for UIs, and finally all things wrapped up, run `npm run eject` to export all files to native codes_
+Native Base UI framework: https://nativebase.io/, Docs: https://docs.nativebase.io/
+
+React-Navigation: https://reactnavigation.org/docs/intro/
+
+JS Environments: https://facebook.github.io/react-native/docs/javascript-environment.html
+
+Color References: https://facebook.github.io/react-native/docs/colors.html
+
+_The major steps to develop is on .js files for UIs, and finally all things wrapped up, run `npm run eject` to export all files to native codes_.
 
 ## Further Instructions
 
