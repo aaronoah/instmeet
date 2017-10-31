@@ -4,7 +4,6 @@
 
 ## Environments
 
-<<<<<<< HEAD
 Node: version 8.8.1
 NPM: version 5.4.2 (with correct node version will suffice)
 
@@ -18,24 +17,12 @@ Install Yarn for package management: https://yarnpkg.com/en/docs/install
 **Whenever you try to add npm packages: do `yarn add package_name` instead of `npm install package_name`**
 
 **After you clone or pull the repo, make sure to run `yarn install` before proceeding to development**
-=======
-Node: version 6.9.0
-
-NPM: version 3.10.8 (with correct node version will suffice)
-
-Download `create-react-native-app`: https://github.com/react-community/create-react-native-app
-
-Install Expo app on iOS/ Android: https://expo.io/
->>>>>>> 71a275ef638dc398d9abf84df26914482c92db0c
 
 ## Develop Docs
 
-Facebook React-Native: https://facebook.github.io/react-native/docs/getting-started.html
-<<<<<<< HEAD
-=======
+Git Conflict: https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/
 
-Native Base UI framework: https://nativebase.io/
->>>>>>> 71a275ef638dc398d9abf84df26914482c92db0c
+Facebook React-Native: https://facebook.github.io/react-native/docs/getting-started.html
 
 Native Base UI framework: https://nativebase.io/, Docs: https://docs.nativebase.io/
 
