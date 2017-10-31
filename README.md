@@ -3,15 +3,18 @@
 
 ## Environments
 
-Node: version 6.9.0 /n
+Node: version 6.9.0
+
 NPM: version 3.10.8 (with correct node version will suffice)
 
 Download `create-react-native-app`: https://github.com/react-community/create-react-native-app
+
 Install Expo app on iOS/ Android: https://expo.io/
 
 ## Develop Docs
 
 Facebook React-Native: https://facebook.github.io/react-native/docs/getting-started.html
+
 Native Base UI framework: https://nativebase.io/
 
 _The major steps to develop is on .js files for UIs, and finally all things wrapped up, run `npm run eject` to export all files to native codes_
@@ -88,11 +91,11 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 ##### Using Android Studio's `adb`
 
 1. Make sure that you can run adb from your terminal.
-2. Open Genymotion and navigate to `Settings -> ADB`. Select “Use custom Android SDK tools” and update with your [Android SDK directory](https://stackoverflow.com/questions/25176594/android-sdk-location).
+2. Open Genymotion and navigate to `Settings -> ADB`. Select ï¿½Use custom Android SDK toolsï¿½ and update with your [Android SDK directory](https://stackoverflow.com/questions/25176594/android-sdk-location).
 
 ##### Using Genymotion's `adb`
 
-1. Find Genymotion’s copy of adb. On macOS for example, this is normally `/Applications/Genymotion.app/Contents/MacOS/tools/`.
+1. Find Genymotionï¿½s copy of adb. On macOS for example, this is normally `/Applications/Genymotion.app/Contents/MacOS/tools/`.
 2. Add the Genymotion tools directory to your path (instructions for [Mac](http://osxdaily.com/2014/08/14/add-new-path-to-path-command-line/), [Linux](http://www.computerhope.com/issues/ch001647.htm), and [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)).
 3. Make sure that you can run adb from your terminal.
 
