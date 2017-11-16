@@ -1,21 +1,15 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import Landing from './views/Landing';
+import Auth from './views/Auth';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>InstMeet</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const RootNavigator = StackNavigator({
+  Landing: {
+    screen: Landing
   },
+  Login: {
+    screen: Auth,
+
+  }
 });
+
+export default RootNavigator;
