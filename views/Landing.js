@@ -3,15 +3,21 @@ import { StyleSheet, View, ImageBackground, Text } from 'react-native';
 import { Button } from 'native-base';
 
 export default class Landing extends React.Component {
+  static navigationOptions = {
+    header: null
+  }
+
   render() {
     return (
       <ImageBackground source={require('../ui/output/auth/friends2.png')} style={styles.container}>
         <Text style={styles.headline}>InstMeet</Text>
         <View style={styles.auth}>
-          <Button info style={styles.login} onPress={() => this.props.navigation.navigate('')}>
+          <Button info style={styles.login}
+            onPress={() => this.props.navigation.navigate('Login', {mode: 'login'})}>
             <Text style={styles.loginText}>Login</Text>
           </Button>
-          <Button light style={styles.signup}>
+          <Button light style={styles.signup}
+            onPress={() => this.props.navigation.navigate('Signup', {mode: 'signup'})}>
             <Text style={styles.signupText}>Sign up</Text>
           </Button>
         </View>

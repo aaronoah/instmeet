@@ -1,14 +1,23 @@
 import { StackNavigator } from 'react-navigation';
 import Landing from './views/Landing';
-import Auth from './views/Auth';
+import Login from './views/auth/Login';
+import Signup from './views/auth/Signup';
 
 const RootNavigator = StackNavigator({
   Landing: {
     screen: Landing
   },
   Login: {
-    screen: Auth,
-
+    screen: Login,
+    navigationOptions: {
+      title: 'InstMeet'
+    }
+  },
+  Signup: {
+    screen: Signup,
+    navigationOptions: {
+      title: 'InstMeet'
+    }
   }
 });
 

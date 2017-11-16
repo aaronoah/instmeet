@@ -32,6 +32,8 @@ JS Environments: https://facebook.github.io/react-native/docs/javascript-environ
 
 Color References: https://facebook.github.io/react-native/docs/colors.html
 
+React Native Vector Icons: https://github.com/oblador/react-native-vector-icons
+
 _The major steps to develop is on .js files for UIs, and finally all things wrapped up, run `npm run eject` to export all files to native codes_.
 
 ## Further Instructions
