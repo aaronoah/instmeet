@@ -9,7 +9,7 @@ export default class Landing extends React.Component {
 
   render() {
     return (
-      <ImageBackground source={require('../ui/output/auth/friends2.png')} style={styles.container}>
+      <ImageBackground source={require('../images/friends2.png')} style={styles.container}>
         <Text style={styles.headline}>InstMeet</Text>
         <View style={styles.auth}>
           <Button info style={styles.login}
