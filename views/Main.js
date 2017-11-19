@@ -1,3 +1,4 @@
+import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import People from './People';
 import NewEvent from './NewEvent';

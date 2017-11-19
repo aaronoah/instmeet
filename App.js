@@ -2,6 +2,7 @@ import { StackNavigator } from 'react-navigation';
 import Landing from './views/Landing';
 import Login from './views/auth/Login';
 import Signup from './views/auth/Signup';
+import People from './views/People';
 
 const RootNavigator = StackNavigator({
   Landing: {
@@ -10,13 +11,19 @@ const RootNavigator = StackNavigator({
   Login: {
     screen: Login,
     navigationOptions: {
-      title: 'InstMeet'
+      title: 'Login'
     }
   },
   Signup: {
     screen: Signup,
     navigationOptions: {
-      title: 'InstMeet'
+      title: 'Sign Up'
+    }
+  },
+  People: {
+    screen: People,
+    navigationOptions: {
+      title: 'People'
     }
   }
 });

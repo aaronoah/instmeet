@@ -24,7 +24,8 @@ export default class Login extends React.Component{
         <TouchableOpacity style={{marginTop: 2, marginLeft: 196}}>
           <Text style={{ color: 'blue' }}>Forget your password?</Text>
         </TouchableOpacity>
-        <Button block info style={{marginTop: 30, width: 355, marginLeft: 10}}>
+        <Button block info style={{marginTop: 30, width: 355, marginLeft: 10}}
+        onPress={() => this.props.navigation.navigate('People')}>
           <Text style={{color: 'white', fontSize: 18}}>Login</Text>
         </Button>
       </Form>
