@@ -14,10 +14,13 @@ const MainNavigator = TabNavigator({
   Settings: { screen: Settings }
 }, {
   tabBarPosition: 'bottom',
+  swipeEnabled: true,
   lazy: true,
   animationEnabled: false,
   tabBarOptions: {
-    activeTintColor: '',
-    inactiveTintColor: ''
+    showLabel: false,
+    activeTintColor: 'blue'
   }
 });
+
+export default MainNavigator;

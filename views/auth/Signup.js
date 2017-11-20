@@ -28,7 +28,8 @@ export default class Login extends React.Component {
           </Item>
           <Icon name='eye' style={{ fontSize: 30 }} />
         </View>
-        <Button block info style={{width: 355, marginTop: 30, marginLeft: 10}}>
+        <Button block info style={{width: 355, marginTop: 30, marginLeft: 10}}
+          onPress={() => this.props.navigation.navigate('Main')}>
           <Text style={{color: 'white', fontSize: 18}}>Sign Up</Text>
         </Button>
       </Form>

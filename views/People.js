@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document } from 'native-base';
-export default class ListThumbnailExample extends Component {
- displayResult() {
-   console.log('wayayay');
+import { View, TouchableOpacity, Image } from 'react-native';
+import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document } from 'native-base';
+
+export default class People extends Component {
+  static navigationOptions = {
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="list" style={{ fontSize: 30, color: tintColor }} />
+    )
+  };
+
+  displayResult() {
+    console.log('wayayay');
     this.setState({backgroundColor: 'black'})
-    }
+  }
   render() {
     return (
       <Form style={{backgroundColor: 'white', height: 667}}>
@@ -16,7 +23,7 @@ export default class ListThumbnailExample extends Component {
           <Button first style={{backgroundColor:'#FFFFFF', borderColor: '#000000'}} onpress={()=>this.displayResult}>
           <Text style={{color: 'black'}}>Follower</Text>
         </Button>
-          <Button last active style={{backgroundColor:'#000000', borderColor: '#000000'}} id = 'following'> 
+          <Button last active style={{backgroundColor:'#000000', borderColor: '#000000'}} id = 'following'>
             <Text style={{color:'#FFFFFF'}} id='followingtext'>Following</Text>
           </Button>
         </Segment>
@@ -39,6 +46,6 @@ export default class ListThumbnailExample extends Component {
             </ListItem>
           </List>
       </Form>
-          )
+    )
   }
 }
