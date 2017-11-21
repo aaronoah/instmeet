@@ -28,13 +28,7 @@ const RootNavigator = StackNavigator({
     navigationOptions: {
       headerLeft: <View></View>
     }
-  },
-  // People: {
-  //   screen: People,
-  //   navigationOptions: {
-  //     title: 'People'
-  //   }
-  // }
+  }
 });
 
 export default RootNavigator;

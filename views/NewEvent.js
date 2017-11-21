@@ -5,7 +5,7 @@ import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem
 export default class NewEvent extends Component {
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="add" style={{ fontSize: 30, color: tintColor }} />
+      <Icon name="ios-add-circle" style={{ fontSize: 30, color: tintColor }} />
     )
   };
 

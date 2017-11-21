@@ -3,6 +3,19 @@ import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { Form, Item, Input, Icon, Button } from 'native-base';
 
 export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.login = this.login.bind(this);
+    this.state = {
+      email: "",
+      password: "",
+      message: ""
+    };
+  }
+
+  signup() {
+    this.props.navigation.navigate('Main');
+  }
 
   render() {
     return (
@@ -29,7 +42,7 @@ export default class Login extends React.Component {
           <Icon name='eye' style={{ fontSize: 30 }} />
         </View>
         <Button block info style={{width: 355, marginTop: 30, marginLeft: 10}}
-          onPress={() => this.props.navigation.navigate('Main')}>
+          onPress={() => this.signup()}>
           <Text style={{color: 'white', fontSize: 18}}>Sign Up</Text>
         </Button>
       </Form>
