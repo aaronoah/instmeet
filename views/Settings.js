@@ -4,6 +4,7 @@ import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem
 
 export default class Settings extends Component {
   static navigationOptions = {
+    title: "Settings",
     tabBarIcon: ({ tintColor }) => (
       <Icon name="ios-person" style={{ fontSize: 30, color: tintColor }} />
     )

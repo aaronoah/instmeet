@@ -9,18 +9,19 @@ export default class People extends Component {
       toggle: false,
       contentUser1: this.Megha(),
       contentUser2: this.Yuqi(),
-      
+
     };
 
     this.toggleState.bind(this);//bind the function to the class
   };
 
   static navigationOptions = {
+    title: "People",
     tabBarIcon: ({ tintColor }) => (
       <Icon name="ios-list" style={{ fontSize: 30, color: tintColor }} />
     )
   };
- 
+
   toggleState(toggle){
     this.setState({contentUser1:toggle ? this.John() : this.Megha(), contentUser2:toggle? this.Jane() : this.Yuqi(), toggle:toggle}); // force a rerender
   }
@@ -122,17 +123,17 @@ Empty() {
 
 // var Megha =
 
-// var Yuqi = 
+// var Yuqi =
 // ;
 
-// var John = 
+// var John =
 // ;
 
-//  var Jane = 
+//  var Jane =
 // ;
 
-// var Empty = 
-// ; 
+// var Empty =
+// ;
 
 var styles = StyleSheet.create({
   container: {

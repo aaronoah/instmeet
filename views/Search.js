@@ -4,6 +4,7 @@ import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem
 
 export default class Search extends Component {
   static navigationOptions = {
+    title: "Search",
     tabBarIcon: ({ tintColor }) => (
       <Icon name="ios-search" style={{ fontSize: 30, color: tintColor }} />
     )

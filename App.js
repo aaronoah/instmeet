@@ -1,11 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, Header } from 'react-navigation';
 import Landing from './views/Landing';
 import Login from './views/auth/Login';
 import Signup from './views/auth/Signup';
 import People from './views/People';
 import MainNavigator from './views/Main';
+import FillInfo from './views/auth/FillInfo';
 
 const RootNavigator = StackNavigator({
   Landing: {
@@ -23,10 +24,14 @@ const RootNavigator = StackNavigator({
       title: 'Sign Up'
     }
   },
+  FillInfo: {
+    screen: FillInfo
+  },
   Main: {
     screen: MainNavigator,
     navigationOptions: {
-      headerLeft: <View></View>
+      header: null,
+      gesturesEnabled: false
     }
   }
 });

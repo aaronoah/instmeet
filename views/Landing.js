@@ -13,11 +13,11 @@ export default class Landing extends React.Component {
         <Text style={styles.headline}>InstMeet</Text>
         <View style={styles.auth}>
           <Button info style={styles.login}
-            onPress={() => this.props.navigation.navigate('Login', {mode: 'login'})}>
+            onPress={() => this.props.navigation.navigate('Login')}>
             <Text style={styles.loginText}>Login</Text>
           </Button>
           <Button light style={styles.signup}
-            onPress={() => this.props.navigation.navigate('Signup', {mode: 'signup'})}>
+            onPress={() => this.props.navigation.navigate('Signup')}>
             <Text style={styles.signupText}>Sign up</Text>
           </Button>
         </View>
