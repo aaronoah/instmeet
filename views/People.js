@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation } from 'react-native';
-import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document } from 'native-base';
+import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, 
+  Thumbnail, Text, Body, document } from 'native-base';
+
 
 export default class People extends Component {
   constructor(props){
@@ -9,9 +11,7 @@ export default class People extends Component {
       toggle: false,
       contentUser1: this.Megha(),
       contentUser2: this.Yuqi(),
-
     };
-
     this.toggleState.bind(this);//bind the function to the class
   };
 
@@ -20,7 +20,7 @@ export default class People extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon name="ios-list" style={{ fontSize: 30, color: tintColor }} />
     )
-  };
+  }; 
 
   toggleState(toggle){
     this.setState({contentUser1:toggle ? this.John() : this.Megha(), contentUser2:toggle? this.Jane() : this.Yuqi(), toggle:toggle}); // force a rerender
@@ -35,15 +35,16 @@ export default class People extends Component {
 }
 
 Megha(){
-  return (<ListItem>
-    <Thumbnail square size={80} source={require('../images/Megha.png')} />
-    <Body>
-      <Text style={{flex: 0.3}}>Megha</Text>
-      <Text note style={{flex: 0.3}}>Its time to build a difference . .</Text>
-    </Body>
-    <TouchableOpacity onPress={()=> this.DeleteUser1()}>
-    <Text style={{flex: 0.3, color: '#3F51B5'}}>Unfollow</Text>
-    </TouchableOpacity>
+  return (
+    <ListItem onPress={() => this.props.navigation.navigate('Megha_profile')}>
+        <Thumbnail square size={80} source={require('../images/Megha.png')} />
+        <Body>
+          <Text style={{ flex: 0.3 }}>Megha</Text>
+          <Text note style={{ flex: 0.3 }}>Its time to build a difference . .</Text>
+        </Body>
+        <TouchableOpacity onPress={()=>this.DeleteUser1()}>
+          <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
+        </TouchableOpacity>
     </ListItem>
     );
 }
@@ -98,12 +99,11 @@ Empty() {
     <Text></Text>
   );
 }
-
   render() {
     // let first = ...
     // let last = ...
     return (
-      <Form style={{backgroundColor: 'white', height: 667}}>
+      <View style={{backgroundColor: 'white', height: 667}}>
         <Segment style= {{backgroundColor: 'white'}}>
           <Button first inactive style={[styles.buttoninactive, this.state.toggle && styles.buttonactive]} onPress={()=> this.toggleState(true)}>
             <Text style={[styles.textinactive, this.state.toggle && styles.textactive]}>Follower</Text>
@@ -116,7 +116,7 @@ Empty() {
             {this.state.contentUser1}
             {this.state.contentUser2}
         </List>
-      </Form>
+      </View>
     );
   }
 }

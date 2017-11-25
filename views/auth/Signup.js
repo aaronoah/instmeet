@@ -16,7 +16,7 @@ export default class Signup extends React.Component {
       passwd: "",
       message: "",
       pinSecure: true
-    };
+    };   
   }
 
   signup() {
