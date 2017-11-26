@@ -2,6 +2,7 @@ export const users = [
   {  //root test user, do not delete
     id: 1,
     username: "test",
+    notes: "test notes",
     email: "test@umn.edu",
     password: "1234",
     gender: "male",

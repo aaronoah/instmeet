@@ -5,9 +5,12 @@ import Landing from './views/Landing';
 import Login from './views/auth/Login';
 import Signup from './views/auth/Signup';
 import People from './views/People';
+import Settings from './views/Settings';
 import MainNavigator from './views/Main';
 import FillInfo from './views/auth/FillInfo';
 import ProfileDetail from './views/ProfileDetail';
+import userProfile from './views/userProfile';
+import Notifications from './views/Notifications';
 
 const RootNavigator = StackNavigator({
   Landing: {
@@ -37,6 +40,14 @@ const RootNavigator = StackNavigator({
   },
   ProfileDetail: {
     screen: ProfileDetail
+  },
+
+  userProfile: {
+    screen: userProfile
+  },
+
+  Notifications: {
+    screen: Notifications
   }
 }, {
   headerMode: "none"
