@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { Form, Item, Input, Icon, Content, H2, Button } from 'native-base';
+import { Form, Item, Input, Icon, Content, H2, Container, Header, Left, Body, Right, Title, Button } from 'native-base';
 import { interests } from '../../data/interests';
 
 class FillInfo extends React.Component{
@@ -11,9 +11,6 @@ class FillInfo extends React.Component{
       choice: []
     };
   }
-
-  static navigationOptions = {
-  };
 
   toggleChoice(choice){
     let c = this.state.choice;
@@ -31,23 +28,38 @@ class FillInfo extends React.Component{
 
   render(){
     return (
-      <Content contentContainerStyle={{}}>
-        <H2 style={{marginLeft: 67, marginTop: 40, marginBottom: 40}}>Choose your Interests</H2>
-        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-          {Object.keys(this.props.picker).map((val, key) => {
-            return (
-              <TouchableOpacity key={key} style={(this.state.choice.indexOf(val) !== -1) ? styles.selected : styles.unselected} onPress={() => this.toggleChoice(val)}>
-                <Text style={(this.state.choice.indexOf(val) !== -1) ? styles.selectedText : styles.unselectedText}>{val}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-        <View>
-          <Button bordered style={styles.nextBtn} onPress={() => this.props.navigation.navigate('Main')}>
-            <Text>Next</Text>
-          </Button>
-        </View>
-      </Content>
+      <Container>
+        <Header>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack(null)}>
+              <Icon name='arrow-back' />
+              <Text style={{color: '#4fadf9'}}>Sign Up</Text>
+            </Button>
+          </Left>
+          <Body>
+            <Title></Title>
+          </Body>
+          <Right></Right>
+        </Header>
+        <Content contentContainerStyle={{}}>
+          <H2 style={{ marginLeft: 67, marginTop: 40, marginBottom: 40 }}>Choose your Interests</H2>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+            {Object.keys(this.props.picker).map((val, key) => {
+              return (
+                <TouchableOpacity key={key} style={(this.state.choice.indexOf(val) !== -1) ? styles.selected : styles.unselected} onPress={() => this.toggleChoice(val)}>
+                  <Text style={(this.state.choice.indexOf(val) !== -1) ? styles.selectedText : styles.unselectedText}>{val}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+          <View>
+            <Button bordered style={styles.nextBtn} onPress={() => this.props.navigation.navigate('Main')}>
+              <Text>Next</Text>
+            </Button>
+          </View>
+        </Content>
+      </Container>
+
     );
   }
 }

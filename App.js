@@ -34,6 +34,8 @@ const RootNavigator = StackNavigator({
       gesturesEnabled: false
     }
   }
+}, {
+  headerMode: "none"
 });
 
 export default RootNavigator;

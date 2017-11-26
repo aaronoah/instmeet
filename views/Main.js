@@ -7,6 +7,8 @@ import NewEvent from './NewEvent';
 import Search from './Search';
 import Home from './Home';
 import Settings from './Settings';
+import Event from './event/Event';
+import MyEvents from './event/MyEvents';
 
 class NewEventTab extends React.Component{
   static navigationOptions = ({navigation}) => ({
@@ -41,8 +43,7 @@ const Tabs = TabNavigator({
   }
 });
 
-
-const MainNavigator = StackNavigator({
+const MainModalNavigator = StackNavigator({
   Tabs: {
     screen: Tabs
   },
@@ -53,7 +54,21 @@ const MainNavigator = StackNavigator({
     },
   }
 }, {
-    mode: 'modal',
+    mode: 'modal'
+});
+
+const MainNavigator = StackNavigator({
+  Modal: {
+    screen: MainModalNavigator,
+  },
+  Event: {
+    screen: Event
+  },
+  MyEvents: {
+    screen: MyEvents
+  }
+}, {
+  headerMode: 'none'
 });
 
 export default MainNavigator;
