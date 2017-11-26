@@ -23,19 +23,27 @@ export default class Megha_profile extends Component {
           <Image square size={80} source={require('../images/Megha_profile.png')} style={{ width: 92, height: 92, marginLeft: 142 }} />
           <Text style={{ fontSize: 24, marginTop: 10, marginLeft: 145 }}>Megha ♀</Text>
           <ListItem style={{ backgroundColor: '#E9E9E9', marginTop: 45, marginLeft: 0, width: 375, height: 45 }}>
-            <Text>Major: Computer Science</Text>
+            <Icon name="ios-school" style={{ marginLeft: 5 }} />
+            <Text style={{ marginLeft: 15 }}>Major: Computer Science</Text>
           </ListItem>
           <ListItem style={{ backgroundColor: '#FFFFFF', marginLeft: 0, width: 375, height: 45 }}>
-            <Text>Phone: 651 —123—4567</Text>
+            <Icon name="ios-call" style={{ marginLeft: 5 }} />
+            <Text style={{ marginLeft: 15 }}>Phone: 651 —123—4567</Text>
           </ListItem>
           <ListItem style={{ backgroundColor: '#E9E9E9', marginLeft: 0, width: 375, height: 45 }}>
-            <Text>Birthday: 1990-01-01 </Text>
+            <Icon name="md-calendar" style={{ marginLeft: 5 }} />
+            <Text style={{ marginLeft: 15 }}>Birthday: 1990-01-01 </Text>
           </ListItem>
           <ListItem style={{ backgroundColor: '#FFFFFF', marginLeft: 0, width: 375, height: 45 }}>
-            <Text>Interests</Text>
+            <Icon name="logo-dribbble" style={{ marginLeft: 5 }} />
+            <Text style={{ marginLeft: 15 }}>Interests: </Text>
+            <Button rounded style={{ backgroundColor: '#FBAD3D', width: 80, height: 23, marginLeft: 5 }}>
+              <Text style={{ color: '#FFFFFF', fontSize: 12 }}>Cooking</Text>
+            </Button>
           </ListItem>
           <ListItem style={{ backgroundColor: '#E9E9E9', marginLeft: 0, width: 375, height: 45 }}>
-            <Text>Credit Status: Perfect </Text>
+            <Icon name="md-clipboard" style={{ marginLeft: 5 }} />
+            <Text style={{ marginLeft: 15 }}>Credit Score: 100 </Text>
           </ListItem>
         </ScrollView>
         <Button block dark style={{ width: 353, height: 41, marginLeft: 11, marginBottom: 20 }}>

@@ -38,6 +38,8 @@ const RootNavigator = StackNavigator({
   Megha_profile: {
     screen: Megha_profile
   }
+}, {
+  headerMode: "none"
 });
 
 export default RootNavigator;
