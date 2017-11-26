@@ -7,6 +7,7 @@ import NewEvent from './NewEvent';
 import Search from './Search';
 import Home from './Home';
 import Settings from './Settings';
+// import Notifications from './Notifications'
 
 class NewEventTab extends React.Component{
   static navigationOptions = ({navigation}) => ({
