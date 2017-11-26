@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, ViewPagerAndroid, ScrollView } from 'react-native';
 import { Icon, Container, Header, Button, List, ListItem, Text, Body, Item, Title, Subtitle, Left, Right } from 'native-base';
 
-export default class Megha_profile extends Component {
+export default class ProfileDetail extends Component {
 
   constructor(props){
     super(props);

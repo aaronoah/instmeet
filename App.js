@@ -7,7 +7,7 @@ import Signup from './views/auth/Signup';
 import People from './views/People';
 import MainNavigator from './views/Main';
 import FillInfo from './views/auth/FillInfo';
-import Megha_profile from './views/Megha_profile';
+import ProfileDetail from './views/ProfileDetail';
 
 const RootNavigator = StackNavigator({
   Landing: {
@@ -35,8 +35,8 @@ const RootNavigator = StackNavigator({
       gesturesEnabled: false
     }
   },
-  Megha_profile: {
-    screen: Megha_profile
+  ProfileDetail: {
+    screen: ProfileDetail
   }
 }, {
   headerMode: "none"
