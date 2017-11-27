@@ -17,8 +17,23 @@ export default class Search extends Component {
   };
 
   static navigationOptions = ({navigation}) => ({
+    header: (
+      <Header searchBar rounded>
+        <Item>
+          <Icon name="ios-search" />
+          <Input
+            placeholder="Search user/event"
+            style={{ height: 40, flex: 1 }}
+            onChangeText={(text) => {
+              this.state.text = text;
+              this.getResult();
+            }}
+            maxLength={30} />
+        </Item>
+      </Header>
+    ),
     tabBarIcon: ({ tintColor }) => {
-      return <Icon name="search" style={{fontSize: 30, color: tintColor}} />
+      return <Icon name="search" style={{ fontSize: 30, color: tintColor }} />
     }
   });
 
@@ -47,19 +62,6 @@ export default class Search extends Component {
 
   // renderHeader(){
   //   return (
-  //     <Header searchBar rounded>
-  //     <Item>
-  //       <Icon name="ios-search" />
-  //       <Input
-  //       placeholder="Search"
-  //       style={{height: 40, flex: 1}}
-  //       onChangeText={(text) => {
-  //         this.state.text = text;
-  //         this.getResult();
-  //       }}
-  //       maxLength={30} />
-  //     </Item>
-  //   </Header>
   //   );
   // }
 
@@ -149,38 +151,9 @@ export default class Search extends Component {
 
 render(){
   return (
-    <Header searchBar rounded>
-    <Item>
-      <Icon name="ios-search" />
-      <Input
-      placeholder="Search"
-      style={{height: 40, flex: 1}}
-      onChangeText={(text) => {
-        this.state.text = text;
-        this.getResult();
-      }}
-      maxLength={30} />
-    </Item>
   <View style={{backgroundColor: 'white', height: 667}}>
-    {/* <View searchBar> */}
-    {/* </View> */}
-    <Segment style= {{backgroundColor: 'white'}}>
-       <Button first inactive style={[styles.buttoninactive,
-        this.state.toggle && styles.buttonactive]}
-        onPress={()=> this.toggleState(true)}>
-          <Text style={[styles.textinactive,
-            this.state.toggle && styles.textactive]}>User</Text>
-       </Button>
-       <Button last active style={[styles.buttonactive,
-        this.state.toggle && styles.buttoninactive]}
-        onPress={()=> this.toggleState(false)}>
-           <Text style={[styles.textactive,
-            this.state.toggle && styles.textinactive]}>Event</Text>
-       </Button>
-    </Segment>
        {this.state.content}
   </View>
-  </Header>
     )
   }
 }
