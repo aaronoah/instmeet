@@ -1,4 +1,5 @@
-export const users = [
+export const users = {
+array: [
   {  //root test user, do not delete
     id: 1,
     username: "test",
@@ -14,4 +15,7 @@ export const users = [
     ],
     credit: 100
   }
-];
+]
+}
+  
+

@@ -58,17 +58,15 @@ export default class Settings extends React.Component {
     // }
    
     return (
-      <Form style={{backgroundColor: 'white', height: 667}}>
+      <View style={{backgroundColor: 'white', height: 667}}>
         <List>
-        {/* {this.Yuqi()} */}
           <ListItem onPress={() => this.props.navigation.navigate('userProfile')}>
-             <Thumbnail square size={80}  />
-                   <Body>
-                     <Text style={{ flex: 0.3 }}>{users.username}</Text>
-                     <Text note style={{ flex: 0.3 }}>{users.notes}</Text>
-                   </Body> 
+             <Thumbnail square size={80} source={require('../images/Yuqi.png')} />
+             <Body>
+                     <Text style={{ flex: 0.3 }}>{users.array[0].username}</Text>
+                     <Text note style={{ flex: 0.3 }}>{users.array[0].notes}</Text>
+             </Body>
           </ListItem> 
-
         </List>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 40}}>
           <Icon name="ios-notifications" style={{fontSize: 40, marginLeft: 44}}></Icon>
@@ -78,18 +76,18 @@ export default class Settings extends React.Component {
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center'}}>
           <Icon name="ios-clock" style={{fontSize: 40, marginLeft: 44}}></Icon>
-          <TouchableOpacity style={{ marginLeft: 90, marginTop: 4}}>
+          <TouchableOpacity style={{ marginLeft: 90, marginTop: 4}} onPress={() => this.props.navigation.navigate('History')}>
           <Text style={{ flex: 0.7, textAlign: 'center' }}>History</Text>
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 60}}>
           <Icon name="ios-lock" style={{fontSize: 40, marginLeft: 44}}></Icon>
-          <TouchableOpacity style={{ marginLeft: 90, marginTop: 6}}>
+          <TouchableOpacity style={{ marginLeft: 90, marginTop: 6}}  onPress={() => this.props.navigation.navigate('resetPassword')}>
           <Text style={{ flex: 0.7, textAlign: 'center' }}>Reset Password</Text>
           </TouchableOpacity>
         </View>
         
-      </Form>
+      </View>
     );
   }
 }
