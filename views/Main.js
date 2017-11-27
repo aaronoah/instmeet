@@ -105,8 +105,25 @@ const MainNavigator = StackNavigator({
   headerMode: 'none'
 });
 
-const Main = (props) => (
-  <MainNavigator screenProps={props.navigation.state.params.user} />
-);
+export default class Main extends React.Component{
+  constructor(props){
+    super(props);
+  }
 
-export default Main;
+  componentDidMount(){
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var initialPosition = JSON.stringify(position);
+        this.setState({ initialPosition });
+      },
+      (error) => alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  }
+
+  render(){
+    return (
+      <MainNavigator screenProps={this.props.navigation.state.params.user} />
+    );
+  }
+}

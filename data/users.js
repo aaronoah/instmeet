@@ -5,6 +5,7 @@ export const users = {
       username: "test",  //primary key
       email: "test@umn.edu",
       password: "1234",
+      avatar: "default",
       gender: "male",
       major: "Computer Science",
       phone: "(651)-123-4567",

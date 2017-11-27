@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document
         , Left, Right, Title } from 'native-base';
 import { events } from '../../data/events';
-        
+
 
 export default class Notifications extends Component {
 
@@ -13,31 +13,6 @@ export default class Notifications extends Component {
 
   static navigationOptions = {
   };
-
-  // Event1() {
-  //   return(
-  //     <ListItem>
-  //     <Thumbnail square source={require('../images/cook.png')} />
-  //     <Body>
-  //       <Text style={{flex: 0.3}}>Italian Cooking</Text>
-  //       <Text note style={{flex: 0.3}}>Location changed to Stadium view!</Text>
-  //     </Body>
-  //     </ListItem>
-  //   );
-  // }
-
-  // Event1() {
-  //   return(
-  //     <ListItem>
-  //     <Thumbnail square source={require('../images/swim.png')} />
-  //     <Body>
-  //       <Text style={{flex: 0.3}}>Group swimming</Text>
-  //       <Text note style={{flex: 0.3}}>Group size enlarged!</Text>
-  //     </Body>
-  //     </ListItem>
-  //   );
-  // }
-
 
   render(){
 
@@ -50,10 +25,10 @@ export default class Notifications extends Component {
       }
     }
 
-     return (
-<Container>
-<Header>
-      <Left>
+    return (
+    <Container>
+      <Header>
+        <Left>
         <Button transparent onPress={() => this.props.navigation.goBack(null)}>
           <Icon name='arrow-back' />
         </Button>
@@ -62,21 +37,23 @@ export default class Notifications extends Component {
           <Title>Notifications</Title>
         </Body>
         <Right></Right>
-    </Header>
-<Content>
-  {this.props.event.map((element, key) => {
-    return (
-      <ListItem>
-      <Thumbnail square source={findImg(element.thumbnail)} />
-      <Body>
-        <Text style={{flex: 0.3}}>{element.title}</Text>
-        <Text note style={{flex: 0.3}}>Havent decided yet!</Text>
-      </Body>
+      </Header>
+      <Content>
+        <List>
+      {this.props.event.map((element, key) => {
+        return (
+      <ListItem key={key}>
+        <Thumbnail square source={findImg(element.thumbnail)} />
+        <Body>
+          <Text style={{flex: 0.3}}>{element.title}</Text>
+          <Text note style={{flex: 0.3}}>Havent decided yet!</Text>
+        </Body>
       </ListItem>
-    );
-  })}
-</Content>
-</Container>
+        );
+      })}
+      </List>
+      </Content>
+    </Container>
      );
 
  }

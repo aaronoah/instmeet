@@ -3801,6 +3801,10 @@ moment@2.x.x, moment@^2.10.6:
   version "2.19.1"
   resolved "http://registry.npm.taobao.org/moment/download/moment-2.19.1.tgz#56da1a2d1cbf01d38b7e1afc31c10bcfa1929167"
 
+moment@^2.19.2:
+  version "2.19.2"
+  resolved "http://registry.npm.taobao.org/moment/download/moment-2.19.2.tgz#8a7f774c95a64550b4c7ebd496683908f9419dbe"
+
 morgan@~1.6.1:
   version "1.6.1"
   resolved "http://registry.npm.taobao.org/morgan/download/morgan-1.6.1.tgz#5fd818398c6819cba28a7cd6664f292fe1c0bbf2"
