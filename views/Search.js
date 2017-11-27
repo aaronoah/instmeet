@@ -8,7 +8,8 @@ export default class Search extends Component {
     super(props);
     this.state ={
       toggle: false,
-      content: this.Event()
+      content: this.Event(),
+      text: ''
     };
     //bind the function to the class
     this.toggleState = this.toggleState.bind(this);
@@ -118,7 +119,7 @@ export default class Search extends Component {
     }
     else {
       if (text == 'Kumat Pratik') {
-        var Kumat =
+        var Kumat = 
         <List>
           <ListItem>
             {/* <Thumbnail square size={80} source={require('../images/Kumat.png')} /> */}
@@ -131,7 +132,7 @@ export default class Search extends Component {
             </TouchableOpacity>
           </ListItem>
           <ListItem>
-            {/* <Thumbnail square size={80} source={require('../images/Kumat_1.png')} /> */}
+            {/* <Thumbnail square size={80} source={require('../images/face3.png')} /> */}
             <Body>
                <Text style={{flex: 0.3}}>Kumat Pratik</Text>
                <Text note style={{flex: 0.3}}>Nice to meet you</Text>
