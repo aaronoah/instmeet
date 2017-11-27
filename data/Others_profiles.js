@@ -6,7 +6,7 @@ export const Others_profiles = {
       name: "Megha",
       major: "Computer Science",
       notes: "Its time to build a difference . .",
-      gender: "Female",
+      gender: "♀",
       phone: "(651)123-4567",
       DOB: "1990-01-01",
       interests: "Cooking",
@@ -15,42 +15,42 @@ export const Others_profiles = {
     {
       name: "Kumat",
       major: "Economics",
-      notes: "Its time to build a difference . .",
-      gender: "Male",
+      notes: "Hello.",
+      gender: "♂",
       phone: "(800)123-4567",
-      DOB: "1994-11-11",
+      DOB: "1994-11-09",
       interests: "Sports",
-      credit: "88"
+      credit: "95"
     },
     {
       name: "Yuqi",
       major: "Computer Science",
       notes: "Carpe diem",
-      gender: "Female",
+      gender: "♀",
       phone: "(612)123-0000",
-      DOB: "1994-10-10",
+      DOB: "1994-05-10",
       interests: "Hiking",
       credit: "100"
     },
     {
       name: "John",
       major: "Electrical Engineering",
-      notes: "Its time to build a difference . .",
-      gender: "Male",
+      notes: "Nice to meet you",
+      gender: "♂",
       phone: "(651)123-4567",
-      DOB: "1990-01-01",
+      DOB: "1995-10-01",
       interests: "Cooking",
-      credit: "90"
+      credit: "100"
     },
     {
       name: "Jane",
       major: "Economics",
-      notes: "Its time to build a difference . .",
-      gender: "Male",
+      notes: "Follow my nose.",
+      gender: "♂",
       phone: "(800)123-4567",
       DOB: "1994-11-11",
       interests: "Sports",
-      credit: "88"
+      credit: "95"
     }
   ]
 };

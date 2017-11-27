@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem,
   Thumbnail, Text, Body, document } from 'native-base';
-import { Others_profiles } from '../data/Others_profiles'
+import { Others_profiles } from '../data/Others_profiles';
 
 export default class People extends Component {
   constructor(props){
     super(props);
     this.state ={
       toggle: false,
-      followingList: ["Megha", "Kumat", "Yuqi"],
+      followingList: ["Megha", "Kumat"],
       followerList: ["John", "Jane"]
     };
     this.toggleState.bind(this);//bind the function to the class
@@ -34,9 +34,12 @@ export default class People extends Component {
   }
 
   follow(name) {
-    var array = this.state.followingList
+    var array1 = this.state.followingList
     array.push(name)
-    this.setState({ followingList: array })
+    var array2 = this.state.followerList
+    var index = array2.indexOf(name)
+    array2.splice(index, 1);
+    this.setState({ followingList: array1, followerList: array2 })
   }
 
   contains_following(name) {
@@ -64,7 +67,6 @@ export default class People extends Component {
       switch(name){
         case 'Megha': return require('../images/Megha.png');
         case 'Kumat': return require('../images/Kumat.png');
-        case 'Yuqi': return require('../images/Yuqi.png');
         case 'John': return require('../images/John.png');
         case 'Jane': return require('../images/Jane.png');
       }
@@ -84,7 +86,7 @@ export default class People extends Component {
         {this.props.Othersitem.map((element, key) => {
           if(this.contains_following(element.name) && !this.state.toggle) {
             return (
-              <ListItem key={key} onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element})}>
+              <ListItem key={key} onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element, toggle: false})}>
                   <Thumbnail square size={80} source={findImg(element.name)} />
                   <Body>
                     <Text style={{ flex: 0.3 }}>{element.name}</Text>
@@ -98,7 +100,7 @@ export default class People extends Component {
           }
           if(this.contains_follower(element.name) && this.state.toggle) {
             return (
-              <ListItem key={key} onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element})}>
+              <ListItem key={key} onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element, toggle: true})}>
                   <Thumbnail square size={80} source={findImg(element.name)} />
                   <Body>
                     <Text style={{ flex: 0.3 }}>{element.name}</Text>
@@ -112,6 +114,9 @@ export default class People extends Component {
             }
           })}
         </List>
+        <Button>
+          <Text>  ➕ </Text>
+          </Button>
       </View>
     );
   }
