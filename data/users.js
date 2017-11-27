@@ -14,7 +14,7 @@ export const users = {
       ],
       credit: 100,
       events: {
-        past: [3],
+        past: [4],
         incoming: [1, 3]
       }
     }

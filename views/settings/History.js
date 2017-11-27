@@ -2,15 +2,18 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Container, Form, Item, Content, Card, CardItem, Input, List, ListItem, Picker, 
         Icon, Button, Header, Left, Right, Body, Title, Badge } from 'native-base';
+import { passEvent } from '../../data/passEvent';
 import { events } from '../../data/events';
-
+import { users } from '../../data/users';
 export default class History extends React.Component {
 
   constructor(props){
     super(props);
+    // this.findPass = this.findPass.bind(this);
     this.state = {
       sort: "",
-      selected3: "key3"
+      selected3: "key3",
+      // pass: []
     };
   }
 
@@ -23,16 +26,34 @@ export default class History extends React.Component {
     });
   }
 
-  render(){
+  // findPass(){
+  //   let p = users.array[0].events.past; 
+  //   for(let id of p){
+  //     for(let e of events.array){
+  //       if (id === e.id) {
+  //         this.setState(prev => {
+  //           pass: [prev.pass, ...e.id]
+  //         });
+  //       }
+  //     }
+  //   }
+  //   return;
+  // }
 
+  // componentDidMount(){
+  //   this.findPass();
+  // }
+
+  render(){
     function findImg(name){
       switch(name){
         case 'swim': return require('../../images/swim.png');
         case 'cook': return require('../../images/cook.png');
         case 'club': return require('../../images/club.png');
+        case 'rock': return require('../../images/music.png');
       }
     }
-   
+    
   return(
     <Container>
     <Header>
@@ -51,7 +72,7 @@ export default class History extends React.Component {
       <ListItem itemHeader first style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'row'}}>
           <Button bordered style={{ height: 30 }} >
-            <Text>16</Text>
+            <Text style={{ paddingHorizontal: 15}}>Total: {users.array[0].events.past.length}</Text>
           </Button>
         </View>
         <Form>
@@ -135,5 +156,5 @@ const styles = StyleSheet.create({
 });
 
 History.defaultProps = {
-  card: events.array
+  card: passEvent.array
 }

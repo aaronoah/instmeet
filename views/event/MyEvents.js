@@ -14,6 +14,7 @@ const TabContent = (props) => {
       case 'swim': return require('../../images/swim.png');
       case 'cook': return require('../../images/cook.png');
       case 'club': return require('../../images/club.png');
+      case 'rock': return require('../../images/music.png');
     }
   }
 

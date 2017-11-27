@@ -14,10 +14,14 @@ export default class Event extends Component {
     for(let person of state.params.event.participants){
       if(person === this.props.screenProps.username){
         txt = 'Quit';
+        break;
       }
     }
+    if(state.params.event.time.end < new Date()){
+      txt = 'Event is Ended';
+    }
     let btn = (
-      <Button block success={(txt === 'Join') ? true : false} danger={(txt === 'Quit') ? true : false}>
+      <Button block light={(txt === 'Event is Ended') ? true : false} success={(txt === 'Join') ? true : false} danger={(txt === 'Quit') ? true : false}>
         <Text>{txt}</Text>
       </Button>
     );
