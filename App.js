@@ -8,6 +8,7 @@ import People from './views/People';
 import Settings from './views/Settings';
 import MainNavigator from './views/Main';
 import FillInfo from './views/auth/FillInfo';
+import { Root } from 'native-base';
 
 const RootNavigator = StackNavigator({
   Landing: {
@@ -39,4 +40,8 @@ const RootNavigator = StackNavigator({
   headerMode: "none"
 });
 
-export default RootNavigator;
+export default App = () => (
+  <Root>
+    <RootNavigator />
+  </Root>
+);
