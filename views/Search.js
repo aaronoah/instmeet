@@ -8,7 +8,8 @@ export default class Search extends Component {
     super(props);
     this.state ={
       toggle: false,
-      content: this.Event()
+      content: this.Event(),
+      text: ''
     };
     //bind the function to the class
     this.toggleState = this.toggleState.bind(this);

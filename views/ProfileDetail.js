@@ -4,17 +4,17 @@ import { Icon, Container, Header, Button, List, ListItem, Text, Body, Item, Titl
 
 export default class ProfileDetail extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
   };
 
   static navigationOptions = {
   };
 
-  render(){
+  render() {
     const { state } = this.props.navigation;
-    function findImg(name){
-      switch(name){
+    function findImg(name) {
+      switch (name) {
         case 'Megha Smith': return require('../images/Megha.png');
         case 'Jackie Jones': return require('../images/Jackie.png');
         case 'John Smith': return require('../images/John.png');
@@ -24,14 +24,14 @@ export default class ProfileDetail extends Component {
       }
     }
 
-    function status (toggle) {
+    function status(toggle) {
       if (toggle) {
         return "Follow";
-      }else {
+      } else {
         return "Unfollow";
       }
     }
-    return (    
+    return (
       <View style={{
         backgroundColor: 'white',
         height: 604,
