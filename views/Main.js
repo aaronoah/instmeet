@@ -9,6 +9,11 @@ import Home from './Home';
 import Settings from './Settings';
 import Event from './event/Event';
 import MyEvents from './event/MyEvents';
+import ProfileDetail from './ProfileDetail';
+import userProfile from './settings/userProfile';
+import Notifications from './settings/Notifications';
+import resetPassword from './settings/resetPassword';
+import History from './settings/History';
 
 const Tabs = TabNavigator({
   Home: { screen: Home },
@@ -76,6 +81,25 @@ const MainNavigator = StackNavigator({
   },
   MyEvents: {
     screen: MyEvents
+  },
+  ProfileDetail: {
+    screen: ProfileDetail
+  },
+
+  userProfile: {
+    screen: userProfile
+  },
+
+  resetPassword: {
+    screen: resetPassword
+  },
+
+  History: {
+    screen: History
+  },
+
+  Notifications: {
+    screen: Notifications
   }
 }, {
   headerMode: 'none'

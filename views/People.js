@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation } from 'react-native';
-import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, 
+import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem,
   Thumbnail, Text, Body, document } from 'native-base';
 import { Others_profiles } from '../data/Others_profiles'
 
@@ -20,7 +20,7 @@ export default class People extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon name="ios-list" style={{ fontSize: 30, color: tintColor }} />
     )
-  }; 
+  };
 
   toggleState(toggle) {
     this.setState({toggle:toggle}); // force a rerender
@@ -30,7 +30,7 @@ export default class People extends Component {
     var array = this.state.followingList;
     var index = array.indexOf(name)
     array.splice(index, 1);
-    this.setState({followingList: array });  
+    this.setState({followingList: array });
   }
 
   follow(name) {
@@ -84,7 +84,7 @@ export default class People extends Component {
         {this.props.Othersitem.map((element, key) => {
           if(this.contains_following(element.name) && !this.state.toggle) {
             return (
-              <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element})}>
+              <ListItem key={key} onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element})}>
                   <Thumbnail square size={80} source={findImg(element.name)} />
                   <Body>
                     <Text style={{ flex: 0.3 }}>{element.name}</Text>
@@ -98,7 +98,7 @@ export default class People extends Component {
           }
           if(this.contains_follower(element.name) && this.state.toggle) {
             return (
-              <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element})}>
+              <ListItem key={key} onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element})}>
                   <Thumbnail square size={80} source={findImg(element.name)} />
                   <Body>
                     <Text style={{ flex: 0.3 }}>{element.name}</Text>

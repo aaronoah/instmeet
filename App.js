@@ -8,11 +8,6 @@ import People from './views/People';
 import Settings from './views/Settings';
 import MainNavigator from './views/Main';
 import FillInfo from './views/auth/FillInfo';
-import ProfileDetail from './views/ProfileDetail';
-import userProfile from './views/settings/userProfile';
-import Notifications from './views/settings/Notifications';
-import resetPassword from './views/settings/resetPassword';
-import History from './views/settings/History';
 
 const RootNavigator = StackNavigator({
   Landing: {
@@ -39,25 +34,6 @@ const RootNavigator = StackNavigator({
       header: null,
       gesturesEnabled: false
     }
-  },
-  ProfileDetail: {
-    screen: ProfileDetail
-  },
-
-  userProfile: {
-    screen: userProfile
-  },
-
-  resetPassword: {
-    screen: resetPassword
-  },
-
-  History: {
-    screen: History
-  },
-
-  Notifications: {
-    screen: Notifications
   }
 }, {
   headerMode: "none"
