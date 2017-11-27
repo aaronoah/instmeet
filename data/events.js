@@ -14,7 +14,7 @@ breast stroke, butterfly… ",
       groupSize: 10,
       initiator: "test",
       participants: [
-        'test2',
+        'test',
         'test3'
       ],
       color: '#5BC0EB',
