@@ -24,12 +24,14 @@ class Home extends Component {
     this.setState({
       selectedFilter: value
     });
-
-
   }
 
   showMyEvents(){
     this.props.navigation.navigate('MyEvents', { eventIds: this.props.screenProps.events.incoming });
+  }
+
+  componentDidMount(){
+
   }
 
   render(){
@@ -45,13 +47,10 @@ class Home extends Component {
         case 'club': return require('../images/club.png');
         case 'rock': return require('../images/music.png');
         case 'games': return require("../images/xbox.png");
-        
+
       }
     }
 
-    navigator.geolocation.getCurrentPosition((success, error, options) => {
-
-    });
     return (
       <Container>
         <List>

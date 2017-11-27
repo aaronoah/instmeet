@@ -53,10 +53,10 @@ export default class People extends Component {
   follow(name) {
     var array1 = this.state.followingList
     array1.push(name)
-    var array2 = this.state.followerList
-    var index = array2.indexOf(name)
-    array2.splice(index, 1);
-    this.setState({ followingList: array1, followerList: array2 })
+    // var array2 = this.state.followerList
+    // var index = array2.indexOf(name)
+    // array2.splice(index, 1);
+    this.setState({ followingList: array1 })
   }
 
   contains_following(name) {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Image, Button } from 'react-native';
-import { Icon, Form, Container, Header, Content, Segment, List, ListItem, Thumbnail, Text, Body, Item, Input, Toast, Left, Right, Title } from 'native-base';
+import { Icon, Form, Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Item, Input, Toast, Left, Right, Title, Badge } from 'native-base';
 import DatePicker from 'react-native-datepicker';
+import TagPicker from '../components/TagPicker';
 
 export default class NewEvent extends Component {
   constructor(props){
@@ -96,7 +97,6 @@ export default class NewEvent extends Component {
                 placeholder="select date"
                 format="YYYY-MM-DD"
                 minDate="2016-05-01"
-                maxDate="2016-06-01"
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
                 customStyles={{
@@ -119,13 +119,11 @@ export default class NewEvent extends Component {
             <Text style={{ flex: 0.3, fontSize: 18, margin: 22 }}>Time End:</Text>
             <Item style={{ flex: 0.6 }}>
               <DatePicker
-                style={{ width: 200 }}
+                style={{ width: 200, borderWidth: 0}}
                 date={this.state.timeEnd}
                 mode="date"
                 placeholder="select date"
                 format="YYYY-MM-DD"
-                minDate="2016-05-01"
-                maxDate="2016-06-01"
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
                 customStyles={{
@@ -137,6 +135,12 @@ export default class NewEvent extends Component {
                   },
                   dateInput: {
                     marginLeft: 36
+                  },
+                  btnTextConfirm: {
+                    color: '#0e7afe'
+                  },
+                  btnTextCancel: {
+                    color: '#0e7afe'
                   }
                   // ... You can check the source to find the other keys.
                 }}
@@ -163,6 +167,10 @@ export default class NewEvent extends Component {
             </Item>
           </View>
           <Text style={{ color: 'red', marginHorizontal: 10, marginVertical: 3 }}>{this.state.message}</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 22 }}>Tags: </Text>
+            <TagPicker />
+          </View>
         </Form>
       </Content>
       </Container>
