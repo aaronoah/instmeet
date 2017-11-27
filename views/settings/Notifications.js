@@ -14,30 +14,6 @@ export default class Notifications extends Component {
   static navigationOptions = {
   };
 
-  // Event1() {
-  //   return(
-  //     <ListItem>
-  //     <Thumbnail square source={require('../images/cook.png')} />
-  //     <Body>
-  //       <Text style={{flex: 0.3}}>Italian Cooking</Text>
-  //       <Text note style={{flex: 0.3}}>Location changed to Stadium view!</Text>
-  //     </Body>
-  //     </ListItem>
-  //   );
-  // }
-
-  // Event1() {
-  //   return(
-  //     <ListItem>
-  //     <Thumbnail square source={require('../images/swim.png')} />
-  //     <Body>
-  //       <Text style={{flex: 0.3}}>Group swimming</Text>
-  //       <Text note style={{flex: 0.3}}>Group size enlarged!</Text>
-  //     </Body>
-  //     </ListItem>
-  //   );
-  // }
-
 
   render(){
 
@@ -66,7 +42,7 @@ export default class Notifications extends Component {
 <Content>
   {this.props.event.map((element, key) => {
     return (
-      <ListItem>
+      <ListItem key={key}>
       <Thumbnail square source={findImg(element.thumbnail)} />
       <Body>
         <Text style={{flex: 0.3}}>{element.title}</Text>
