@@ -61,6 +61,25 @@ breast stroke, butterfly… ",
       color: '#ed5053',
       thumbnail: 'club',
       tags: ["club"]
+    },
+    {
+      id: 4,
+      title: "Xbox Games",
+      time: {
+        start: "22:00",
+        end: "12:30"
+      },
+      location: "University Village",
+      description: "Xbox game meeting, can be \
+either online or offine",
+      groupSize: 4,
+      initiator: "test4",
+      participants: [
+        'test4'
+      ],
+      color: '#84dcc6',
+      thumbnail: 'games',
+      tags: ["games"]
     }
   ]
 };
