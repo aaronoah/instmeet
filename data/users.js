@@ -13,6 +13,8 @@ export const users = {
       interests: [
         "coding"
       ],
+      follower: [],
+      following: [],
       credit: 100,
       events: {
         past: [4],

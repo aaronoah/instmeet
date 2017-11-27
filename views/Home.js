@@ -65,15 +65,15 @@ class Home extends Component {
               <Button bordered style={{height: 30}}>
                 <Picker
                   mode="dropdown"
-                  iosHeader="Filter"
+                  iosHeader="Sort"
                   selectedValue={this.state.selectedFilter}
                   onValueChange={this.onValueChange3.bind(this)}
                 >
-                  <Item label="Filter" value="key0"></Item>
-                  <Item label="Filter: Time" value="time" />
-                  <Item label="Filter: Location" value="location" />
-                  <Item label="Filter: Distance" value="distance" />
-                  <Item label="Filter: Group size" value="groupSize" />
+                  <Item label="Sort" value="key0"></Item>
+                  <Item label="Sort: Time" value="time" />
+                  <Item label="Sort: Location" value="location" />
+                  <Item label="Sort: Distance" value="distance" />
+                  <Item label="Sort: Group size" value="groupSize" />
                 </Picker>
               </Button>
             </Form>

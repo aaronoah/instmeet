@@ -8,31 +8,15 @@ export default class Search extends Component {
     super(props);
     this.state ={
       toggle: false,
-      content: this.Event(),
-      text: ''
+      content: '',
     };
     //bind the function to the class
     this.toggleState = this.toggleState.bind(this);
     this.getResult = this.getResult.bind(this);
-    // this.renderHeader = this.renderHeader.bind(this);
   };
 
   static navigationOptions = ({navigation}) => ({
-    header: (
-      <Header searchBar rounded>
-        <Item>
-          <Icon name="ios-search" />
-          <Input
-            placeholder="Search user/event"
-            style={{ height: 40, flex: 1 }}
-            onChangeText={(text) => {
-              this.state.text = text;
-              this.getResult();
-            }}
-            maxLength={30} />
-        </Item>
-      </Header>
-    ),
+    header: null,
     tabBarIcon: ({ tintColor }) => {
       return <Icon name="search" style={{ fontSize: 30, color: tintColor }} />
     }
@@ -61,17 +45,13 @@ export default class Search extends Component {
     }
   }
 
-  // renderHeader(){
-  //   return (
-  //   );
-  // }
-
-  Event() {
-    return (
-      <View style={{ flexDirection: 'column' }}>
+  render() {
+    let hotTags = (
+      <View style={{marginTop: 100}}>
         <View>
           <Text style={{ color: '#D0021B', fontSize: 30, fontWeight: 'bold', marginLeft: 27 }}>Hot🔥</Text>
         </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         <View>
           <Button rounded style={{ backgroundColor: '#4FADF9', marginLeft: 27, marginTop: 15 }}>
             <Text style={{ color: '#FFFFFF' }}>Swimming</Text>
@@ -93,22 +73,44 @@ export default class Search extends Component {
             <Text style={{ color: '#FFFFFF' }}>Others</Text>
           </Button>
         </View>
+        </View>
       </View>
+    );
+    return (
+      <Container>
+        <Header searchBar rounded>
+          <Item>
+            <Icon name="ios-search" />
+            <Input
+              placeholder="Search user/event"
+              style={{ height: 40, flex: 1 }}
+              onChangeText={(text) => this.getResult(text)}
+              maxLength={30} />
+          </Item>
+        </Header>
+      <Content>
+          {this.state.content === '' ? hotTags : this.state.content}
+      </Content>
+      </Container>
     );
   }
 
-  getResult() {
-    this.state.text
-    if (!this.state.toggle) {
-      if (text == 'swimming' || text == 'Swimming') {
+  getResult(txt) {
+    if(txt == ''){
+      this.setState({
+        content: txt
+      });
+      return;
+    }
+      if (txt == 'swimming' || txt == 'Swimming') {
         var Swim = <Text>Swimming</Text>;
         this.setState({content: Swim});
       }
-      else if (text == 'club' || text == 'Club') {
+      else if (txt == 'c' || txt == 'C') {
         var Club = <Text>Club</Text>;
         this.setState({content: Club});
       }
-      else if (text == 'cooking' || text == 'Cooking') {
+      else if (txt == 'cooking' || txt == 'Cooking') {
         var Cook = <Text>Cook</Text>;
         this.setState({content: Cook});
       }
@@ -116,10 +118,8 @@ export default class Search extends Component {
         var Empty = <Text></Text>;
         this.setState({content: Empty});
       }
-    }
-    else {
-      if (text == 'Kumat Pratik') {
-        var Kumat = 
+    if (txt == 'Kumat Pratik') {
+        var Kumat =
         <List>
           <ListItem>
             {/* <Thumbnail square size={80} source={require('../images/Kumat.png')} /> */}
@@ -147,15 +147,8 @@ export default class Search extends Component {
         var Empty = <Text></Text>;
         this.setState({content: Empty});
       }
-    }
-  }
 
-render(){
-  return (
-  <View style={{backgroundColor: 'white', height: 667}}>
-       {this.state.content}
-  </View>
-    )
+
   }
 }
 

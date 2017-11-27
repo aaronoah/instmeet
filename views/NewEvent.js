@@ -95,8 +95,8 @@ export default class NewEvent extends Component {
                 date={this.state.timeStart}
                 mode="date"
                 placeholder="select date"
-                format="YYYY-MM-DD"
-                minDate="2016-05-01"
+                format="MM-DD-HH"
+                minDate="05-01-00"
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
                 customStyles={{
@@ -123,7 +123,7 @@ export default class NewEvent extends Component {
                 date={this.state.timeEnd}
                 mode="date"
                 placeholder="select date"
-                format="YYYY-MM-DD"
+                format="MM-DD-HH"
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
                 customStyles={{

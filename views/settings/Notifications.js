@@ -22,6 +22,7 @@ export default class Notifications extends Component {
         case 'cook': return require('../../images/cook.png');
         case 'club': return require('../../images/club.png');
         case 'rock': return require('../../images/music.png');
+        case 'games': return require("../../images/xbox.png");
       }
     }
 
@@ -46,7 +47,7 @@ export default class Notifications extends Component {
         <Thumbnail square source={findImg(element.thumbnail)} />
         <Body>
           <Text style={{flex: 0.3}}>{element.title}</Text>
-          <Text note style={{flex: 0.3}}>Havent decided yet!</Text>
+          <Text note style={{flex: 0.3}}>Haven‘t decided yet!</Text>
         </Body>
       </ListItem>
         );

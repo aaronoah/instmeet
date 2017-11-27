@@ -1,5 +1,3 @@
-import { interests } from "./interests";
-
 export const Others_profiles = {
   array: [
     {
