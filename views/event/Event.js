@@ -10,6 +10,17 @@ export default class Event extends Component {
 
   render() {
     const { state } = this.props.navigation;
+    let txt = 'Join';
+    for(let person of state.params.event.participants){
+      if(person === this.props.screenProps.username){
+        txt = 'Quit';
+      }
+    }
+    let btn = (
+      <Button block success={(txt === 'Join') ? true : false} danger={(txt === 'Quit') ? true : false}>
+        <Text>{txt}</Text>
+      </Button>
+    );
     return (
       <Container>
         <Header>
@@ -31,6 +42,7 @@ export default class Event extends Component {
               <Body>
                 <Icon name='clock' />
                 <Text>
+                  {state.params.event.time.start} - {state.params.event.time.end}
                 </Text>
               </Body>
             </CardItem>
@@ -40,36 +52,33 @@ export default class Event extends Component {
               <Body>
                 <Icon name='navigate' />
                 <Text>
+                  {state.params.event.location}
                 </Text>
               </Body>
             </CardItem>
           </Card>
           <Card>
             <CardItem header bordered>
-              <Text>Description</Text>
+              <Text style={{color: 'black'}}>Description</Text>
             </CardItem>
             <CardItem>
               <Body>
-                <Text>Group swimming and auatic exercise programme
-for college students: Freestyle, front/back craw,
-breast stroke, butterfly… </Text>
+                <Text>{state.params.event.description}</Text>
               </Body>
             </CardItem>
           </Card>
           <Card>
             <CardItem header bordered>
               <Icon name='people' />
-              <Text>(23)</Text>
+              <Text>({state.params.event.participants.length})</Text>
             </CardItem>
             <CardItem>
               <Body>
-                <Text></Text>
+                <Text>//thumbnails</Text>
               </Body>
             </CardItem>
           </Card>
-          <Button block success>
-            <Text>Join</Text>
-          </Button>
+          {btn}
         </Content>
       </Container>
     )

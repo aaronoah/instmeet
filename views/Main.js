@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator, TabBarBottom, NavigationActions } from 'react-navigation';
 import { Easing, Animated, View } from 'react-native';
 import { Icon, Button } from 'native-base';
 import People from './People';
@@ -10,27 +10,20 @@ import Settings from './Settings';
 import Event from './event/Event';
 import MyEvents from './event/MyEvents';
 
-class NewEventTab extends React.Component{
-  static navigationOptions = ({navigation}) => ({
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="ios-add-circle" style={{ fontSize: 30, color: tintColor }} />
-    ),
-    tabBarOnPress: (previousScene, scene, jumpToIndex) => {
-      navigation.navigate('NewEventModal');
-    }
-  });
-
-  render(){
-    return(
-      <View></View>
-    );
-  }
-}
-
 const Tabs = TabNavigator({
   Home: { screen: Home },
   People: { screen: People },
-  NewEvent: { screen: NewEventTab },
+  NewEvent: {
+  screen: View,
+    navigationOptions: ({navigation}) => ({
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="ios-add-circle" style={{ fontSize: 30, color: tintColor }} />
+      ),
+      tabBarOnPress: (previousScene, scene, jumpToIndex) => {
+        navigation.navigate('NewEventModal');
+      }
+    })
+  },
   Search: { screen: Search },
   Settings: { screen: Settings }
 }, {
@@ -40,7 +33,24 @@ const Tabs = TabNavigator({
   tabBarOptions: {
     showLabel: false,
     activeTintColor: 'blue'
-  }
+  },
+    tabBarComponent: ({ jumpToIndex, ...props }) => {
+      const { navigation, navigationState } = props;
+      return (
+          <TabBarBottom
+            {...props}
+            jumpToIndex={index => {
+              tab = navigationState.routes[index];
+              tabRoute = tab.routeName;
+              const TabNav = NavigationActions.navigate({
+                routeName: tabRoute,
+                params: {user: props.screenProps.username}
+              });
+              navigation.dispatch(TabNav);
+            }}
+          />
+      );
+    }
 });
 
 const MainModalNavigator = StackNavigator({
@@ -71,4 +81,8 @@ const MainNavigator = StackNavigator({
   headerMode: 'none'
 });
 
-export default MainNavigator;
+const Main = (props) => (
+  <MainNavigator screenProps={props.navigation.state.params.user} />
+);
+
+export default Main;

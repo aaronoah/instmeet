@@ -1,12 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Form, Item, Input, Icon, Button, Header, Left, Body, Right, Title } from 'native-base';
+import { users } from '../../data/users';
 
 export default class Login extends React.Component{
-
-  // static navigationOptions = {
-  //   title: "Login"
-  // };
 
   constructor(props){
     super(props);
@@ -29,13 +26,16 @@ export default class Login extends React.Component{
       return;
     }
 
-    if(this.state.email === 'test' && this.state.password === '1234'){
-      this.props.navigation.navigate('Main');
-    }else{
-      this.setState({
-        message: "invalid username or password"
-      });
+    for(let user of users.array){
+      if (user.username === 'test' && user.password === '1234') {
+        this.props.navigation.navigate('Main', {user: user});
+        return;
+      }
     }
+
+    this.setState({
+      message: "invalid username or password"
+    });
   }
 
   toggleEye(){

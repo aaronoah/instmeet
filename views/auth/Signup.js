@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Form, Item, Input, Icon, Button, Header, Left, Right, Body, Title } from 'native-base';
+import { users } from '../../data/users';
 
 export default class Signup extends React.Component {
   static navigationOptions = {
@@ -16,7 +17,7 @@ export default class Signup extends React.Component {
       passwd: "",
       message: "",
       pinSecure: true
-    };   
+    };
   }
 
   signup() {
@@ -35,12 +36,24 @@ export default class Signup extends React.Component {
       return;
     }
 
+    for(let user of users.array){
+      if(user.email === this.state.email){
+        this.setState({ message: 'this email has been used' });
+        return;
+      }
+    }
+
     if (this.state.passwd !== this.state.password) {
       this.setState({ message: 'your re-entered password does not match' });
       return;
     }
 
-    this.props.navigation.navigate('FillInfo');
+    const newUser = {
+      email: "test@umn.edu",
+      password: "1234"
+    };
+
+    this.props.navigation.navigate('FillInfo', {user: newUser});
   }
 
   toggleEye(){

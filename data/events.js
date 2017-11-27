@@ -1,14 +1,22 @@
 export const events = {
   array: [
     {
-      id: 1,
+      id: 1,  //primary key
       title: "Professional swimmer hangout",
       time: {
         start: "15:30",
         end: "18:30"
       },
       location: "University Recreation and Wellness Center",
+      description: "Group swimming and auatic exercise programme \
+for college students: Freestyle, front/back craw,\
+breast stroke, butterfly… ",
       groupSize: 10,
+      initiator: "test",
+      participants: [
+        'test2',
+        'test3'
+      ],
       color: '#5BC0EB',
       thumbnail: 'swim',
       tags: ["swimming"]
@@ -21,7 +29,14 @@ export const events = {
         end: "14:30"
       },
       location: "Wahu Studen Apartment",
+      description: "Group swimming and auatic exercise programme \
+for college students: Freestyle, front/back craw,\
+breast stroke, butterfly… ",
       groupSize: 6,
+      initiator: "test2",   //initiators might not attend the event, since they can be just organizers
+      participants: [
+        'test2'
+      ],
       color: '#fbad3d',
       thumbnail: 'cook',
       tags: ["cooking"]
@@ -34,7 +49,15 @@ export const events = {
         end: "1:30"
       },
       location: "Sally's Saloon",
+      description: "Group swimming and auatic exercise programme \
+for college students: Freestyle, front/back craw,\
+breast stroke, butterfly… ",
       groupSize: 20,
+      initiator: "test3",
+      participants: [
+        'test',
+        'test3'
+      ],
       color: '#ed5053',
       thumbnail: 'club',
       tags: ["club"]

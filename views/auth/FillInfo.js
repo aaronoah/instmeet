@@ -7,6 +7,7 @@ class FillInfo extends React.Component{
   constructor(props){
     super(props);
     this.toggleChoice = this.toggleChoice.bind(this);
+    this.saveInterests = this.saveInterests.bind(this);
     this.state = {
       choice: []
     };
@@ -26,6 +27,12 @@ class FillInfo extends React.Component{
     });
   }
 
+  saveInterests(){
+    let u = this.props.navigation.state.params.user;
+    u.interests = this.state.choice;
+    this.props.navigation.navigate('Main', {user: u});
+  }
+
   render(){
     return (
       <Container>
@@ -39,7 +46,12 @@ class FillInfo extends React.Component{
           <Body>
             <Title></Title>
           </Body>
-          <Right></Right>
+          <Right>
+            <Button transparent onPress={() => this.props.navigation.navigate('Main', { user: this.props.navigation.state.params.user}) }>
+              <Text style={{ color: '#4fadf9' }}>Skip</Text>
+              <Icon name='arrow-forward' />
+            </Button>
+          </Right>
         </Header>
         <Content contentContainerStyle={{}}>
           <H2 style={{ marginLeft: 67, marginTop: 40, marginBottom: 40 }}>Choose your Interests</H2>
@@ -53,7 +65,7 @@ class FillInfo extends React.Component{
             })}
           </View>
           <View>
-            <Button bordered style={styles.nextBtn} onPress={() => this.props.navigation.navigate('Main')}>
+            <Button bordered style={styles.nextBtn} onPress={() => this.saveInterests() }>
               <Text>Next</Text>
             </Button>
           </View>

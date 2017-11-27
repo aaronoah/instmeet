@@ -6,23 +6,30 @@ import { events } from '../data/events';
 class Home extends Component {
   constructor(props){
     super(props);
+    this.showMyEvents = this.showMyEvents.bind(this);
     this.state = {
       sort: "",
-      selected3: "key3"
+      selectedFilter: "key0"
     };
   }
 
-  static navigationOptions = {
-    title: "Home",
+  static navigationOptions = ({navigation, screenProps}) => ({
+    title: 'Home',
     tabBarIcon: ({ tintColor }) => (
       <Icon name="ios-home" style={{ fontSize: 30, color: tintColor }} />
     )
-  };
+  });
 
   onValueChange3(value) {
     this.setState({
-      selected3: value
+      selectedFilter: value
     });
+
+
+  }
+
+  showMyEvents(){
+    this.props.navigation.navigate('MyEvents', { eventIds: this.props.screenProps.events.incoming });
   }
 
   render(){
@@ -48,22 +55,23 @@ class Home extends Component {
           <ListItem itemHeader first style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <View style={{flexDirection: 'row'}}>
               <Text>My Events: </Text>
-              <Button bordered style={{ height: 30 }} onPress={() => this.props.navigation.navigate('MyEvents')}>
-                <Text>16</Text>
+              <Button bordered style={{ height: 30 }} onPress={() => this.showMyEvents()}>
+                <Text>{this.props.screenProps.events.incoming.length}</Text>
               </Button>
             </View>
             <Form>
               <Button bordered style={{height: 30}}>
                 <Picker
                   mode="dropdown"
-                  iosHeader="Your Header"
-                  selectedValue={this.state.selected3}
+                  iosHeader="Filter"
+                  selectedValue={this.state.selectedFilter}
                   onValueChange={this.onValueChange3.bind(this)}
                 >
-                  <Item label="Sort by time" value="key0" />
-                  <Item label="Sort by location" value="key1" />
-                  <Item label="Sort by distance" value="key2" />
-                  <Item label="Sort by group size" value="key3" />
+                  <Item label="Filter" value="key0"></Item>
+                  <Item label="Filter: Time" value="time" />
+                  <Item label="Filter: Location" value="location" />
+                  <Item label="Filter: Distance" value="distance" />
+                  <Item label="Filter: Group size" value="groupSize" />
                 </Picker>
               </Button>
             </Form>
@@ -73,7 +81,7 @@ class Home extends Component {
           {this.props.card.map((element, key) => {
             return (
               <Card key={key} style={{ backgroundColor: element.color }}>
-                <CardItem bordered header style={{ backgroundColor: element.color, marginVertical: 0 }}>
+                <CardItem header style={{ backgroundColor: element.color, marginVertical: 0 }}>
                   <Text style={{ fontSize: 16, color: 'black' }}>{element.title}</Text>
                 </CardItem>
                 <CardItem button onPress={() => this.props.navigation.navigate('Event', {event: element})} style={{ backgroundColor: element.color }}>

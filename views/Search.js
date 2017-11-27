@@ -36,7 +36,7 @@ export default class Search extends Component {
   toggleState(toggle){
     this._textInput.setNativeProps({text: ""});
     if (toggle) {
-      var ContentUser = 
+      var ContentUser =
       <Text></Text>
       this.setState({content: ContentUser, toggle: toggle});
     } else {
@@ -50,13 +50,13 @@ export default class Search extends Component {
   //     <Header searchBar rounded>
   //     <Item>
   //       <Icon name="ios-search" />
-  //       <Input  
+  //       <Input
   //       placeholder="Search"
   //       style={{height: 40, flex: 1}}
   //       onChangeText={(text) => {
   //         this.state.text = text;
   //         this.getResult();
-  //       }} 
+  //       }}
   //       maxLength={30} />
   //     </Item>
   //   </Header>
@@ -116,10 +116,10 @@ export default class Search extends Component {
     }
     else {
       if (text == 'Kumat Pratik') {
-        var Kumat = 
+        var Kumat =
         <List>
           <ListItem>
-            <Thumbnail square size={80} source={require('../images/Kumat.png')} />
+            {/* <Thumbnail square size={80} source={require('../images/Kumat.png')} /> */}
             <Body>
                <Text style={{flex: 0.3}}>Kumat Pratik</Text>
                <Text note style={{flex: 0.3}}>Follow my nose</Text>
@@ -129,7 +129,7 @@ export default class Search extends Component {
             </TouchableOpacity>
           </ListItem>
           <ListItem>
-            <Thumbnail square size={80} source={require('../images/Kumat_1.png')} />
+            {/* <Thumbnail square size={80} source={require('../images/Kumat_1.png')} /> */}
             <Body>
                <Text style={{flex: 0.3}}>Kumat Pratik</Text>
                <Text note style={{flex: 0.3}}>Nice to meet you</Text>
@@ -152,29 +152,29 @@ render(){
     <Header searchBar rounded>
     <Item>
       <Icon name="ios-search" />
-      <Input  
+      <Input
       placeholder="Search"
       style={{height: 40, flex: 1}}
       onChangeText={(text) => {
         this.state.text = text;
         this.getResult();
-      }} 
+      }}
       maxLength={30} />
     </Item>
   <View style={{backgroundColor: 'white', height: 667}}>
     {/* <View searchBar> */}
     {/* </View> */}
     <Segment style= {{backgroundColor: 'white'}}>
-       <Button first inactive style={[styles.buttoninactive, 
-        this.state.toggle && styles.buttonactive]} 
+       <Button first inactive style={[styles.buttoninactive,
+        this.state.toggle && styles.buttonactive]}
         onPress={()=> this.toggleState(true)}>
-          <Text style={[styles.textinactive, 
+          <Text style={[styles.textinactive,
             this.state.toggle && styles.textactive]}>User</Text>
        </Button>
-       <Button last active style={[styles.buttonactive, 
-        this.state.toggle && styles.buttoninactive]} 
+       <Button last active style={[styles.buttonactive,
+        this.state.toggle && styles.buttoninactive]}
         onPress={()=> this.toggleState(false)}>
-           <Text style={[styles.textactive, 
+           <Text style={[styles.textactive,
             this.state.toggle && styles.textinactive]}>Event</Text>
        </Button>
     </Segment>

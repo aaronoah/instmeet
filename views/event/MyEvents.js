@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
-import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, Tab, Tabs, Left, Right, Title } from 'native-base';
+import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, Tab, Tabs, Left, Right, Title, Card, CardItem, Badge } from 'native-base';
+import { events } from '../../data/events';
 
-const TabContent = () => {
+const TabContent = (props) => {
+  /**
+     * find image path according to its name
+     * @param name string - image name
+     * @return object
+    */
+  function findImg(name) {
+    switch (name) {
+      case 'swim': return require('../../images/swim.png');
+      case 'cook': return require('../../images/cook.png');
+      case 'club': return require('../../images/club.png');
+    }
+  }
+
   return (
     <Content>
-      {this.props.card.filter(card => {this.props.filter === card.type}).map((element, key) => {
+      {props.events.filter(event => {
+        if((props.tab === 'initiated' && event.initiator === props.user) || props.tab === 'all'){
+          return true;
+        }else if(props.tab === 'joined' && event.participants.indexOf(props.user) !== -1){
+          return true;
+        }
+        return false;
+      }).map((element, key) => {
         return (
           <Card key={key} style={{ backgroundColor: element.color }}>
             <CardItem bordered header style={{ backgroundColor: element.color, marginVertical: 0 }}>
               <Text style={{ fontSize: 16, color: 'black' }}>{element.title}</Text>
             </CardItem>
-            <CardItem button onPress={() => this.props.navigation.navigate('Event', { event: element })} style={{ backgroundColor: element.color }}>
+            <CardItem button onPress={() => props.navigation.navigate('Event', { event: element })} style={{ backgroundColor: element.color }}>
               <Body style={{ flexDirection: 'row' }}>
                 <View>
                   <View style={{ flexDirection: 'row' }}>
@@ -50,35 +71,66 @@ const TabContent = () => {
 }
 
 export default class MyEvents extends Component {
+  constructor(props){
+    super(props);
+    this.fetchEvents = this.fetchEvents.bind(this);
+    this.state = {
+      events: []
+    };
+  }
+
+  fetchEvents(){
+    const { state } = this.props.navigation;
+    return events.array.filter(event => state.params.eventIds.indexOf(event.id) !== -1);
+  }
+
+  componentDidMount(){
+    this.setState({
+      events: this.fetchEvents()
+    })
+  }
 
   render() {
+    const { state } = this.props.navigation;
+    const username = this.props.screenProps.username;
     return (
       <Container>
         <Header hasTabs>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack(null)}>
               <Icon name='arrow-back' />
-              <Text>Home</Text>
             </Button>
           </Left>
           <Body>
-            <Title>My Events</Title>
+            <Title>Event Details</Title>
           </Body>
           <Right>
           </Right>
         </Header>
-        <Tabs initialPage={1}>
+        <Tabs initialPage={0}>
           <Tab heading="All">
-            <TabContent filter="all" />
+            <TabContent tab="all" navigation={this.props.navigation} events={this.state.events} user={username} />
           </Tab>
           <Tab heading="Initiated">
-            <TabContent filter="initiated" />
+            <TabContent tab="initiated" navigation={this.props.navigation} events={this.state.events} user={username} />
           </Tab>
           <Tab heading="Joined">
-            <TabContent filter="joined" />
+            <TabContent tab="joined" navigation={this.props.navigation} events={this.state.events} user={username} />
           </Tab>
         </Tabs>
       </Container>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  icon: {
+    fontSize: 20,
+    margin: 3
+  },
+  bodyText: {
+    margin: 3,
+    fontSize: 14,
+    width: 190
+  }
+});
