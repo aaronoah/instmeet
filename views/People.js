@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, 
   Thumbnail, Text, Body, document } from 'native-base';
-
+import { Others_profiles } from '../data/Others_profiles'
 
 export default class People extends Component {
   constructor(props){
     super(props);
     this.state ={
       toggle: false,
-      contentUser1: this.Megha(),
-      contentUser2: this.Yuqi(),
+      followingList: ["Megha", "Kumat", "Yuqi"],
+      followerList: ["John", "Jane"]
     };
     this.toggleState.bind(this);//bind the function to the class
   };
@@ -22,86 +22,54 @@ export default class People extends Component {
     )
   }; 
 
-  toggleState(toggle){
-    this.setState({contentUser1:toggle ? this.John() : this.Megha(), contentUser2:toggle? this.Jane() : this.Yuqi(), toggle:toggle}); // force a rerender
+  toggleState(toggle) {
+    this.setState({toggle:toggle}); // force a rerender
   }
 
-  DeleteUser1(){
-    this.setState({contentUser1: this.Empty()});
+  unfollow(name) {
+    var array = this.state.followingList;
+    var index = array.indexOf(name)
+    array.splice(index, 1);
+    this.setState({followingList: array });  
   }
 
-  DeleteUser2(){
-    this.setState({contentUser2: this.Empty()});
-}
+  follow(name) {
+    var array = this.state.followingList
+    array.push(name)
+    this.setState({ followingList: array })
+  }
 
-Megha(){
-  return (
-    <ListItem onPress={() => this.props.navigation.navigate('Megha_profile')}>
-        <Thumbnail square size={80} source={require('../images/Megha.png')} />
-        <Body>
-          <Text style={{ flex: 0.3 }}>Megha</Text>
-          <Text note style={{ flex: 0.3 }}>Its time to build a difference . .</Text>
-        </Body>
-        <TouchableOpacity onPress={()=>this.DeleteUser1()}>
-          <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
-        </TouchableOpacity>
-    </ListItem>
-    );
-}
+  contains_following(name) {
+    var array = this.state.followingList;
+    for(var i = 0; i < array.length; i++) {
+      if (array[i] == name) {
+          return true;
+      }
+    }
+    return false;
+  }
 
-Yuqi() {
-  return(
-    <ListItem>
-    <Thumbnail square size={80} source={require('../images/Yuqi.png')} />
-    <Body>
-      <Text style={{flex: 0.3}}>Yuqi Zhou</Text>
-      <Text note style={{flex: 0.3}}>Carpe diem</Text>
-    </Body>
-    <TouchableOpacity onPress={()=>this.DeleteUser2()}>
-      <Text style={{flex: 0.3, color: '#3F51B5'}}>Unfollow</Text>
-    </TouchableOpacity>
-    </ListItem>
-  );
-}
+  contains_follower(name) {
+    var array = this.state.followerList;
+    for(var i = 0; i < array.length; i++) {
+      if (array[i] == name) {
+          return true;
+      }
+    }
+    return false;
+  }
 
-John() {
-  return (
-    <ListItem>
-    <Thumbnail square size={80} source={require('../images/John.png')} />
-    <Body>
-      <Text style={{flex: 0.3}}>John Smith</Text>
-      <Text note style={{flex: 0.3}}>Go fighting</Text>
-    </Body>
-    <TouchableOpacity>
-    <Text style={{flex: 0.3, color: '#3F51B5'}}>Follow</Text>
-    </TouchableOpacity>
-    </ListItem>
-  );
-}
-
-Jane() {
-  return (
-    <ListItem>
-    <Thumbnail square size={80} source={require('../images/Jane.png')} />
-    <Body>
-      <Text style={{flex: 0.3}}>Jane Doe</Text>
-      <Text note style={{flex: 0.3}}>Hello</Text>
-    </Body>
-    <TouchableOpacity>
-    <Text style={{flex: 0.3, color: '#3F51B5'}}>Follow</Text>
-    </TouchableOpacity>
-    </ListItem>
-  );
-}
-
-Empty() {
-  return (
-    <Text></Text>
-  );
-}
   render() {
-    // let first = ...
-    // let last = ...
+    function findImg(name){
+      switch(name){
+        case 'Megha': return require('../images/Megha.png');
+        case 'Kumat': return require('../images/Kumat.png');
+        case 'Yuqi': return require('../images/Yuqi.png');
+        case 'John': return require('../images/John.png');
+        case 'Jane': return require('../images/Jane.png');
+      }
+    }
+
     return (
       <View style={{backgroundColor: 'white', height: 667}}>
         <Segment style= {{backgroundColor: 'white'}}>
@@ -113,8 +81,36 @@ Empty() {
           </Button>
         </Segment>
         <List>
-            {this.state.contentUser1}
-            {this.state.contentUser2}
+        {this.props.Othersitem.map((element, key) => {
+          if(this.contains_following(element.name) && !this.state.toggle) {
+            return (
+              <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element})}>
+                  <Thumbnail square size={80} source={findImg(element.name)} />
+                  <Body>
+                    <Text style={{ flex: 0.3 }}>{element.name}</Text>
+                    <Text note style={{ flex: 0.3 }}>{element.notes}</Text>
+                  </Body>
+                  <TouchableOpacity onPress={()=>this.unfollow(element.name)}>
+                    <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
+                  </TouchableOpacity>
+              </ListItem>
+              );
+          }
+          if(this.contains_follower(element.name) && this.state.toggle) {
+            return (
+              <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', {profile: element})}>
+                  <Thumbnail square size={80} source={findImg(element.name)} />
+                  <Body>
+                    <Text style={{ flex: 0.3 }}>{element.name}</Text>
+                    <Text note style={{ flex: 0.3 }}>{element.notes}</Text>
+                  </Body>
+                  <TouchableOpacity onPress={()=>this.follow(element.name)}>
+                    <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
+                  </TouchableOpacity>
+              </ListItem>
+              );
+            }
+          })}
         </List>
       </View>
     );
@@ -159,3 +155,6 @@ var styles = StyleSheet.create({
   }
 });
 
+People.defaultProps = {
+  Othersitem: Others_profiles.array,
+}

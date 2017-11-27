@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Image, ViewPagerAndroid, ScrollView } from 'react-native';
 import { Icon, Container, Header, Button, List, ListItem, Text, Body, Item, Title, Subtitle, Left, Right } from 'native-base';
 
-export default class Megha_profile extends Component {
+export default class ProfileDetail extends Component {
 
   constructor(props){
     super(props);
@@ -13,12 +13,22 @@ export default class Megha_profile extends Component {
 
   render(){
     return (
+      
       <View style={{
         backgroundColor: 'white',
         height: 604,
         flex: 1,
         flexDirection: 'column'
       }}>
+      <Header>
+      <Left>
+        <Button transparent onPress={() => this.props.navigation.goBack(null)}>
+          <Icon name='arrow-back' />
+        </Button>
+        </Left>
+        <Body></Body>
+        <Right></Right>
+    </Header>
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <Image square size={80} source={require('../images/Megha_profile.png')} style={{ width: 92, height: 92, marginLeft: 142 }} />
           <Text style={{ fontSize: 24, marginTop: 10, marginLeft: 145 }}>Megha ♀</Text>
@@ -50,7 +60,7 @@ export default class Megha_profile extends Component {
           <Text style={{ fontSize: 18 }}>Following</Text>
         </Button>
       </View>
-    )
+    );
   }
 }
 
