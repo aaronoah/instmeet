@@ -14,6 +14,7 @@ import userProfile from './settings/userProfile';
 import Notifications from './settings/Notifications';
 import resetPassword from './settings/resetPassword';
 import History from './settings/History';
+import Searchpeople from './Searchpeople';
 
 const Tabs = TabNavigator({
   Home: { screen: Home },
@@ -85,7 +86,9 @@ const MainNavigator = StackNavigator({
   ProfileDetail: {
     screen: ProfileDetail
   },
-
+  Searchpeople: {
+    screen: Searchpeople
+  },
   userProfile: {
     screen: userProfile
   },
