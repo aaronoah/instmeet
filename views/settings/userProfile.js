@@ -25,6 +25,7 @@ export default class userProfile extends Component {
   render(){
     
     function viewSwitch(){
+      const a = "";
       if(!this.state.toggle){
        let a = (
         <View>
@@ -42,7 +43,7 @@ export default class userProfile extends Component {
           </Right>
       </Header>
           <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Image square size={80} source={require('../../images/Megha_profile.png')} style={{ width: 92, height: 92, marginLeft: 142 }} />
+        <Image square size={80} source={require('../../images/Yuqi.png')} style={{ width: 92, height: 92, marginLeft: 142 }} />
         <Text style={{ fontSize: 24, marginTop: 10, marginLeft: 160 }}>test ♀</Text>
         <ListItem style={{ backgroundColor: '#E9E9E9', marginTop: 45, marginLeft: 0, width: 375, height: 45 }}>
           <Icon name="ios-school" style={{ marginLeft: 5 }} />
@@ -50,17 +51,17 @@ export default class userProfile extends Component {
         </ListItem>
         <ListItem style={{ backgroundColor: '#FFFFFF', marginLeft: 0, width: 375, height: 45 }}>
           <Icon name="ios-call" style={{ marginLeft: 5 }} />
-          <Text style={{ marginLeft: 15 }}>Phone: 651 —123—4567</Text>
+          <Text style={{ marginLeft: 15 }}>Phone: (612)123-0000</Text>
         </ListItem>
         <ListItem style={{ backgroundColor: '#E9E9E9', marginLeft: 0, width: 375, height: 45 }}>
           <Icon name="md-calendar" style={{ marginLeft: 5 }} />
-          <Text style={{ marginLeft: 15 }}>Birthday: 1990-01-01 </Text>
+          <Text style={{ marginLeft: 15 }}>Birthday: 1994-05-10 </Text>
         </ListItem>
         <ListItem style={{ backgroundColor: '#FFFFFF', marginLeft: 0, width: 375, height: 45 }}>
           <Icon name="logo-dribbble" style={{ marginLeft: 5 }} />
           <Text style={{ marginLeft: 15 }}>Interests: </Text>
-          <Button rounded style={{ backgroundColor: '#FBAD3D', width: 80, height: 23, marginLeft: 5 }}>
-            <Text style={{ color: '#FFFFFF', fontSize: 12 }}>Coding</Text>
+          <Button rounded style={{ backgroundColor: '#D58C8C', width: 80, height: 23, marginLeft: 5 }}>
+            <Text style={{ color: '#FFFFFF', fontSize: 12 }}>Hiking</Text>
           </Button>
         </ListItem>
         <ListItem style={{ backgroundColor: '#E9E9E9', marginLeft: 0, width: 375, height: 45 }}>
@@ -88,7 +89,7 @@ export default class userProfile extends Component {
           </Right>
          </Header>
         <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Image square size={80} source={require('../../images/Megha_profile.png')} style={{ width: 92, height: 92, marginLeft: 142 }} />
+        <Image square size={80} source={require('../../images/Yuqi.png')} style={{ width: 92, height: 92, marginLeft: 142 }} />
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 35 }}>
             <Item last style={{ flex: 0.6, marginLeft: 100 }}>
               <Input placeholder="test" />
@@ -108,7 +109,7 @@ export default class userProfile extends Component {
             <Icon name="ios-call" style={{ marginLeft: 5 }} />
             <Text style={{ marginLeft: 15 }}>Phone: </Text>
             <Item last style={{ flex: 0.8, marginLeft: 40 }}>
-              <Input placeholder="651 —123—4567" />
+              <Input placeholder="(612)123-0000" />
             </Item>
           </ListItem>
         </View>
@@ -117,7 +118,7 @@ export default class userProfile extends Component {
             <Icon name="md-calendar" style={{ marginLeft: 5 }} />
             <Text style={{ marginLeft: 15 }}>Birthday: </Text>
             <Item last style={{ flex: 0.8, marginLeft: 40 }}>
-              <Input placeholder="1990-01-01" />
+              <Input placeholder="1994-05-10" />
             </Item>
           </ListItem>
         </View>
@@ -125,9 +126,9 @@ export default class userProfile extends Component {
           <ListItem style={{ backgroundColor: '#FFFFFF', marginLeft: 0, width: 375, height: 45 }}>
             <Icon name="logo-dribbble" style={{ marginLeft: 5 }} />
             <Text style={{ marginLeft: 15 }}>Interests: </Text>
-              <Button rounded style={{ backgroundColor: '#FBAD3D', width: 80, height: 23, marginLeft: 5 }}>
+              <Button rounded style={{ backgroundColor: '#D58C8C', width: 80, height: 23, marginLeft: 5 }}>
                 <Item last style={{ flex: 0.2, marginLeft: 18 }}>
-                 <Input placeholder="Coding" />
+                 <Input placeholder="Hiking" />
                </Item>
               </Button>
           </ListItem>
