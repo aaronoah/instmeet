@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation } from 'react-native';
-import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document, Item, Input } from 'native-base';
-
+import { Icon, Form, Container, Header, Content, Segment, Button, Badge, List, ListItem, Thumbnail, Text, Body, document, Item, Input, Card, CardItem } from 'native-base';
+import { events } from '../data/events';
 
 export default class Search extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state ={
-      toggle: false,
+    this.state = {
       content: '',
+      text: ''
     };
     //bind the function to the class
-    this.toggleState = this.toggleState.bind(this);
-    this.getResult = this.getResult.bind(this);
+    // this.getResult = this.getResult.bind(this);
   };
 
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     header: null,
     tabBarIcon: ({ tintColor }) => {
       return <Icon name="search" style={{ fontSize: 30, color: tintColor }} />
@@ -29,53 +28,110 @@ export default class Search extends Component {
 
   componentWillReceiveProps() {
     if (!this.props.navigation.state.params) {
-      this.props.navigation.setParams({header: this.renderHeader});
+      this.props.navigation.setParams({ header: this.renderHeader });
     }
   }
 
-  toggleState(toggle){
-    this._textInput.setNativeProps({text: ""});
-    if (toggle) {
-      var ContentUser =
-      <Text></Text>
-      this.setState({content: ContentUser, toggle: toggle});
-    } else {
-      // force a rerender
-      this.setState({content: this.Event(), toggle: toggle});
+  contains(array, text) {
+    console.log("working");
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] == text) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // getResult (){
+  //   var content1 = 
+  //   this.setState({content:content1});
+  // }
+findImg(name){
+    switch(name){
+      case 'swim': return require('../images/swim.png');
+      case 'cook': return require('../images/cook.png');
+      case 'club': return require('../images/club.png');
+      case 'rock': return require('../images/music.png');
+      case 'games': return require("../images/xbox.png");
+
     }
   }
+
+
+  getResult(key, element) {
+    var content1 =  
+         <Card key={key} style={{ backgroundColor: element.color }}>
+           <CardItem header style={{ backgroundColor: element.color, marginVertical: 0 }}>
+             <Text style={{ fontSize: 16, color: 'black' }}>{element.title}</Text>
+           </CardItem>
+           <CardItem button onPress={() => this.props.navigation.navigate('Event', { event: element })} style={{ backgroundColor: element.color }}>
+             <Body style={{ flexDirection: 'row' }}>
+               <View>
+                 <View style={{ flexDirection: 'row' }}>
+                   <Icon name="time" style={styles.icon} />
+                   <Text style={styles.bodyText}>{element.time.start} - {element.time.end}</Text>
+                 </View>
+                 <View style={{ flexDirection: 'row' }}>
+                   <Icon name="pin" style={styles.icon} />
+                   <Text style={styles.bodyText}>{element.location}</Text>
+                 </View>
+                 <View style={{ flexDirection: 'row' }}>
+                   <Icon name="people" style={styles.icon} />
+                   <Text style={styles.bodyText}>{element.groupSize}</Text>
+                 </View>
+               </View>
+               <View>
+                 <Image style={{ width: 100, height: 100 }} source={this.findImg(element.thumbnail)} />
+               </View>
+             </Body>
+           </CardItem>
+           <CardItem footer style={{ backgroundColor: element.color }}>
+             <Text>Tags: </Text>
+             {element.tags.map((tag, k) => {
+               return (
+                 <Badge key={k} style={{ backgroundColor: 'white' }}>
+                   <Text style={{ color: 'gray' }}>{tag}</Text>
+                 </Badge>
+               );
+             })}
+           </CardItem>
+         </Card>;
+     this.setState({content: content1});
+   }
 
   render() {
+
     let hotTags = (
-      <View style={{marginTop: 100}}>
+      <View style={{ marginTop: 100 }}>
         <View>
           <Text style={{ color: '#D0021B', fontSize: 30, fontWeight: 'bold', marginLeft: 27 }}>Hot🔥</Text>
         </View>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-        <View>
-          <Button rounded style={{ backgroundColor: '#4FADF9', marginLeft: 27, marginTop: 15 }}>
-            <Text style={{ color: '#FFFFFF' }}>Swimming</Text>
-          </Button>
-          <Button rounded style={{ backgroundColor: '#FBAD3D', marginLeft: 27, marginTop: 15 }}>
-            <Text style={{ color: '#FFFFFF' }}>Cooking</Text>
-          </Button>
-        </View>
-        <View>
-          <Button rounded style={{ backgroundColor: '#EC3D40', marginLeft: 27, marginTop: 15 }}>
-            <Text style={{ color: '#FFFFFF' }}>Club</Text>
-          </Button>
-          <Button rounded style={{ backgroundColor: '#D58C8C', marginLeft: 27, marginTop: 15 }}>
-            <Text style={{ color: '#FFFFFF' }}>Hiking</Text>
-          </Button>
-        </View>
-        <View>
-          <Button rounded style={{ backgroundColor: '#A3AFEF', marginLeft: 27, marginTop: 15 }}>
-            <Text style={{ color: '#FFFFFF' }}>Others</Text>
-          </Button>
-        </View>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+          <View>
+            <Button rounded style={{ backgroundColor: '#4FADF9', marginLeft: 27, marginTop: 15 }}>
+              <Text style={{ color: '#FFFFFF' }}>Swimming</Text>
+            </Button>
+            <Button rounded style={{ backgroundColor: '#FBAD3D', marginLeft: 27, marginTop: 15 }}>
+              <Text style={{ color: '#FFFFFF' }}>Cooking</Text>
+            </Button>
+          </View>
+          <View>
+            <Button rounded style={{ backgroundColor: '#EC3D40', marginLeft: 27, marginTop: 15 }}>
+              <Text style={{ color: '#FFFFFF' }}>Club</Text>
+            </Button>
+            <Button rounded style={{ backgroundColor: '#D58C8C', marginLeft: 27, marginTop: 15 }}>
+              <Text style={{ color: '#FFFFFF' }}>Hiking</Text>
+            </Button>
+          </View>
+          <View>
+            <Button rounded style={{ backgroundColor: '#A3AFEF', marginLeft: 27, marginTop: 15 }}>
+              <Text style={{ color: '#FFFFFF' }}>Others</Text>
+            </Button>
+          </View>
         </View>
       </View>
     );
+    
     return (
       <Container>
         <Header searchBar rounded>
@@ -84,73 +140,43 @@ export default class Search extends Component {
             <Input
               placeholder="Search user/event"
               style={{ height: 40, flex: 1 }}
-              onChangeText={(text) => this.getResult(text)}
+              onChangeText={(text) => {
+                this.state.text = text;
+                this.props.card.map((element, key) => {
+                  if (this.contains(element.tags, this.state.text)){
+                this.getResult(key, element);}})
+              }}
               maxLength={30} />
           </Item>
         </Header>
-      <Content>
+        <Content>
           {this.state.content === '' ? hotTags : this.state.content}
-      </Content>
+        </Content>
       </Container>
     );
   }
-
-  getResult(txt) {
-    if(txt == ''){
-      this.setState({
-        content: txt
-      });
-      return;
-    }
-      if (txt == 'swimming' || txt == 'Swimming') {
-        var Swim = <Text>Swimming</Text>;
-        this.setState({content: Swim});
-      }
-      else if (txt == 'c' || txt == 'C') {
-        var Club = <Text>Club</Text>;
-        this.setState({content: Club});
-      }
-      else if (txt == 'cooking' || txt == 'Cooking') {
-        var Cook = <Text>Cook</Text>;
-        this.setState({content: Cook});
-      }
-      else {
-        var Empty = <Text></Text>;
-        this.setState({content: Empty});
-      }
-    if (txt == 'Kumat Pratik') {
-        var Kumat =
-        <List>
-          <ListItem>
-            {/* <Thumbnail square size={80} source={require('../images/Kumat.png')} /> */}
-            <Body>
-               <Text style={{flex: 0.3}}>Kumat Pratik</Text>
-               <Text note style={{flex: 0.3}}>Follow my nose</Text>
-            </Body>
-            <TouchableOpacity>
-               <Text style={{flex: 0.3, color: '#3F51B5'}}>Follow</Text>
-            </TouchableOpacity>
-          </ListItem>
-          <ListItem>
-            {/* <Thumbnail square size={80} source={require('../images/face3.png')} /> */}
-            <Body>
-               <Text style={{flex: 0.3}}>Kumat Pratik</Text>
-               <Text note style={{flex: 0.3}}>Nice to meet you</Text>
-            </Body>
-            <TouchableOpacity>
-               <Text style={{flex: 0.3, color: '#3F51B5'}}>Follow</Text>
-            </TouchableOpacity>
-          </ListItem>
-        </List>;
-        this.setState({content: Kumat});
-      } else {
-        var Empty = <Text></Text>;
-        this.setState({content: Empty});
-      }
-
-
-  }
 }
+//   getResult() {
+//     var text = this.state.text;
+//     if (text == 'swimming' || text == 'Swimming') {
+//       var Swim = 
+//       this.setState({content: Swim});
+//     }
+//     else if (text == 'club' || text == 'Club') {
+//       var Club = <Text>Club</Text>;
+//       this.setState({content: Club});
+//     }
+//     else if (text == 'cooking' || text == 'Cooking') {
+//       var Cook = <Text>Cook</Text>;
+//       this.setState({content: Cook});
+//     }
+//     else {
+//       var Empty = <Text></Text>;
+//       this.setState({content: Empty});
+//     }
+//   }
+// }
+
 
 var styles = StyleSheet.create({
   container: {
@@ -164,8 +190,8 @@ var styles = StyleSheet.create({
     backgroundColor: '#000000',
     borderColor: '#000000',
   },
-  textactive:{
-    color:'#FFFFFF'
+  textactive: {
+    color: '#FFFFFF'
   },
   buttoninactive: {
     backgroundColor: '#FFFFFF',
@@ -175,3 +201,7 @@ var styles = StyleSheet.create({
     color: '#000000'
   }
 });
+
+Search.defaultProps = {
+  card: events.array
+}
