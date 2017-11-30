@@ -1,17 +1,66 @@
 [
-  "cooking",
-  "swimming",
-  "hiking",
-  "club",
-  "football",
-  "yoga",
-  "frisbee",
-  "golf",
-  "gym",
-  "skiing",
-  "singing",
-  "painting",
-  "piano",
-  "photography",
-  "biking"
+  {
+    "text": "cooking",
+    "color": "orange"
+  },
+  {
+    "text": "swimming",
+    "color": "#00ffff"
+  },
+  {
+    "text": "hiking",
+    "color": "brown"
+  },
+  {
+    "text": "club",
+    "color": "red"
+  },
+  {
+    "text": "football",
+    "color": "green"
+  },
+  {
+    "text": "yoga",
+    "color": "white"
+  },
+  {
+    "text": "frisbee",
+    "color": "#faebd7"
+  },
+  {
+    "text": "golf",
+    "color": "#f0fff0"
+  },
+  {
+    "text": "gym",
+    "color": "#f08080"
+  },
+  {
+    "text": "skiing",
+    "color": "#f5fffa"
+  },
+  {
+    "text": "singing",
+    "color": "#da70d6"
+  },
+  {
+    "text": "painting",
+    "color": "#ffc0cb"
+  },
+  {
+    "text": "piano",
+    "color": "#c0c0c0"
+  },
+  {
+    "text": "photography",
+    "color": "#e0ffff"
+  },
+  {
+    "text": "biking",
+    "color": "#afeeee"
+  },
+  {
+    "text": "coding",
+    "color": "#6495ed"
+  }
 ]

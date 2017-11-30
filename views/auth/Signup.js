@@ -16,7 +16,8 @@ export default class Signup extends React.Component {
       password: "",
       passwd: "",
       message: "",
-      pinSecure: true
+      pin1Secure: true,
+      pin2Secure: true
     };
   }
 
@@ -56,12 +57,6 @@ export default class Signup extends React.Component {
     this.props.navigation.navigate('FillInfo', {user: newUser});
   }
 
-  toggleEye(){
-    // let prev = this.state.pinSecure;
-    // this.setState({
-    //   pinSecure: !prev
-    // });
-  }
 
   render() {
     return (
@@ -81,25 +76,21 @@ export default class Signup extends React.Component {
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.2, fontSize: 18, marginLeft: 22 }}>Email:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input onChangeText={(input) => this.setState({ email: input = '@umn.edu' })} />
+              <Input onChangeText={(input) => this.setState({ email: input.trim() + '@umn.edu' })} />
             </Item>
             <Text style={{ flex: 0.4, fontSize: 18 }}>@umn.edu</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 22 }}>Password:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input secureTextEntry={this.state.pinSecure} onChangeText={(input) => this.setState({ password: input })} />
+              <Input secureTextEntry={this.state.pin1Secure} onChangeText={(input) => this.setState({ password: input.trim() })} />
             </Item>
-            <Icon name='eye' style={{ fontSize: 30 }} />
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 22 }}>Re-enter:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input secureTextEntry={this.state.pinSecure} onChangeText={(input) => this.setState({ passwd: input })} />
+              <Input secureTextEntry={this.state.pin2Secure} onChangeText={(input) => this.setState({ passwd: input.trim() })} />
             </Item>
-            <TouchableOpacity onPress={() => this.toggleEye()}>
-              <Icon name='eye' style={{ fontSize: 30 }} />
-            </TouchableOpacity>
           </View>
           <Text style={{ color: 'red' }}>{this.state.message}</Text>
           <Button block info style={{ width: 355, marginTop: 30, marginLeft: 10 }}

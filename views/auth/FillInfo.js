@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
 
 let picker = {};
 interests.forEach(ele => {
-  picker[ele] = false
+  picker[ele.text] = false
 });
 
 FillInfo.defaultProps = {

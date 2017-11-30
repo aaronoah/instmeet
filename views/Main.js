@@ -38,7 +38,7 @@ const Tabs = TabNavigator({
   animationEnabled: false,
   tabBarOptions: {
     showLabel: false,
-    activeTintColor: 'blue'
+    activeTintColor: '#4fadf9'
   },
     // tabBarComponent: ({ jumpToIndex, ...props }) => {
     //   const { navigation, navigationState } = props;

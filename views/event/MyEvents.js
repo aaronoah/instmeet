@@ -94,7 +94,7 @@ export default class MyEvents extends Component {
 
   render() {
     const { state } = this.props.navigation;
-    const username = this.props.screenProps.username;
+    const username = this.props.screenProps.user.username;
     return (
       <Container>
         <Header hasTabs>
@@ -111,13 +111,13 @@ export default class MyEvents extends Component {
         </Header>
         <Tabs initialPage={0}>
           <Tab heading="All">
-            <TabContent tab="all" navigation={this.props.navigation} events={this.state.events} user={username} />
+            <TabContent tab="all" navigation={this.props.navigation} events={this.state.events} user={username}/>
           </Tab>
           <Tab heading="Initiated">
-            <TabContent tab="initiated" navigation={this.props.navigation} events={this.state.events} user={username} />
+            <TabContent tab="initiated" navigation={this.props.navigation} events={this.state.events} user={username}/>
           </Tab>
           <Tab heading="Joined">
-            <TabContent tab="joined" navigation={this.props.navigation} events={this.state.events} user={username} />
+            <TabContent tab="joined" navigation={this.props.navigation} events={this.state.events} user={username}/>
           </Tab>
         </Tabs>
       </Container>
