@@ -58,8 +58,7 @@ export default class Searchpeople extends Component {
               maxLength={30} />
           </Item>
         </Header>
-        <View>
-          
+
       </View>
     );
   }

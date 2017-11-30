@@ -7,7 +7,7 @@ import interests from '../../data/interests.json';
 export default class userProfile extends Component {
   constructor(props) {
     super(props);
-    let { user } = this.props.screenProps;
+    let { user } = this.props.screenProps.token;
     this.state = {
       toggle: false,
       usernameOld: user.username,
@@ -34,7 +34,7 @@ export default class userProfile extends Component {
   _fetchInterests(){
     let res = [];
     const len = interests.length;
-    const userInterests = this.props.screenProps.user.interests;
+    const userInterests = this.props.screenProps.token.user.interests;
     for(let i=0; i<len; ++i){
       for(let j=0; j<userInterests.length; ++j){
         if (interests[i].text === userInterests[j]){
@@ -47,7 +47,7 @@ export default class userProfile extends Component {
   }
 
   componentDidMount(){
-    let { user } = this.props.screenProps;
+    let { user } = this.props.screenProps.token;
     this.setState({
       usernameOld: user.username,
       genderOld: user.gender,
