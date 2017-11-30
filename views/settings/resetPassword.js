@@ -28,7 +28,7 @@ export default class ResetPassword extends React.Component {
       this.setState({message: 'email field must be provided'});
       return true;
     }
-    return false; 
+    return false;
 
   }
 
@@ -45,7 +45,7 @@ export default class ResetPassword extends React.Component {
     function statusB(){
       if(!this.state.toggle){
         let a = (
-          <Button block info style={{ marginTop: 200, width: 355, marginLeft: 10 }} 
+          <Button block info style={{ marginTop: 200, width: 355, marginLeft: 10 }}
           onPress={()=> this._onPress(true)}>
           <Text style={{ color: 'white', fontSize: 18 }}>SEND EMAIL</Text>
           </Button>
@@ -53,7 +53,7 @@ export default class ResetPassword extends React.Component {
         return a;
       }else{
         let a = (
-          <Button block info style={{ marginTop: 200, width: 355, marginLeft: 10 }} 
+          <Button block info style={{ marginTop: 200, width: 355, marginLeft: 10 }}
           onPress={()=> this._onPress(false)}>
           <Text style={{ color: 'white', fontSize: 18 }}>EMAIL SENT</Text>
           </Button>
@@ -80,8 +80,8 @@ export default class ResetPassword extends React.Component {
     <Form style={{ backgroundColor: 'white', height: 667 }}>
     <View style={{ flexDirection: 'row' }}>
       <Text style={styles.bodyText}>
-    To have your password reset, enter your email
-    adress below. We will the send and email containing a link to reset your password.
+    To reset your password, enter your email
+    address below. We will send an email containing a link to reset your password.
       </Text>
     </View>
     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
@@ -93,13 +93,13 @@ export default class ResetPassword extends React.Component {
     </View>
          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
              <Text style={{ color: 'red', marginTop: 2 }}>{this.state.message}</Text>
-        </View> 
-    
+        </View>
+
     {statusB.bind(this)()}
   </Form>
   </View>
 
-    ); 
+    );
   }
 }
 

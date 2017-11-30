@@ -54,7 +54,6 @@ findImg(name){
       case 'club': return require('../images/club.png');
       case 'rock': return require('../images/music.png');
       case 'games': return require("../images/xbox.png");
-
     }
   }
 
@@ -75,7 +74,7 @@ findImg(name){
            <CardItem header style={{ backgroundColor: element.color, marginVertical: 0 }}>
              <Text style={{ fontSize: 16, color: 'black' }}>{element.title}</Text>
            </CardItem>
-           <CardItem button onPress={() => this.props.navigation.navigate('Event', { event: element })} 
+           <CardItem button onPress={() => this.props.navigation.navigate('Event', { event: element })}
            style={{ backgroundColor: element.color }}>
              <Body style={{ flexDirection: 'row' }}>
                <View>
@@ -85,7 +84,7 @@ findImg(name){
                  </View>
                  <View style={{ flexDirection: 'row' }}>
                    <Icon name="pin" style={styles.icon} />
-                   <Text style={styles.bodyText}>{element.location}</Text>
+                   <Text style={styles.bodyText}>{element.location.name}</Text>
                  </View>
                  <View style={{ flexDirection: 'row' }}>
                    <Icon name="people" style={styles.icon} />
@@ -156,7 +155,7 @@ findImg(name){
                 this.props.card.map((element, key) => {
                   if (this.contains(element.tags, this.state.text)){
                 this.getResult(key, element);
-              } 
+              }
               else {
                 this.Noresult();
               }

@@ -11,10 +11,11 @@ export default class Event extends Component {
 
   render() {
     const { state } = this.props.navigation;
+    let { user } = this.props.screenProps;
     const event = state.params.event;
     let txt = 'Join';
-    for(let person of event.participants){
-      if(person === this.props.screenProps.username){
+    for(let i=0; i<event.participants.length; ++i){
+      if(event.participants[i] === this.props.screenProps.user.username){
         txt = 'Quit';
         break;
       }
@@ -27,12 +28,19 @@ export default class Event extends Component {
         <Text>{txt}</Text>
       </Button>
     );
+
+    let editBtn = (event.initiator === user.username) ? (
+      <Button transparent>
+        <Text>Edit</Text>
+      </Button>
+    ) : null;
+
     return (
       <Container>
         <Header>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack(null)}>
-              <Icon name='arrow-back' />
+              <Icon name='arrow-back' style={{marginRight: 0}}/>
               <Text>Home</Text>
             </Button>
           </Left>
@@ -40,6 +48,7 @@ export default class Event extends Component {
             <Title>Event Details</Title>
           </Body>
           <Right>
+            {editBtn}
           </Right>
         </Header>
         <Content>
@@ -47,9 +56,14 @@ export default class Event extends Component {
             <CardItem>
               <Body style={{flexDirection: "row", alignItems: 'center'}}>
                 <Icon style={{ fontSize: 60 }}name='clock' />
-                <Text style={{marginLeft: 10}}>
-                  {event.time.start} - {event.time.end}
-                </Text>
+                <View style={{flex:1, justifyContent: 'center'}}>
+                  <Text style={{marginLeft: 15, width: 250}}>
+                    From: {event.time.start}
+                  </Text>
+                  <Text style={{marginLeft: 15, width: 250 }}>
+                    To: {event.time.end}
+                  </Text>
+                </View>
               </Body>
             </CardItem>
           </Card>
@@ -57,7 +71,7 @@ export default class Event extends Component {
             <CardItem>
               <Body style={{flexDirection: "row", alignItems: 'center'}}>
                 <Icon name='navigate' style={{ fontSize: 60}}/>
-                <Text style={{marginLeft:10}}>
+                <Text style={{marginLeft:15, width: 280}}>
                   {event.location.name}
                 </Text>
               </Body>
