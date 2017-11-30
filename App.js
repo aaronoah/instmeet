@@ -12,7 +12,10 @@ import { Root } from 'native-base';
 
 const RootNavigator = StackNavigator({
   Landing: {
-    screen: Landing
+    screen: Landing,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
   },
   Login: {
     screen: Login,

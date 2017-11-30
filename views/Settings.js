@@ -12,12 +12,15 @@ export default class Settings extends React.Component {
   static navigationOptions = ({screenProps}) => ({
     title: "Settings",
     tabBarIcon: ({ tintColor }) => (
-      <IconBadge name="ios-person" fontSize={30} tintColor={tintColor} notificationsCount={screenProps.user.notifications.length} />
+      <IconBadge name="ios-person" fontSize={30} tintColor={tintColor} notificationsCount={screenProps.token.user.notifications.length} />
     )
   });
 
   _logout(){
-
+    this.props.screenProps.token.user = null;
+    this.props.screenProps.token.location = null;
+    this.props.screenProps.authNavigator.navigate('Landing');
+    this.props.screenProps.authNavigator = null;
   }
 
   render(){
@@ -32,7 +35,7 @@ export default class Settings extends React.Component {
     //   }
     // }
 
-    const { username, major, notifications } = this.props.screenProps.user;
+    const { username, major, notifications } = this.props.screenProps.token.user;
 
     return (
       <View style={{backgroundColor: 'white'}}>

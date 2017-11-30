@@ -21,7 +21,7 @@ export default class NewEvent extends Component {
       description: "",
       groupSize: 0,
       tags: [],
-      initiator: this.props.screenProps.user.username
+      initiator: this.props.screenProps.token.user.username
     };
   }
 

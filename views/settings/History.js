@@ -39,7 +39,7 @@ export default class History extends React.Component {
       }
     }
 
-  const { user } = this.props.screenProps;
+  const { user } = this.props.screenProps.token;
 
   return(
     <Container>
