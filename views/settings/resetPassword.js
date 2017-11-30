@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Form, Item, Input, Icon, Button, Header, Left, Right, Body, Title } from 'native-base';
+import Communications from 'react-native-communications';
 
 export default class ResetPassword extends React.Component {
   static navigationOptions = {
@@ -16,7 +17,7 @@ export default class ResetPassword extends React.Component {
       email: "",
       message: ""
     };
-    this.toggleState.bind(this);//bind the function to the class
+   this.toggleState = this.toggleState.bind(this);//bind the function to the class
   };
 
   toggleState(toggle) {
@@ -36,6 +37,8 @@ export default class ResetPassword extends React.Component {
     this.toggleState(toggle);
     if(this.reset()){
       this.toggleState(false);
+    } else {
+      Communications.email(['yzhou677@gmail.com'], null, null, "Reset your password", "reset your password");
     }
   }
 

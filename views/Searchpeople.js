@@ -29,6 +29,33 @@ export default class Searchpeople extends Component {
     return false;
   }
 
+  Noresult() {
+    if (this.state.text == '') {
+      var content1 = '';
+      this.setState({content: content1});
+    } else if (!this.contains(this.state.text)){
+      var constent1= <View></View>;
+      this.setState({content: content1});
+    }
+  }
+
+  getResult(key, element) {
+    var content1 =
+    <List>
+      <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: element, toggle: false })}>
+        <Thumbnail size={80} source={findImg(element.username)} />
+        <Body>
+          <Text >{element.username}</Text>
+          <Text note >{element.notes}</Text>
+        </Body>
+        <TouchableOpacity onPress={() => this.unfollow(element.username)}>
+          <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
+        </TouchableOpacity>
+      </ListItem>;
+    </List>
+     this.setState({content: content1});
+   }
+
   render() {
 
     function findImg(name) {
@@ -53,13 +80,21 @@ export default class Searchpeople extends Component {
               style={{ height: 40, flex: 1 }}
               onChangeText={(text) => {
                 this.state.text = text;
-                this.getResult();
+                this.props.Searchitem.map((element, key) => {
+                  if (element.username == this.state.text) {
+                    this.getResult(key, element);
+                  }
+                  else {
+                    this.Noresult();
+                  }
+                })
               }}
               maxLength={30} />
           </Item>
         </Header>
         <View>
-          
+          {this.state.content}
+        </View>
       </View>
     );
   }
