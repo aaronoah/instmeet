@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document, Item, Input } from 'native-base';
-import Others_profiles from '../data/Others_profiles.json';
+import Others_profiles from '../data/Others_profiles';
 
 export default class Searchpeople extends Component {
 
@@ -10,7 +10,8 @@ export default class Searchpeople extends Component {
     this.state = {
       text: '',
       // content: this.recommedpeople()
-      searchList: ["Kumat Pratik", "Kumat Din"]
+      searchList: ["Kumat Pratik", "Kumat Din", "Yuqi Zhou", "Megha Smith", "Jackie Jones", "John Smith", "Jane Doe"],
+      content:''
     };
   };
 
@@ -34,6 +35,11 @@ export default class Searchpeople extends Component {
       switch (name) {
         case 'Kumat Pratik': return require('../images/face2.png');
         case 'Kumat Din': return require('../images/face3.png');
+        case 'Megha Smith': return require('../images/Megha.png');
+        case 'Jackie Jones': return require('../images/Jackie.png');
+        case 'John Smith': return require('../images/John.png');
+        case 'Jane Doe': return require('../images/Jane.png');
+        case 'Yuqi Zhou': return require('../images/Yuqi.png');
       }
     }
 
@@ -53,25 +59,7 @@ export default class Searchpeople extends Component {
           </Item>
         </Header>
         <View>
-          <List>
-            {this.props.Searchitem.map((element, key) => {
-              if (this.contains(element.username)) {
-                return (
-                  <ListItem key={key} onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: element, toggle: true })}>
-                    <Thumbnail square size={80} source={findImg(element.username)} />
-                    <Body>
-                      <Text>{element.username}</Text>
-                      <Text note>{element.notes}</Text>
-                    </Body>
-                    <TouchableOpacity>
-                      <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
-                    </TouchableOpacity>
-                  </ListItem>
-                );
-              }
-            })}
-          </List>
-        </View>
+          
       </View>
     );
   }

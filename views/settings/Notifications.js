@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, Left, Right, Title } from 'native-base';
-import events from '../../data/events.json';
+import events from '../../data/events';
 
 export default class Notifications extends Component {
 

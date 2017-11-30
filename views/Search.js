@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation, Vibration } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, Badge, List, ListItem, Thumbnail, Text, Body, document, Item, Input, Card, CardItem } from 'native-base';
-import events from '../data/events.json';
+import events from '../data/events';
 
 export default class Search extends Component {
   constructor(props) {
@@ -46,6 +46,7 @@ export default class Search extends Component {
   //   var content1 =
   //   this.setState({content:content1});
   // }
+  
 findImg(name){
     switch(name){
       case 'swim': return require('../images/swim.png');
@@ -111,7 +112,6 @@ findImg(name){
    }
 
   render() {
-
     let hotTags = (
       <View style={{ marginTop: 100 }}>
         <View>
