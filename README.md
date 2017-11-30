@@ -14,6 +14,8 @@ Install Expo app on iOS / Android: https://expo.io/
 
 Install Yarn for package management: https://yarnpkg.com/en/docs/install
 
+Using Firebase with Expo: https://docs.expo.io/versions/latest/guides/using-firebase.html
+
 **Whenever you try to add npm packages: do `yarn add package_name` instead of `npm install package_name`**
 
 **After you clone or pull the repo, make sure to run `yarn install` before proceeding to development**

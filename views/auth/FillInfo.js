@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Form, Item, Input, Icon, Content, H2, Container, Header, Left, Body, Right, Title, Button } from 'native-base';
-import { interests } from '../../data/interests';
+import interests from '../../data/interests.json';
 
 class FillInfo extends React.Component{
   constructor(props){
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
 });
 
 let picker = {};
-interests.array.forEach(ele => {
+interests.forEach(ele => {
   picker[ele] = false
 });
 

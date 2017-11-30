@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
 import { Container, Icon, Content, Card, CardItem, Body, Text, Button, Badge, List, ListItem, Picker, Item, Form } from 'native-base';
-import { events } from '../data/events';
+import events from '../data/events.json';
+import sortBy from 'lodash/sortBy';
+import moment from 'moment';
 
 class Home extends Component {
   constructor(props){
     super(props);
     this.showMyEvents = this.showMyEvents.bind(this);
     this.state = {
-      sort: "",
-      selectedFilter: "key0"
+      selectedSort: "key0",
+      cards: events
     };
   }
 
@@ -20,14 +22,23 @@ class Home extends Component {
     )
   });
 
-  onValueChange3(value) {
+  onSortChange(value) {
+    let callback;
+    const { latitude, longitude } = this.props.screenProps.location;
+    switch(value){
+      case 'time': callback = (o) => new moment(o.time.start); break;
+      case 'groupSize': callback = (o) => o.groupSize; break;
+      case 'distance': callback = (o) => Math.pow(Math.abs(o.latitude - latitude), 2) + Math.pow(Math.abs(o.longitude - longitude), 2); break;
+    }
+    const sortedCards = sortBy(this.state.cards, callback);
     this.setState({
-      selectedFilter: value
+      selectedSort: value,
+      cards: sortedCards
     });
   }
 
   showMyEvents(){
-    this.props.navigation.navigate('MyEvents', { eventIds: this.props.screenProps.events.incoming });
+    this.props.navigation.navigate('MyEvents', { eventIds: this.props.screenProps.user.events.incoming });
   }
 
   componentDidMount(){
@@ -58,7 +69,7 @@ class Home extends Component {
             <View style={{flexDirection: 'row'}}>
               <Text>My Events: </Text>
               <Button bordered style={{ height: 30 }} onPress={() => this.showMyEvents()}>
-                <Text>{this.props.screenProps.events.incoming.length}</Text>
+                <Text>{this.props.screenProps.user.events.incoming.length}</Text>
               </Button>
             </View>
             <Form>
@@ -66,12 +77,11 @@ class Home extends Component {
                 <Picker
                   mode="dropdown"
                   iosHeader="Sort"
-                  selectedValue={this.state.selectedFilter}
-                  onValueChange={this.onValueChange3.bind(this)}
+                  selectedValue={this.state.selectedSort}
+                  onValueChange={this.onSortChange.bind(this)}
                 >
                   <Item label="Sort" value="key0"></Item>
                   <Item label="Sort: Time" value="time" />
-                  <Item label="Sort: Location" value="location" />
                   <Item label="Sort: Distance" value="distance" />
                   <Item label="Sort: Group size" value="groupSize" />
                 </Picker>
@@ -79,48 +89,54 @@ class Home extends Component {
             </Form>
           </ListItem>
         </List>
-        <Content>
+        <FlatList
+          data={this.state.cards}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <Card style={{ backgroundColor: item.color }}>
+              <CardItem header style={{ backgroundColor: item.color, marginVertical: 0 }}>
+                <Text style={{ fontSize: 16, color: 'black' }}>{item.title}</Text>
+              </CardItem>
+              <CardItem button onPress={() => this.props.navigation.navigate('Event', { event: item })} style={{ backgroundColor: item.color }}>
+                <Body style={{ flexDirection: 'row' }}>
+                  <View>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Icon name="time" style={styles.icon} />
+                      <Text style={styles.bodyText}>{item.time.start} - {item.time.end}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Icon name="pin" style={styles.icon} />
+                      <Text style={styles.bodyText}>{item.location.name}</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Icon name="people" style={styles.icon} />
+                      <Text style={styles.bodyText}>{item.groupSize}</Text>
+                    </View>
+                  </View>
+                  <View>
+                    <Image style={{ width: 100, height: 100 }} source={findImg(item.thumbnail)} />
+                  </View>
+                </Body>
+              </CardItem>
+              <CardItem footer style={{ backgroundColor: item.color }}>
+                <Text>Tags: </Text>
+                {item.tags.map((tag, k) => {
+                  return (
+                    <Badge key={k} style={{ backgroundColor: 'white' }}>
+                      <Text style={{ color: 'gray' }}>{tag}</Text>
+                    </Badge>
+                  );
+                })}
+              </CardItem>
+            </Card>
+          )}
+        />
+        {/* <Content>
           {this.props.card.map((element, key) => {
             return (
-              <Card key={key} style={{ backgroundColor: element.color }}>
-                <CardItem header style={{ backgroundColor: element.color, marginVertical: 0 }}>
-                  <Text style={{ fontSize: 16, color: 'black' }}>{element.title}</Text>
-                </CardItem>
-                <CardItem button onPress={() => this.props.navigation.navigate('Event', {event: element})} style={{ backgroundColor: element.color }}>
-                  <Body style={{ flexDirection: 'row' }}>
-                    <View>
-                      <View style={{ flexDirection: 'row' }}>
-                        <Icon name="time" style={styles.icon} />
-                        <Text style={styles.bodyText}>{element.time.start} - {element.time.end}</Text>
-                      </View>
-                      <View style={{ flexDirection: 'row' }}>
-                        <Icon name="pin" style={styles.icon} />
-                        <Text style={styles.bodyText}>{element.location}</Text>
-                      </View>
-                      <View style={{ flexDirection: 'row' }}>
-                        <Icon name="people" style={styles.icon} />
-                        <Text style={styles.bodyText}>{element.groupSize}</Text>
-                      </View>
-                    </View>
-                    <View>
-                      <Image style={{ width: 100, height: 100 }} source={findImg(element.thumbnail)} />
-                    </View>
-                  </Body>
-                </CardItem>
-                <CardItem footer style={{ backgroundColor: element.color }}>
-                  <Text>Tags: </Text>
-                  {element.tags.map((tag, k) => {
-                    return (
-                      <Badge key={k} style={{ backgroundColor: 'white' }}>
-                        <Text style={{ color: 'gray' }}>{tag}</Text>
-                      </Badge>
-                    );
-                  })}
-                </CardItem>
-              </Card>
             );
           })}
-        </Content>
+        </Content> */}
       </Container>
     );
   }
@@ -139,7 +155,7 @@ const styles = StyleSheet.create({
 });
 
 Home.defaultProps = {
-  card: events.array
+  card: events
 }
 
 export default Home;

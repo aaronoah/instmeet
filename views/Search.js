@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation, Vibration } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, Badge, List, ListItem, Thumbnail, Text, Body, document, Item, Input, Card, CardItem } from 'native-base';
-import { events } from '../data/events';
+import events from '../data/events.json';
 
 export default class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
       content: '',
-      text: ''
+      text: '',
+      InterestsList: ['swimming', 'club', 'cooking', 'games', 'rock']
     };
     //bind the function to the class
     // this.getResult = this.getResult.bind(this);
@@ -33,7 +34,6 @@ export default class Search extends Component {
   }
 
   contains(array, text) {
-    console.log("working");
     for (var i = 0; i < array.length; i++) {
       if (array[i] == text) {
         return true;
@@ -43,7 +43,7 @@ export default class Search extends Component {
   }
 
   // getResult (){
-  //   var content1 = 
+  //   var content1 =
   //   this.setState({content:content1});
   // }
 findImg(name){
@@ -57,14 +57,25 @@ findImg(name){
     }
   }
 
+  Noresult() {
+    if (this.state.text == '') {
+      var content1 = '';
+      this.setState({content: content1});
+    } else if (!this.contains(this.state.InterestsList, this.state.text)){
+      var constent1= <View></View>;
+      this.setState({content: content1});
+    }
+  }
+
 
   getResult(key, element) {
-    var content1 =  
+    var content1 =
          <Card key={key} style={{ backgroundColor: element.color }}>
            <CardItem header style={{ backgroundColor: element.color, marginVertical: 0 }}>
              <Text style={{ fontSize: 16, color: 'black' }}>{element.title}</Text>
            </CardItem>
-           <CardItem button onPress={() => this.props.navigation.navigate('Event', { event: element })} style={{ backgroundColor: element.color }}>
+           <CardItem button onPress={() => this.props.navigation.navigate('Event', { event: element })} 
+           style={{ backgroundColor: element.color }}>
              <Body style={{ flexDirection: 'row' }}>
                <View>
                  <View style={{ flexDirection: 'row' }}>
@@ -131,7 +142,7 @@ findImg(name){
         </View>
       </View>
     );
-    
+
     return (
       <Container>
         <Header searchBar rounded>
@@ -144,7 +155,12 @@ findImg(name){
                 this.state.text = text;
                 this.props.card.map((element, key) => {
                   if (this.contains(element.tags, this.state.text)){
-                this.getResult(key, element);}})
+                this.getResult(key, element);
+              } 
+              else {
+                this.Noresult();
+              }
+              })
               }}
               maxLength={30} />
           </Item>
@@ -159,7 +175,7 @@ findImg(name){
 //   getResult() {
 //     var text = this.state.text;
 //     if (text == 'swimming' || text == 'Swimming') {
-//       var Swim = 
+//       var Swim =
 //       this.setState({content: Swim});
 //     }
 //     else if (text == 'club' || text == 'Club') {
@@ -199,9 +215,18 @@ var styles = StyleSheet.create({
   },
   textinactive: {
     color: '#000000'
+  },
+  icon: {
+    fontSize: 20,
+    margin: 3
+  },
+  bodyText: {
+    margin: 3,
+    fontSize: 14,
+    width: 190
   }
 });
 
 Search.defaultProps = {
-  card: events.array
+  card: events
 }

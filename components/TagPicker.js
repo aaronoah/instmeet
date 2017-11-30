@@ -15,6 +15,9 @@ export default class TagPicker extends React.Component{
 
   _addTags() {
 
+    if(this.props.onTagSelected !== undefined){
+      this.props.onTagSelected(newTag);
+    }
   }
 
   _removeTags(){

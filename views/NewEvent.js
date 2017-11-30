@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Image, Button } from 'react-native';
 import { Icon, Form, Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Item, Input, Toast, Left, Right, Title, Badge } from 'native-base';
-import DatePicker from 'react-native-datepicker';
+// import DatePicker from 'react-native-datepicker';
 import TagPicker from '../components/TagPicker';
+import CustomDateTimePicker from '../components/CustomDateTimePicker';
+// import moment from 'moment';
 
 export default class NewEvent extends Component {
   constructor(props){
@@ -14,12 +16,13 @@ export default class NewEvent extends Component {
       showToast: false,
       message: "",
       title: "",
-      timeStart: "",
-      timeEnd: "",
+      timeStart: new Date(),
+      timeEnd: new Date(),
       location: "",
       description: "",
       groupSize: 0,
-      tags: []
+      tags: [],
+      initiator: this.screenProps.user.username
     };
   }
 
@@ -90,62 +93,25 @@ export default class NewEvent extends Component {
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.3, fontSize: 18, margin: 22 }}>Time Start:</Text>
             <Item style={{ flex: 0.6 }}>
-              <DatePicker
-                style={{ width: 200 }}
-                date={this.state.timeStart}
-                mode="date"
-                placeholder="select date"
-                format="MM-DD-HH"
-                minDate="05-01-00"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                  dateIcon: {
-                    position: 'absolute',
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0
-                  },
-                  dateInput: {
-                    marginLeft: 36
-                  }
-                  // ... You can check the source to find the other keys.
+              <CustomDateTimePicker
+                number={1}
+                fontSize={Number(18)}
+                onDateSelected={(date, time) => {
+                  this.setState({timeStart: date + ' ' + time})
                 }}
-                onDateChange={(date) => { this.setState({ timeStart: date }) }}
-              />
+                maximumDate={this.state.timeEnd} />
             </Item>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.3, fontSize: 18, margin: 22 }}>Time End:</Text>
             <Item style={{ flex: 0.6 }}>
-              <DatePicker
-                style={{ width: 200, borderWidth: 0}}
-                date={this.state.timeEnd}
-                mode="date"
-                placeholder="select date"
-                format="MM-DD-HH"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                  dateIcon: {
-                    position: 'absolute',
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0
-                  },
-                  dateInput: {
-                    marginLeft: 36
-                  },
-                  btnTextConfirm: {
-                    color: '#0e7afe'
-                  },
-                  btnTextCancel: {
-                    color: '#0e7afe'
-                  }
-                  // ... You can check the source to find the other keys.
+              <CustomDateTimePicker
+                number={2}
+                fontSize={Number(18)}
+                onDateSelected={(date, time) => {
+                  this.setState({ timeEnd: date + ' ' + time})
                 }}
-                onDateChange={(date) => { this.setState({ timeEnd: date }) }}
-              />
+                minimumDate={this.state.timeStart} />
             </Item>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -169,7 +135,7 @@ export default class NewEvent extends Component {
           <Text style={{ color: 'red', marginHorizontal: 10, marginVertical: 3 }}>{this.state.message}</Text>
           <View style={{flexDirection: 'row'}}>
             <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 22 }}>Tags: </Text>
-            <TagPicker />
+            <TagPicker onTagSelected={(newTag) => {}} />
           </View>
         </Form>
       </Content>

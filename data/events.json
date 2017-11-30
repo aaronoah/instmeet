@@ -1,0 +1,92 @@
+[
+    {
+      "id": 1,  //primary key
+      "title": "Professional swimmer hangout",
+      "time": {
+        "start": "Tuesday, 28 Nov 15:30",
+        "end": "Tuesday, 28 Nov 18:30"
+      },
+      "location": {
+        "name": "University Recreation and Wellness Center",
+        "latitude": 39.9042,
+        "longitude": 116.4074
+      },
+      "description": "Group swimming and auatic exercise programme for college students: Freestyle, front/back craw, breast stroke, butterfly… ",
+      "groupSize": 10,
+      "initiator": "test",
+      "participants": [
+        "test2",
+        "test3"
+      ],
+      "color": "#5BC0EB",
+      "thumbnail": "swim",
+      "tags": ["swimming"]
+    },
+    {
+      "id": 2,
+      "title": "Share your favorite recipe",
+      "time": {
+        "start": "Monday, 27 Nov 11:30",
+        "end": "Monday, 27 Nov 14:30"
+      },
+      "location": {
+        "name": "Wahu Student Apartment",
+        "latitude": 44.9778,
+        "longitude": -93.2650
+      },
+      "description": "Group swimming and auatic exercise programme for college students: Freestyle, front/back craw, breast stroke, butterfly… ",
+      "groupSize": 6,
+      "initiator": "test2",   //initiators might not attend the event, since they can be just organizers
+      "participants": [
+        "test2"
+      ],
+      "color": "#fbad3d",
+      "thumbnail": "cook",
+      "tags": ["cooking"]
+    },
+    {
+      "id": 3,
+      "title": "Club Night",
+      "time": {
+        "start": "Saturday, 25 Nov 22:00",
+        "end": "Sunday, 26 Nov 1:30"
+      },
+      "location": {
+        "name": "Sally's Saloon",
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      },
+      "description": "Group swimming and auatic exercise programme for college students: Freestyle, front/back craw, breast stroke, butterfly… ",
+      "groupSize": 20,
+      "initiator": "test3",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "#ed5053",
+      "thumbnail": "club",
+      "tags": ["club"]
+    },
+    {
+      "id": 4,
+      "title": "Xbox Games",
+      "time": {
+        "start": "Sunday, 26 Nov 22:00",
+        "end": "Sunday, 26 Nov 23:30"
+      },
+      "location": {
+        "name": "University Village",
+        "latitude": -22.9068,
+        "longitude": 43.1729
+      },
+      "description": "Xbox game meeting, can be either online or offine",
+      "groupSize": 4,
+      "initiator": "test4",
+      "participants": [
+        "test4"
+      ],
+      "color": "#84dcc6",
+      "thumbnail": "games",
+      "tags": ["games"]
+    }
+]

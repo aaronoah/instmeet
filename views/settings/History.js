@@ -1,48 +1,33 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
-import { Container, Form, Item, Content, Card, CardItem, Input, List, ListItem, Picker, 
+import { Container, Form, Item, Content, Card, CardItem, Input, List, ListItem, Picker,
         Icon, Button, Header, Left, Right, Body, Title, Badge } from 'native-base';
-import { passEvent } from '../../data/passEvent';
-import { events } from '../../data/events';
-import { users } from '../../data/users';
-export default class History extends React.Component {
+import passEvent from '../../data/passEvent.json';
 
+
+export default class History extends React.Component {
   constructor(props){
     super(props);
-    // this.findPass = this.findPass.bind(this);
     this.state = {
       sort: "",
-      selected3: "key3",
-      // pass: []
+      selectedSort: "key0"
     };
   }
 
-  static navigationOptions = {
-  };
-
-  onValueChange3(value) {
+  onSortChange(value) {
+    let callback;
+    const { latitude, longitude } = this.props.screenProps.location;
+    switch (value) {
+      case 'time': callback = (o) => new moment(o.time.start); break;
+      case 'groupSize': callback = (o) => o.groupSize; break;
+      case 'distance': callback = (o) => Math.pow(Math.abs(o.latitude - latitude), 2) + Math.pow(Math.abs(o.longitude - longitude), 2); break;
+    }
+    const sortedCards = sortBy(this.state.cards, callback);
     this.setState({
-      selected3: value
+      selectedSort: value,
+      cards: sortedCards
     });
   }
-
-  // findPass(){
-  //   let p = users.array[0].events.past; 
-  //   for(let id of p){
-  //     for(let e of events.array){
-  //       if (id === e.id) {
-  //         this.setState(prev => {
-  //           pass: [prev.pass, ...e.id]
-  //         });
-  //       }
-  //     }
-  //   }
-  //   return;
-  // }
-
-  // componentDidMount(){
-  //   this.findPass();
-  // }
 
   render(){
     function findImg(name){
@@ -53,7 +38,9 @@ export default class History extends React.Component {
         case 'rock': return require('../../images/music.png');
       }
     }
-    
+
+  const { user } = this.props.screenProps;
+
   return(
     <Container>
     <Header>
@@ -72,21 +59,21 @@ export default class History extends React.Component {
       <ListItem itemHeader first style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'row'}}>
           <Button bordered style={{ height: 30 }} >
-            <Text style={{ paddingHorizontal: 15}}>Total: {users.array[0].events.past.length}</Text>
+            <Text style={{ paddingHorizontal: 15}}>Total: {user.events.past.length}</Text>
           </Button>
         </View>
         <Form>
-          <Button bordered style={{height: 30}}>
+          <Button disabled bordered style={{height: 30}}>
             <Picker
               mode="dropdown"
-              iosHeader="Your Header"
-              selectedValue={this.state.selected3}
-              onValueChange={this.onValueChange3.bind(this)}
+              iosHeader="Sort History"
+              selectedValue={this.state.selectedSort}
+              onValueChange={this.onSortChange.bind(this)}
             >
-              <Item label="Sort by time" value="key0" />
-              <Item label="Sort by location" value="key1" />
-              <Item label="Sort by distance" value="key2" />
-              <Item label="Sort by group size" value="key3" />
+                <Item label="Sort" value="key0"></Item>
+                <Item label="Sort: Time" value="time" />
+                <Item label="Sort: Distance" value="distance" />
+                <Item label="Sort: Group size" value="groupSize" />
             </Picker>
           </Button>
         </Form>
@@ -137,7 +124,7 @@ export default class History extends React.Component {
   </Container>
   );
 
-  
+
 
   }
 
@@ -156,5 +143,5 @@ const styles = StyleSheet.create({
 });
 
 History.defaultProps = {
-  card: passEvent.array
+  card: passEvent
 }

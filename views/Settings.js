@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document } from 'native-base';
-import { users } from '../data/users';
+import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, Left, Right, Title, Badge } from 'native-base';
+import IconBadge from '../components/IconBadge';
 
 export default class Settings extends React.Component {
   constructor(props){
@@ -9,34 +9,12 @@ export default class Settings extends React.Component {
     this._logout = this._logout.bind(this);
   };
 
-  static navigationOptions = {
+  static navigationOptions = ({screenProps}) => ({
     title: "Settings",
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="ios-person" style={{ fontSize: 30, color: tintColor }} />
+      <IconBadge name="ios-person" fontSize={30} tintColor={tintColor} notificationsCount={screenProps.user.notifications.length} />
     )
-  };
-
-  Yuqi() {
-    return(
-      <ListItem>
-      <Thumbnail square source={require('../images/Yuqi.png')} />
-      <Body>
-        <Text style={{flex: 0.3}}>Yuqi Zhou</Text>
-        <Text note style={{flex: 0.3}}>Carpe diem</Text>
-      </Body>
-      </ListItem>
-    );
-  }
-
-  // contains(name) {
-  //   var array = this.state.userList;
-  //   for(var i = 0; i < array.length; i++) {
-  //     if (array[i] == name) {
-  //         return true;
-  //     }
-  //   }
-  //   return false;
-  // }
+  });
 
   _logout(){
 
@@ -54,10 +32,10 @@ export default class Settings extends React.Component {
     //   }
     // }
 
-    const { username, major } = this.props.screenProps;
+    const { username, major, notifications } = this.props.screenProps.user;
 
     return (
-      <View style={{backgroundColor: 'white', height: 667}}>
+      <View style={{backgroundColor: 'white'}}>
         <List>
           <ListItem onPress={() => this.props.navigation.navigate('userProfile')}>
             <Thumbnail size={80} source={{ uri: `https://ui-avatars.com/api/?name=${username[0]}`}} />
@@ -66,31 +44,51 @@ export default class Settings extends React.Component {
               <Text note style={{ flex: 0.3 }}>{major}</Text>
              </Body>
           </ListItem>
+          <ListItem icon onPress={() => this.props.navigation.navigate('Notifications', {notifications: notifications})}>
+            <Left>
+              <Icon name="notifications" />
+            </Left>
+            <Body>
+              <Text style={{lineHeight: 30}}>Notifications</Text>
+            </Body>
+            <Right>
+              <Badge>
+                <Text>{notifications.length}</Text>
+              </Badge>
+            </Right>
+          </ListItem>
+          <ListItem icon onPress={() => this.props.navigation.navigate('History')}>
+            <Left>
+              <Icon name="clock" />
+            </Left>
+            <Body>
+              <Text>History</Text>
+            </Body>
+            <Right>
+              <Icon name="arrow-forward" />
+            </Right>
+          </ListItem>
+          <ListItem icon onPress={() => this.props.navigation.navigate('resetPassword')}>
+            <Left>
+              <Icon name="lock" />
+            </Left>
+            <Body>
+              <Text>Reset Password</Text>
+            </Body>
+            <Right>
+              <Icon name="arrow-forward" />
+            </Right>
+          </ListItem>
+          <ListItem icon onPress={() => this._logout()}>
+            <Left>
+              <Icon name="exit" />
+            </Left>
+            <Body>
+              <Text>Logout</Text>
+            </Body>
+            <Right></Right>
+          </ListItem>
         </List>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 40}}>
-          <Icon name="notifications" style={{fontSize: 40, marginLeft: 44}}></Icon>
-          <TouchableOpacity style={{ marginLeft: 90, marginTop: 4}} onPress={() => this.props.navigation.navigate('Notifications')}>
-            <Text style={{ flex: 0.7, textAlign: 'center' }}>Notifications</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
-          <Icon name="clock" style={{fontSize: 40, marginLeft: 44}}></Icon>
-          <TouchableOpacity style={{ marginLeft: 90, marginTop: 4}} onPress={() => this.props.navigation.navigate('History')}>
-          <Text style={{ flex: 0.7, textAlign: 'center' }}>History</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
-          <Icon name="lock" style={{fontSize: 40, marginLeft: 44}}></Icon>
-          <TouchableOpacity style={{ marginLeft: 90, marginTop: 6}}  onPress={() => this.props.navigation.navigate('resetPassword')}>
-          <Text style={{ flex: 0.7, textAlign: 'center' }}>Reset Password</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-          <Icon name="exit" style={{ fontSize: 40, marginLeft: 44 }}></Icon>
-          <TouchableOpacity style={{ marginLeft: 90, marginTop: 6 }} onPress={() => this._logout}>
-            <Text style={{ flex: 0.7, textAlign: 'center' }}>Logout</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }

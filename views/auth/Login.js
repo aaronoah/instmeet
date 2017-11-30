@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Form, Item, Input, Icon, Button, Header, Left, Body, Right, Title } from 'native-base';
-import { users } from '../../data/users';
+import users from '../../data/users.json';
 
 export default class Login extends React.Component{
 
@@ -18,24 +18,26 @@ export default class Login extends React.Component{
   }
 
   login(){
+    let flag = false;
     if(this.state.email === ''){
       this.setState({message: 'you must provide your email'});
-      return;
     }else if(this.state.password === ''){
       this.setState({message: 'password cannot be empty'});
-      return;
+    }else{
+      users.forEach(user => {
+        if(user.email === this.state.email && user.password === this.state.password){
+          this.setState({message: ''});
+          flag = true;
+          this.props.navigation.navigate('Main', {user: user});
+        }
+      });
     }
 
-    for(let user of users.array){
-      if (user.username === 'test' && user.password === '1234') {
-        this.props.navigation.navigate('Main', {user: user});
-        return;
-      }
+    if(!flag){
+      this.setState({
+        message: "invalid username or password"
+      });
     }
-
-    this.setState({
-      message: "invalid username or password"
-    });
   }
 
   toggleEye(){
@@ -63,7 +65,7 @@ export default class Login extends React.Component{
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
             <Text style={{ flex: 0.2, fontSize: 18, marginLeft: 22 }}>Email:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input onChangeText={(input) => this.setState({ email: input })} />
+              <Input onChangeText={(input) => this.setState({ email: input + '@umn.edu' })} />
             </Item>
             <Text style={{ flex: 0.4, fontSize: 18 }}>@umn.edu</Text>
           </View>
@@ -81,7 +83,7 @@ export default class Login extends React.Component{
             <Text style={{ color: 'blue' }}>Forget your password?</Text>
           </TouchableOpacity>
           <Button block info style={{ marginTop: 30, width: 355, marginLeft: 10 }}
-            onPress={() => this.login()}>
+            onPress={this.login}>
             <Text style={{ color: 'white', fontSize: 18 }}>Login</Text>
           </Button>
         </Form>

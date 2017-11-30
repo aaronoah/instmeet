@@ -40,23 +40,22 @@ const Tabs = TabNavigator({
     showLabel: false,
     activeTintColor: 'blue'
   },
-    tabBarComponent: ({ jumpToIndex, ...props }) => {
-      const { navigation, navigationState } = props;
-      return (
-          <TabBarBottom
-            {...props}
-            jumpToIndex={index => {
-              tab = navigationState.routes[index];
-              tabRoute = tab.routeName;
-              const TabNav = NavigationActions.navigate({
-                routeName: tabRoute,
-                params: {user: props.screenProps.username}
-              });
-              navigation.dispatch(TabNav);
-            }}
-          />
-      );
-    }
+    // tabBarComponent: ({ jumpToIndex, ...props }) => {
+    //   const { navigation, navigationState } = props;
+    //   return (
+    //       <TabBarBottom
+    //         {...props}
+    //         jumpToIndex={index => {
+    //           tab = navigationState.routes[index];
+    //           tabRoute = tab.routeName;
+    //           const TabNav = NavigationActions.navigate({
+    //             routeName: tabRoute
+    //           });
+    //           navigation.dispatch(TabNav);
+    //         }}
+    //       />
+    //   );
+    // }
 });
 
 const MainModalNavigator = StackNavigator({
@@ -92,15 +91,12 @@ const MainNavigator = StackNavigator({
   userProfile: {
     screen: userProfile
   },
-
   resetPassword: {
     screen: resetPassword
   },
-
   History: {
     screen: History
   },
-
   Notifications: {
     screen: Notifications
   }
@@ -108,25 +104,56 @@ const MainNavigator = StackNavigator({
   headerMode: 'none'
 });
 
+function success(position){
+  this.setState({
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,
+    error: null,
+  });
+}
+
+function error(error){
+  this.setState({ error: error.message });
+}
+
 export default class Main extends React.Component{
   constructor(props){
     super(props);
+    this.state = {
+      latitude: 0,
+      longitude: 0,
+      error: ""
+    }
   }
 
   componentDidMount(){
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var initialPosition = JSON.stringify(position);
-        this.setState({ initialPosition });
-      },
-      (error) => alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      success.bind(this),
+      error.bind(this),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 },
+    );
+
+    this.watchId = navigator.geolocation.watchPosition(
+      success.bind(this),
+      error.bind(this),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10 },
     );
   }
 
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchId);
+  }
+
   render(){
+    let token = {
+      user: this.props.navigation.state.params.user,
+      location: {
+        latitude: this.state.latitude,
+        longitude: this.state.longitude
+      }
+    };
     return (
-      <MainNavigator screenProps={this.props.navigation.state.params.user} />
+      <MainNavigator screenProps={token} />
     );
   }
 }

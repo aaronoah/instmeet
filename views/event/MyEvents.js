@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, Tab, Tabs, Left, Right, Title, Card, CardItem, Badge } from 'native-base';
-import { events } from '../../data/events';
+import events from '../../data/events.json';
 
 const TabContent = (props) => {
   /**
@@ -43,7 +43,7 @@ const TabContent = (props) => {
                   </View>
                   <View style={{ flexDirection: 'row' }}>
                     <Icon name="pin" style={styles.icon} />
-                    <Text style={styles.bodyText}>{element.location}</Text>
+                    <Text style={styles.bodyText}>{element.location.name}</Text>
                   </View>
                   <View style={{ flexDirection: 'row' }}>
                     <Icon name="people" style={styles.icon} />
@@ -83,7 +83,7 @@ export default class MyEvents extends Component {
 
   fetchEvents(){
     const { state } = this.props.navigation;
-    return events.array.filter(event => state.params.eventIds.indexOf(event.id) !== -1);
+    return events.filter(event => state.params.eventIds.indexOf(event.id) !== -1);
   }
 
   componentDidMount(){

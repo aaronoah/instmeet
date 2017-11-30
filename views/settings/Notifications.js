@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document
-        , Left, Right, Title } from 'native-base';
-import { events } from '../../data/events';
-
+import { View, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native';
+import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, Left, Right, Title } from 'native-base';
+import events from '../../data/events.json';
 
 export default class Notifications extends Component {
 
   constructor(props){
     super(props);
-  };
-
-  static navigationOptions = {
-  };
+  }
 
   render(){
 
@@ -27,7 +22,7 @@ export default class Notifications extends Component {
     }
 
     return (
-    <Container>
+    <Container style={{backgroundColor: 'white'}}>
       <Header>
         <Left>
         <Button transparent onPress={() => this.props.navigation.goBack(null)}>
@@ -39,27 +34,28 @@ export default class Notifications extends Component {
         </Body>
         <Right></Right>
       </Header>
-      <Content>
-        <List>
-      {this.props.event.map((element, key) => {
-        return (
-      <ListItem key={key}>
-        <Thumbnail square source={findImg(element.thumbnail)} />
-        <Body>
-          <Text style={{flex: 0.3}}>{element.title}</Text>
-          <Text note style={{flex: 0.3}}>Haven‘t decided yet!</Text>
-        </Body>
-      </ListItem>
-        );
-      })}
-      </List>
-      </Content>
+      <FlatList
+        data={this.props.navigation.state.params.notifications}
+        keyExtractor={item => item}
+        renderItem={({item}) => {
+          let event;
+          for(let i=0; i<events.length; ++i){
+            if(events[i].id === item){
+              event = events[i];
+            }
+          }
+          return (
+              <ListItem>
+                <Thumbnail source={findImg(event.thumbnail)} />
+                <Body>
+                  <Text style={{ flex: 0.3 }}>{event.title}</Text>
+                  <Text note style={{ flex: 0.3 }}>Haven‘t decided yet!</Text>
+                </Body>
+              </ListItem>
+          );
+        }} />
     </Container>
-     );
-
+    );
  }
-}
 
-Notifications.defaultProps = {
-  event: events.array
 }

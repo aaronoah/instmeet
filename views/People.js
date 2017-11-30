@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation, Title, Right, Left } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation, FlatList } from 'react-native';
 import {
-  Icon, Form, Container, Header, Content, Segment, Button, List, ListItem,
-  Thumbnail, Text, Body, document
+  Icon, Form, Container, Header, Content, Button, List, ListItem, Left, Right, Title,
+  Thumbnail, Text, Body, Tab, Tabs
 } from 'native-base';
-import { Others_profiles } from '../data/Others_profiles';
+import Others_profiles from '../data/Others_profiles.json';
 
 export default class People extends Component {
   constructor(props) {
     super(props);
     this.state = {
       toggle: false,
-      followingList: ["Megha Smith", "Jackie Jones"],
-      followerList: ["John Smith", "Jane Doe"]
+      followingList: this.props.screenProps.user.following,
+      followerList: this.props.screenProps.user.follower
     };
     this.toggleState.bind(this);//bind the function to the class
   };
 
   static navigationOptions =  ({navigation}) => ({
-    header: ( 
-      <Header>
+    header: (
+      <Header hasTabs>
+        <Left></Left>
         <Body style ={{alignItems: 'center'}}>
-          <Text style={{ fontSize: 20 }}>People</Text>
+          <Title>People</Title>
         </Body>
-        <Button style={{ backgroundColor: "#F8F8F8", width: 3, height: 3, marginTop: 15 }} onPress={() => navigation.navigate('Searchpeople')}>
-          <Text>➕</Text>
-        </Button>
+        <Right>
+          <TouchableOpacity style={{marginRight: 5}} onPress={() => navigation.navigate('Searchpeople')}>
+            <Icon style={{fontSize: 35, lineHeight: 35 }} name="add" />
+          </TouchableOpacity>
+        </Right>
       </Header>
       ),
     tabBarIcon: ({ tintColor }) => (
@@ -33,10 +36,8 @@ export default class People extends Component {
     )
   });
 
-  componentWillReceiveProps() {
-    if (!this.props.navigation.state.params) {
-      this.props.navigation.setParams({ header: this.renderHeader });
-    }
+
+  componentDidMount(){
   }
 
   toggleState(toggle) {
@@ -79,6 +80,10 @@ export default class People extends Component {
     return false;
   }
 
+  switchTab(){
+
+  }
+
   render() {
     function findImg(name) {
       switch (name) {
@@ -91,64 +96,64 @@ export default class People extends Component {
 
     return (
       <View style={{ backgroundColor: 'white', height: 667 }}>
-        <Segment style={{ backgroundColor: 'white' }}>
-          <Button first inactive style={[styles.buttoninactive, this.state.toggle && styles.buttonactive]} onPress={() => this.toggleState(true)}>
-            <Text style={[styles.textinactive, this.state.toggle && styles.textactive]}>Follower</Text>
-          </Button>
-          <Button last active style={[styles.buttonactive, this.state.toggle && styles.buttoninactive]} onPress={() => this.toggleState(false)}>
-            <Text style={[styles.textactive, this.state.toggle && styles.textinactive]} id='followingtext'>Following</Text>
-          </Button>
-        </Segment>
-        <List>
-          {this.props.Othersitem.map((element, key) => {
-            if (this.contains_following(element.name) && !this.state.toggle) {
-              return (
-                <ListItem key={key} onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: element, toggle: false })}>
-                  <Thumbnail square size={80} source={findImg(element.name)} />
-                  <Body>
-                    <Text >{element.name}</Text>
-                    <Text note >{element.notes}</Text>
-                  </Body>
-                  <TouchableOpacity onPress={() => this.unfollow(element.name)}>
-                    <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
-                  </TouchableOpacity>
-                </ListItem>
-              );
-            }
-            if (this.contains_follower(element.name) && this.state.toggle) {
-              return (
-                <ListItem key={key} onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: element, toggle: true })}>
-                  <Thumbnail square size={80} source={findImg(element.name)} />
-                  <Body>
-                    <Text>{element.name}</Text>
-                    <Text note>{element.notes}</Text>
-                  </Body>
-                  <TouchableOpacity onPress={() => this.follow(element.name)}>
-                    <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
-                  </TouchableOpacity>
-                </ListItem>
-              );
-            }
-          })}
-        </List>
+        <Tabs initialPage={0}>
+          <Tab heading="Follower">
+            <FlatList
+              data={this.state.followerList}
+              keyExtractor={item => item}
+              renderItem={({ item }) => {
+                let u;
+                this.props.Others.forEach(user => {
+                  if (user.username == item) {
+                    u = user;
+                  }
+                });
+
+                return (
+                  <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: u, toggle: true })}>
+                    <Thumbnail size={80} source={findImg(u.username)} />
+                    <Body>
+                      <Text>{u.username}</Text>
+                      <Text note>{u.notes}</Text>
+                    </Body>
+                    <TouchableOpacity onPress={() => this.follow(u.username)}>
+                      <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
+                    </TouchableOpacity>
+                  </ListItem>
+                );
+              }} />
+          </Tab>
+          <Tab heading="Following">
+            <FlatList
+              data={this.state.followingList}
+              keyExtractor={item => item}
+              renderItem={({item}) => {
+                let u2 = this.props.Others[0];
+                for(let i=0; i<this.props.Others.length; ++i){
+                  if(this.props.Others[i].username === item){
+                    u2 = this.props.Others[i];
+                  }
+                }
+                return (
+                  <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: u2, toggle: false })}>
+                    <Thumbnail size={80} source={findImg(u2.username)} />
+                    <Body>
+                      <Text >{u2.username}</Text>
+                      <Text note >{u2.notes}</Text>
+                    </Body>
+                    <TouchableOpacity onPress={() => this.unfollow(u2.username)}>
+                      <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
+                    </TouchableOpacity>
+                  </ListItem>
+                );
+              }}
+              />
+          </Tab>
+        </Tabs>
       </View>
     );
   }
 }
-
-// var Megha =
-
-// var Yuqi =
-// ;
-
-// var John =
-// ;
-
-//  var Jane =
-// ;
-
-// var Empty =
-// ;
 
 var styles = StyleSheet.create({
   container: {
@@ -175,5 +180,5 @@ var styles = StyleSheet.create({
 });
 
 People.defaultProps = {
-  Othersitem: Others_profiles.array,
+  Others: Others_profiles,
 }

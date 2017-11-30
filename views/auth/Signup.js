@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Form, Item, Input, Icon, Button, Header, Left, Right, Body, Title } from 'native-base';
-import { users } from '../../data/users';
+import users from '../../data/users.json';
 
 export default class Signup extends React.Component {
   static navigationOptions = {
@@ -36,7 +36,7 @@ export default class Signup extends React.Component {
       return;
     }
 
-    for(let user of users.array){
+    for(let user of users){
       if(user.email === this.state.email){
         this.setState({ message: 'this email has been used' });
         return;
@@ -81,7 +81,7 @@ export default class Signup extends React.Component {
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.2, fontSize: 18, marginLeft: 22 }}>Email:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input onChangeText={(input) => this.setState({ email: input })} />
+              <Input onChangeText={(input) => this.setState({ email: input = '@umn.edu' })} />
             </Item>
             <Text style={{ flex: 0.4, fontSize: 18 }}>@umn.edu</Text>
           </View>

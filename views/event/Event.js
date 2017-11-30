@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
-import { Icon, Form, Container, Header, Content, Button, Text, Body, Left, Right, Title, Card, CardItem } from 'native-base';
+import { Icon, Form, Container, Header, Content, Button, Text, Body, Left, Right, Title, Card, CardItem, Thumbnail } from 'native-base';
+import moment from 'moment';
 
 export default class Event extends Component {
   constructor(props){
@@ -10,14 +11,15 @@ export default class Event extends Component {
 
   render() {
     const { state } = this.props.navigation;
+    const event = state.params.event;
     let txt = 'Join';
-    for(let person of state.params.event.participants){
+    for(let person of event.participants){
       if(person === this.props.screenProps.username){
         txt = 'Quit';
         break;
       }
     }
-    if(state.params.event.time.end < new Date()){
+    if (moment(event.time.end).isBefore(moment())){
       txt = 'Event is Ended';
     }
     let btn = (
@@ -43,20 +45,20 @@ export default class Event extends Component {
         <Content>
           <Card>
             <CardItem>
-              <Body>
-                <Icon name='clock' />
-                <Text>
-                  {state.params.event.time.start} - {state.params.event.time.end}
+              <Body style={{flexDirection: "row", alignItems: 'center'}}>
+                <Icon style={{ fontSize: 60 }}name='clock' />
+                <Text style={{marginLeft: 10}}>
+                  {event.time.start} - {event.time.end}
                 </Text>
               </Body>
             </CardItem>
           </Card>
           <Card>
             <CardItem>
-              <Body>
-                <Icon name='navigate' />
-                <Text>
-                  {state.params.event.location}
+              <Body style={{flexDirection: "row", alignItems: 'center'}}>
+                <Icon name='navigate' style={{ fontSize: 60}}/>
+                <Text style={{marginLeft:10}}>
+                  {event.location.name}
                 </Text>
               </Body>
             </CardItem>
@@ -67,18 +69,22 @@ export default class Event extends Component {
             </CardItem>
             <CardItem>
               <Body>
-                <Text>{state.params.event.description}</Text>
+                <Text>{event.description}</Text>
               </Body>
             </CardItem>
           </Card>
           <Card>
             <CardItem header bordered>
-              <Icon name='people' />
-              <Text>({state.params.event.participants.length})</Text>
+              <Icon name='people' style={{ fontSize: 35 }}/>
+              <Text style={{marginLeft: 3}}>({event.participants.length})</Text>
             </CardItem>
             <CardItem>
-              <Body>
-                <Text>//thumbnails</Text>
+              <Body style={{flexDirection: 'row'}}>
+                {event.participants.map((participant, key) => {
+                  return (
+                    <Thumbnail key={key} source={{ uri: `https://ui-avatars.com/api/?name=${participant}`}}/>
+                  );
+                })}
               </Body>
             </CardItem>
           </Card>
