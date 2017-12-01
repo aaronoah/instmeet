@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation, Vibration } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, Badge, List, ListItem, Thumbnail, Text, Body, document, Item, Input, Card, CardItem } from 'native-base';
 import events from '../data/events';
+// import { element } from '../../../Library/Caches/typescript/2.6/node_modules/@types/prop-types';
 
 export default class Search extends Component {
   constructor(props) {
@@ -118,23 +119,50 @@ findImg(name){
         </View>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           <View>
-            <Button rounded style={{ backgroundColor: '#4FADF9', marginLeft: 27, marginTop: 15 }}>
+            <Button rounded style={{ backgroundColor: '#4FADF9', marginLeft: 27, marginTop: 15 }} onPress={()=>{this.props.card.map((element, key) => {
+                  if (this.contains(element.tags, "swimming")){
+                this.getResult(key, element);
+              } 
+              this.setState({text: "swimming"});
+              })}}>
               <Text style={{ color: '#FFFFFF' }}>Swimming</Text>
             </Button>
-            <Button rounded style={{ backgroundColor: '#FBAD3D', marginLeft: 27, marginTop: 15 }}>
+            <Button rounded style={{ backgroundColor: '#FBAD3D', marginLeft: 27, marginTop: 15 }} onPress={()=>{this.props.card.map((element, key) => {
+                  if (this.contains(element.tags, "cooking")){
+                this.getResult(key, element);
+              } 
+            this.setState({text: "cooking"});
+              })}}>
               <Text style={{ color: '#FFFFFF' }}>Cooking</Text>
             </Button>
           </View>
           <View>
-            <Button rounded style={{ backgroundColor: '#EC3D40', marginLeft: 27, marginTop: 15 }}>
+            <Button rounded style={{ backgroundColor: '#EC3D40', marginLeft: 27, marginTop: 15 }} onPress={()=>{this.props.card.map((element, key) => {
+                  if (this.contains(element.tags, "club")){
+                this.getResult(key, element);
+              } 
+            this.setState({text: "club"});
+              })}}>
               <Text style={{ color: '#FFFFFF' }}>Club</Text>
             </Button>
-            <Button rounded style={{ backgroundColor: '#D58C8C', marginLeft: 27, marginTop: 15 }}>
+            <Button rounded style={{ backgroundColor: '#D58C8C', marginLeft: 27, marginTop: 15 }} onPress={()=>{this.props.card.map((element, key) => {
+                  if (this.contains(element.tags, "hiking")){
+                this.getResult(key, element);
+              } else {this.setState({content:<View></View>})}
+              this.setState({text: "hiking"});
+              })}}>
               <Text style={{ color: '#FFFFFF' }}>Hiking</Text>
             </Button>
           </View>
           <View>
-            <Button rounded style={{ backgroundColor: '#A3AFEF', marginLeft: 27, marginTop: 15 }}>
+            <Button rounded style={{ backgroundColor: '#A3AFEF', marginLeft: 27, marginTop: 15 }} onPress={()=>{this.props.card.map((element, key) => {
+                  if (this.contains(element.tags, "others")){
+                this.getResult(key, element);
+              }
+              else {this.setState({content:<View></View>})
+            }
+              this.setState({text: "others"});
+              })}}>
               <Text style={{ color: '#FFFFFF' }}>Others</Text>
             </Button>
           </View>
@@ -161,6 +189,7 @@ findImg(name){
               }
               })
               }}
+              value={this.state.text}
               maxLength={30} />
           </Item>
         </Header>
