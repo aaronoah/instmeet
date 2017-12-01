@@ -28,7 +28,7 @@ class Home extends Component {
     switch(value){
       case 'time': callback = (o) => new moment(o.time.start); break;
       case 'groupSize': callback = (o) => o.groupSize; break;
-      case 'distance': callback = (o) => Math.pow(Math.abs(o.latitude - latitude), 2) + Math.pow(Math.abs(o.longitude - longitude), 2); break;
+      case 'distance': callback = (o) => Math.pow(Math.abs(o.location.latitude - latitude), 2) + Math.pow(Math.abs(o.location.longitude - longitude), 2); break;
     }
     const sortedCards = sortBy(this.state.cards, callback);
     this.setState({
@@ -42,7 +42,7 @@ class Home extends Component {
   }
 
   componentDidMount(){
-
+    // this.props.screenProps.firebase.database();
   }
 
   render(){

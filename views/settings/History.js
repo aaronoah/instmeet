@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Container, Form, Item, Content, Card, CardItem, Input, List, ListItem, Picker,
         Icon, Button, Header, Left, Right, Body, Title, Badge } from 'native-base';
-import passEvent from '../../data/passEvent.json';
-
+import events from '../../data/events.json';
 
 export default class History extends React.Component {
   constructor(props){
@@ -16,11 +15,11 @@ export default class History extends React.Component {
 
   onSortChange(value) {
     let callback;
-    const { latitude, longitude } = this.props.screenProps.location;
+    const { latitude, longitude } = this.props.screenProps.token.location;
     switch (value) {
       case 'time': callback = (o) => new moment(o.time.start); break;
       case 'groupSize': callback = (o) => o.groupSize; break;
-      case 'distance': callback = (o) => Math.pow(Math.abs(o.latitude - latitude), 2) + Math.pow(Math.abs(o.longitude - longitude), 2); break;
+      case 'distance': callback = (o) => Math.pow(Math.abs(o.location.latitude - latitude), 2) + Math.pow(Math.abs(o.location.longitude - longitude), 2); break;
     }
     const sortedCards = sortBy(this.state.cards, callback);
     this.setState({
@@ -80,7 +79,13 @@ export default class History extends React.Component {
       </ListItem>
     </List>
     <Content>
-      {this.props.card.map((element, key) => {
+      {this.props.card.filter(event => {
+        if(user.events.past.indexOf(event.id) !== -1){
+          return true;
+        }else{
+          return false;
+        }
+      }).map((element, key) => {
         return (
           <Card key={key} style={{ backgroundColor: element.color }}>
             <CardItem bordered header style={{ backgroundColor: element.color, marginVertical: 0 }}>
@@ -95,7 +100,7 @@ export default class History extends React.Component {
                   </View>
                   <View style={{ flexDirection: 'row' }}>
                     <Icon name="pin" style={styles.icon} />
-                    <Text style={styles.bodyText}>{element.location}</Text>
+                    <Text style={styles.bodyText}>{element.location.name}</Text>
                   </View>
                   <View style={{ flexDirection: 'row' }}>
                     <Icon name="people" style={styles.icon} />
@@ -143,5 +148,5 @@ const styles = StyleSheet.create({
 });
 
 History.defaultProps = {
-  card: passEvent
+  card: events
 }

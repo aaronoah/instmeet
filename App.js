@@ -10,6 +10,19 @@ import MainNavigator from './views/Main';
 import FillInfo from './views/auth/FillInfo';
 import { Root } from 'native-base';
 
+import ReactNative from 'react-native';
+import * as firebase from 'firebase';
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBsmLMpLKrek0FnLSzby7jKORT8YTXbMJE",
+  authDomain: "instmeet.firebaseapp.com",
+  databaseURL: "https://instmeet.firebaseio.com",
+  projectId: "instmeet",
+  storageBucket: "instmeet.appspot.com",
+  messagingSenderId: "281725857803"
+};
+firebase.initializeApp(config);
+
 const RootNavigator = StackNavigator({
   Landing: {
     screen: Landing,
@@ -45,6 +58,6 @@ const RootNavigator = StackNavigator({
 
 export default App = () => (
   <Root>
-    <RootNavigator />
+    <RootNavigator screenProps={{ firebase: firebase}} />
   </Root>
 );

@@ -64,6 +64,7 @@ export default class NewEvent extends Component {
     if(this.state.title !== '' && this.state.timeStart !== ''
     && this.state.timeEnd !== '' && this.state.location !== ''
     && this.state.description !== '' && this.state.groupSize !== 0){
+
       Toast.show({
         text: 'Create Event Successfully!',
         position: 'bottom',

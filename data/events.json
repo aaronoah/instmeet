@@ -1,6 +1,6 @@
 [
     {
-      "id": 1,  //primary key
+      "id": 1,
       "title": "Professional swimmer hangout",
       "time": {
         "start": "Tuesday, 28 Nov 15:30",
@@ -36,7 +36,7 @@
       },
       "description": "Group swimming and auatic exercise programme for college students: Freestyle, front/back craw, breast stroke, butterfly… ",
       "groupSize": 6,
-      "initiator": "test2",   //initiators might not attend the event, since they can be just organizers
+      "initiator": "test2",
       "participants": [
         "test2"
       ],
@@ -88,5 +88,30 @@
       "color": "#84dcc6",
       "thumbnail": "games",
       "tags": ["games"]
+    },
+    {
+      "id": 5, //primary key
+      "title": "rockkkkkkk!",
+      "time": {
+        "start": "20:30",
+        "end": "03:30"
+      },
+      "location": {
+        "name": "Kitty Cat Klub",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Rock with friends! enjoy live performance!",
+      "groupSize": 10,
+      "initiator": "test2",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "#5BC0EB",
+      "thumbnail": "rock",
+      "tags": [
+        "rock"
+      ]
     }
 ]

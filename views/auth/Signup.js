@@ -23,36 +23,38 @@ export default class Signup extends React.Component {
   }
 
   signup() {
-    let flag = true;
-    if(this.state.email === ''){
-      this.setState({message: 'email field must be provided'});
-      flag = false;
-    }else if (this.state.password === '') {
-      this.setState({ message: 'you must enter password' });
-      flag = false;
-    }else if(this.state.passwd === ''){
-      this.setState({ message: 'you must re-enter password' });
-      flag = false;
-    }else if (this.state.passwd !== this.state.password) {
-      this.setState({ message: 'your re-entered password does not match' });
-      flag = false;
-    }
+    // let flag = true;
+    // if(this.state.email === ''){
+    //   this.setState({message: 'email field must be provided'});
+    //   flag = false;
+    // }else if (this.state.password === '') {
+    //   this.setState({ message: 'you must enter password' });
+    //   flag = false;
+    // }else if(this.state.passwd === ''){
+    //   this.setState({ message: 'you must re-enter password' });
+    //   flag = false;
+    // }else if (this.state.passwd !== this.state.password) {
+    //   this.setState({ message: 'your re-entered password does not match' });
+    //   flag = false;
+    // }
 
-    for(let user of users){
-      if(user.email === this.state.email){
-        this.setState({ message: 'this email has been used' });
-        flag = false;
-      }
-    }
+    // for(let user of users){
+    //   if(user.email === this.state.email){
+    //     this.setState({ message: 'this email has been used' });
+    //     flag = false;
+    //   }
+    // }
 
-    if(flag){
-      this.props.navigation.navigate('FillInfo', {
-        user: {
-          email: `${this.state.email}@umn.edu`,
-          password: this.state.password
-        }
-      });
-    }
+    // if(flag){
+    //   this.props.navigation.navigate('FillInfo', {
+    //     user: {
+    //       email: `${this.state.email}@umn.edu`,
+    //       password: this.state.password
+    //     }
+    //   });
+    // }
+
+    this.props.screenProps.firebase.auth()
   }
 
 
