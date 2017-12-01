@@ -21,6 +21,7 @@ export default class ProfileDetail extends Component {
         case 'Jane Doe': return require('../images/Jane.png');
         case 'Kumat Pratik': return require('../images/face2.png');
         case 'Kumat Din': return require('../images/face3.png');
+        case 'Yuqi Zhou': return require('../images/Yuqi.png');
       }
     }
 
@@ -48,8 +49,8 @@ export default class ProfileDetail extends Component {
           <Right></Right>
         </Header>
         <ScrollView contentContainerStyle={styles.contentContainer}>
-          <Image square size={80} source={findImg(state.params.profile.name)} style={{ width: 92, height: 92, marginLeft: 142 }} />
-          <Text style={{ fontSize: 24, marginTop: 10, marginLeft: 125 }}>{state.params.profile.name} {state.params.profile.gender}</Text>
+          <Image square size={80} source={findImg(state.params.profile.username)} style={{ width: 92, height: 92, marginLeft: 142 }} />
+          <Text style={{ fontSize: 24, marginTop: 10, marginLeft: 125 }}>{state.params.profile.username} {state.params.profile.gender}</Text>
           <ListItem style={{ backgroundColor: '#E9E9E9', marginTop: 45, marginLeft: 0, width: 375, height: 45 }}>
             <Icon name="ios-school" style={{ marginLeft: 5 }} />
             <Text style={{ marginLeft: 15 }}>Major: {state.params.profile.major}</Text>
