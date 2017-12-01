@@ -53,8 +53,7 @@ class FillInfo extends React.Component{
             </Button>
           </Right>
         </Header>
-        <ScrollView contentContainerStyle={styles.contentContainer}>
-        <Content contentContainerStyle={{}}>
+        <Content contentContainerStyle={styles.contentContainer}>
           <H2 style={{ marginLeft: 67, marginTop: 40, marginBottom: 40 }}>Choose your Interests</H2>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
             {Object.keys(this.props.picker).map((val, key) => {
@@ -71,7 +70,6 @@ class FillInfo extends React.Component{
             </Button>
           </View>
         </Content>
-        </ScrollView>
       </Container>
 
     );

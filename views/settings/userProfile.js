@@ -242,7 +242,7 @@ export default class userProfile extends Component {
                   flex: 0.6,
                   marginLeft: 100
                 }}>
-                  <Input value={this.state.usernameNow} onChangeText={(input) => this.setState({ usernameNow: input})}/>
+                  <Input onChangeText={(input) => this.setState({ usernameNow: input})}/>
                 </Item>
               </View>
               <View>
@@ -266,7 +266,7 @@ export default class userProfile extends Component {
                     flex: 0.8,
                     marginLeft: 40
                   }}>
-                    <Input value={this.state.majorNow} onChangeText={(input) => this.setState({ majorNow: input})} />
+                    <Input onChangeText={(input) => this.setState({ majorNow: input})} />
                   </Item>
                 </ListItem>
               </View>
@@ -293,7 +293,7 @@ export default class userProfile extends Component {
                     flex: 0.8,
                     marginLeft: 40
                   }}>
-                    <Input value={this.state.phoneNow} onChangeText={(input) => this.setState({ phoneNow: input})} />
+                    <Input onChangeText={(input) => this.setState({ phoneNow: input})} />
                   </Item>
                 </ListItem>
               </View>
@@ -320,7 +320,7 @@ export default class userProfile extends Component {
                     flex: 0.8,
                     marginLeft: 40
                   }}>
-                    <Input value={this.state.birthdayNow} onChangeText={(input) => this.setState({birthdayNow: input})} />
+                    <Input onChangeText={(input) => this.setState({birthdayNow: input})} />
                   </Item>
                 </ListItem>
               </View>

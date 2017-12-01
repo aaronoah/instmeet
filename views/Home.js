@@ -62,6 +62,9 @@ class Home extends Component {
       }
     }
 
+    let { user } = this.props.screenProps.token;
+    let myEvents = (user.events !== undefined && user.events.incoming !== undefined) ? user.events.incoming : [];
+
     return (
       <Container>
         <List>
@@ -69,7 +72,7 @@ class Home extends Component {
             <View style={{flexDirection: 'row'}}>
               <Text>My Events: </Text>
               <Button bordered style={{ height: 30 }} onPress={() => this.showMyEvents()}>
-                <Text>{this.props.screenProps.token.user.events.incoming.length}</Text>
+                <Text>{myEvents.length}</Text>
               </Button>
             </View>
             <Form>
