@@ -1,12 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Form, Item, Input, Icon, Button, Header, Left, Right, Body, Title } from 'native-base';
-import Communications from 'react-native-communications';
 
 export default class ResetPassword extends React.Component {
   static navigationOptions = {
   };
-
 
   constructor(props){
     super(props);
@@ -30,18 +28,23 @@ export default class ResetPassword extends React.Component {
       return true;
     }
     return false;
-
   }
 
   _onPress(toggle){
     this.toggleState(toggle);
     if(this.reset()){
       this.toggleState(false);
-    } else {
-      Communications.email(['yzhou677@gmail.com'], null, null, "Reset your password", "reset your password");
-    }
+    }  else {
+    Alert.alert(
+      'Sent successfully',
+      'The mail has been sent successfully',
+      [
+        { text: 'OK', style: 'OK' },
+      ],
+      { cancelable: false }
+    )
   }
-
+  }
 
   render(){
 
