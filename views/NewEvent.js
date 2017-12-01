@@ -25,7 +25,8 @@ export default class NewEvent extends Component {
       tags: [],
       initiator: this.props.screenProps.token.user.username,
       sizeLimit: "No size limit",
-      numberDisabled: false
+      numberDisabled: false,
+      registerDDL: ""
     };
   }
 
@@ -171,6 +172,18 @@ export default class NewEvent extends Component {
               <Text style={{ color: 'blue'}}>{this.state.sizeLimit}</Text>
             </TouchableOpacity>
             <Text style={{ color: 'red', marginHorizontal: 10, marginVertical: 3 }}>{this.state.message}</Text>
+            </CardItem>
+          </Card>
+          <Card>
+            <CardItem style={{flexDirection: "row"}}>
+              <Text style={{color: 'red', margin: 8}}>Deadline to register:</Text>
+                <CustomDateTimePicker
+                  number={3}
+                  fontSize={Number(18)}
+                  onDateSelected={(date, time) => {
+                    this.setState({ registerDDL: date + ' ' + time })
+                  }}
+                  maximumDate={this.state.timeStart}/>
             </CardItem>
           </Card>
           <Card>
