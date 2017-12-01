@@ -11,11 +11,11 @@ export default class Event extends Component {
 
   render() {
     const { state } = this.props.navigation;
-    let { user } = this.props.screenProps;
+    let { user } = this.props.screenProps.token;
     const event = state.params.event;
     let txt = 'Join';
     for(let i=0; i<event.participants.length; ++i){
-      if(event.participants[i] === this.props.screenProps.user.username){
+      if(event.participants[i] === this.props.screenProps.token.user.username){
         txt = 'Quit';
         break;
       }

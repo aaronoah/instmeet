@@ -153,7 +153,7 @@ export default class Main extends React.Component{
       }
     };
     return (
-      <MainNavigator screenProps={token} />
+      <MainNavigator screenProps={{ authNavigator: this.props.navigation, token: token}} />
     );
   }
 }

@@ -24,7 +24,7 @@ class Home extends Component {
 
   onSortChange(value) {
     let callback;
-    const { latitude, longitude } = this.props.screenProps.location;
+    const { latitude, longitude } = this.props.screenProps.token.location;
     switch(value){
       case 'time': callback = (o) => new moment(o.time.start); break;
       case 'groupSize': callback = (o) => o.groupSize; break;
@@ -38,7 +38,7 @@ class Home extends Component {
   }
 
   showMyEvents(){
-    this.props.navigation.navigate('MyEvents', { eventIds: this.props.screenProps.user.events.incoming });
+    this.props.navigation.navigate('MyEvents', { eventIds: this.props.screenProps.token.user.events.incoming });
   }
 
   componentDidMount(){
@@ -69,7 +69,7 @@ class Home extends Component {
             <View style={{flexDirection: 'row'}}>
               <Text>My Events: </Text>
               <Button bordered style={{ height: 30 }} onPress={() => this.showMyEvents()}>
-                <Text>{this.props.screenProps.user.events.incoming.length}</Text>
+                <Text>{this.props.screenProps.token.user.events.incoming.length}</Text>
               </Button>
             </View>
             <Form>

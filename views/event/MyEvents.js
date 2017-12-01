@@ -94,7 +94,7 @@ export default class MyEvents extends Component {
 
   render() {
     const { state } = this.props.navigation;
-    const username = this.props.screenProps.user.username;
+    const username = this.props.screenProps.token.user.username;
     return (
       <Container>
         <Header hasTabs>

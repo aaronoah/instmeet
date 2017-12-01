@@ -11,8 +11,8 @@ export default class People extends Component {
     super(props);
     this.state = {
       toggle: false,
-      followingList: this.props.screenProps.user.following,
-      followerList: this.props.screenProps.user.follower
+      followingList: this.props.screenProps.token.user.following,
+      followerList: this.props.screenProps.token.user.follower
     };
     this.toggleState.bind(this);//bind the function to the class
   };
