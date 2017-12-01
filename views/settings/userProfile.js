@@ -42,7 +42,6 @@ export default class userProfile extends Component {
         }
       }
     }
-
     return res;
   }
 

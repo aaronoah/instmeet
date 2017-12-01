@@ -78,6 +78,13 @@ export default class NewEvent extends Component {
     }
   }
 
+  // __selected() {
+  //   this.props.screenProps.token.user = null;
+  //   this.props.screenProps.token.location = null;
+  //   this.props.screenProps.authNavigator.navigate('Searchtag');
+  //   this.props.screenProps.authNavigator = null;
+  // }
+
   _cancel(){
     this.props.navigation.goBack(null);
   }
@@ -169,7 +176,7 @@ export default class NewEvent extends Component {
           <Card>
             <CardItem style={{flexDirection: 'row'}}>
               <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 8 }}>Tags: </Text>
-              <TagPicker onTagSelected={(newTag) => {}} />
+              <TagPicker onTagSelected={(newTag) => {this.__selected()}} />
             </CardItem>
           </Card>
         </Form>
