@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, Left, Right, Title, Badge } from 'native-base';
 import IconBadge from '../components/IconBadge';
 
@@ -7,16 +7,33 @@ export default class Settings extends React.Component {
   constructor(props){
     super(props);
     this._logout = this._logout.bind(this);
+    this.state = {
+      isModalVisible: false
+    }
   };
 
   static navigationOptions = ({screenProps}) => ({
     title: "Settings",
-    tabBarIcon: ({ tintColor }) => (
-      <IconBadge name="ios-person" fontSize={30} tintColor={tintColor} notificationsCount={screenProps.token.user.notifications.length} />
-    )
+    tabBarIcon: ({ tintColor }) => {
+      const { user } = screenProps.token;
+      let count = (user.notifications !== undefined) ? user.notifications.length : 0;
+      return <IconBadge name="ios-person" fontSize={30} tintColor={tintColor} notificationsCount={count} />;
+    }
   });
 
   _logout(){
+    Alert.alert(
+      'Log out',
+      'Are you sure to log out?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'OK', onPress: () => this._onConfirmLogout() },
+      ],
+      { cancelable: false }
+    )
+  }
+
+  _onConfirmLogout(){
     this.props.screenProps.token.user = null;
     this.props.screenProps.token.location = null;
     this.props.screenProps.authNavigator.navigate('Landing');

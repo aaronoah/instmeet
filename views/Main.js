@@ -15,20 +15,24 @@ import Notifications from './settings/Notifications';
 import resetPassword from './settings/resetPassword';
 import History from './settings/History';
 import Searchpeople from './Searchpeople';
+import debounce from 'lodash/debounce';
 
 const Tabs = TabNavigator({
   Home: { screen: Home },
   People: { screen: People },
   NewEvent: {
-  screen: View,
-    navigationOptions: ({navigation}) => ({
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-add-circle" style={{ fontSize: 30, color: tintColor }} />
-      ),
-      tabBarOnPress: (previousScene, scene, jumpToIndex) => {
+    screen: View,
+    navigationOptions: ({navigation}) => {
+      let debounceOnPress = debounce((previousScene, scene, jumpToIndex) => {
         navigation.navigate('NewEventModal');
-      }
-    })
+      }, 200);
+      return {
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="ios-add-circle" style={{ fontSize: 30, color: tintColor }} />
+        ),
+        tabBarOnPress: debounceOnPress
+      };
+    }
   },
   Search: { screen: Search },
   Settings: { screen: Settings }
@@ -40,22 +44,22 @@ const Tabs = TabNavigator({
     showLabel: false,
     activeTintColor: '#4fadf9'
   },
-    // tabBarComponent: ({ jumpToIndex, ...props }) => {
-    //   const { navigation, navigationState } = props;
-    //   return (
-    //       <TabBarBottom
-    //         {...props}
-    //         jumpToIndex={index => {
-    //           tab = navigationState.routes[index];
-    //           tabRoute = tab.routeName;
-    //           const TabNav = NavigationActions.navigate({
-    //             routeName: tabRoute
-    //           });
-    //           navigation.dispatch(TabNav);
-    //         }}
-    //       />
-    //   );
-    // }
+  // tabBarComponent: ({ jumpToIndex, ...props }) => {
+  //     const { navigation, navigationState } = props;
+  //     return (
+  //         <TabBarBottom
+  //           {...props}
+  //           jumpToIndex={index => {
+  //             tab = navigationState.routes[index];
+  //             tabRoute = tab.routeName;
+  //             const TabNav = NavigationActions.navigate({
+  //               routeName: tabRoute
+  //             });
+  //             navigation.dispatch(TabNav);
+  //           }}
+  //         />
+  //     );
+  // }
 });
 
 const MainModalNavigator = StackNavigator({

@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { Form, Item, Input, Icon, Button, Header, Left, Body, Right, Title } from 'native-base';
+import { Form, Item, Icon, Button, Header, Left, Body, Right, Title } from 'native-base';
 import users from '../../data/users.json';
+import { DebounceInput } from '../../components/DebounceInput';
 
 export default class Login extends React.Component{
 
@@ -57,14 +58,14 @@ export default class Login extends React.Component{
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
             <Text style={{ flex: 0.2, fontSize: 18, marginLeft: 22 }}>Email:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input onChangeText={(input) => this.setState({ email: input.trim() + '@umn.edu' })} />
+              <DebounceInput onChangeText={(input) => this.setState({ email: input.trim() + '@umn.edu' })} />
             </Item>
             <Text style={{ flex: 0.4, fontSize: 18 }}>@umn.edu</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 22 }}>Password:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input id="password" secureTextEntry={this.state.pinSecure} onChangeText={(input) => this.setState({ password: input.trim() })} />
+              <DebounceInput id="password" secureTextEntry={this.state.pinSecure} onChangeText={(input) => this.setState({ password: input.trim() })} />
             </Item>
           </View>
           <Text style={{ color: 'red', marginTop: 2 }}>{this.state.message}</Text>

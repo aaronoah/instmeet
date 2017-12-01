@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { Form, Item, Input, Icon, Button, Header, Left, Right, Body, Title } from 'native-base';
+import { Form, Item, Icon, Button, Header, Left, Right, Body, Title } from 'native-base';
 import users from '../../data/users.json';
+import { DebounceInput } from '../../components/DebounceInput';
 
 export default class Signup extends React.Component {
   static navigationOptions = {
@@ -22,39 +23,36 @@ export default class Signup extends React.Component {
   }
 
   signup() {
+    let flag = true;
     if(this.state.email === ''){
       this.setState({message: 'email field must be provided'});
-      return;
-    }
-
-    if (this.state.password === '') {
+      flag = false;
+    }else if (this.state.password === '') {
       this.setState({ message: 'you must enter password' });
-      return;
-    }
-
-    if(this.state.passwd === ''){
+      flag = false;
+    }else if(this.state.passwd === ''){
       this.setState({ message: 'you must re-enter password' });
-      return;
+      flag = false;
+    }else if (this.state.passwd !== this.state.password) {
+      this.setState({ message: 'your re-entered password does not match' });
+      flag = false;
     }
 
     for(let user of users){
       if(user.email === this.state.email){
         this.setState({ message: 'this email has been used' });
-        return;
+        flag = false;
       }
     }
 
-    if (this.state.passwd !== this.state.password) {
-      this.setState({ message: 'your re-entered password does not match' });
-      return;
+    if(flag){
+      this.props.navigation.navigate('FillInfo', {
+        user: {
+          email: `${this.state.email}@umn.edu`,
+          password: this.state.password
+        }
+      });
     }
-
-    const newUser = {
-      email: "test@umn.edu",
-      password: "1234"
-    };
-
-    this.props.navigation.navigate('FillInfo', {user: newUser});
   }
 
 
@@ -76,20 +74,20 @@ export default class Signup extends React.Component {
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.2, fontSize: 18, marginLeft: 22 }}>Email:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input onChangeText={(input) => this.setState({ email: input.trim() + '@umn.edu' })} />
+              <DebounceInput onChangeText={(input) => this.setState({ email: input.trim() + '@umn.edu' })} />
             </Item>
             <Text style={{ flex: 0.4, fontSize: 18 }}>@umn.edu</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 22 }}>Password:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input secureTextEntry={this.state.pin1Secure} onChangeText={(input) => this.setState({ password: input.trim() })} />
+              <DebounceInput secureTextEntry={this.state.pin1Secure} onChangeText={(input) => this.setState({ password: input.trim() })} />
             </Item>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 22 }}>Re-enter:</Text>
             <Item style={{ flex: 0.6 }}>
-              <Input secureTextEntry={this.state.pin2Secure} onChangeText={(input) => this.setState({ passwd: input.trim() })} />
+              <DebounceInput secureTextEntry={this.state.pin2Secure} onChangeText={(input) => this.setState({ passwd: input.trim() })} />
             </Item>
           </View>
           <Text style={{ color: 'red' }}>{this.state.message}</Text>
