@@ -9,6 +9,7 @@ import Settings from './views/Settings';
 import MainNavigator from './views/Main';
 import FillInfo from './views/auth/FillInfo';
 import Forgetpassword from './views/auth/Forgetpassword';
+// import SearchTag from './views/auth/SearchTag';
 import { Root } from 'native-base';
 
 import ReactNative from 'react-native';
@@ -43,6 +44,9 @@ const RootNavigator = StackNavigator({
       title: 'Sign Up'
     }
   },
+  // SearchTag: {
+  //   screen: SearchTag
+  // },
   FillInfo: {
     screen: FillInfo
   },

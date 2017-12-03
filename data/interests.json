@@ -1,66 +1,82 @@
 [
   {
     "text": "cooking",
-    "color": "orange"
+    "color": "orange",
+    "category": "life"
   },
   {
     "text": "swimming",
-    "color": "#00ffff"
+    "color": "#00ffff",
+    "category": "sport"
   },
   {
     "text": "hiking",
-    "color": "brown"
+    "color": "brown",
+    "category": "sport"
   },
   {
     "text": "club",
-    "color": "red"
+    "color": "red",
+    "category": "entertainment"
   },
   {
     "text": "football",
-    "color": "green"
+    "color": "green",
+    "category": "sport"
   },
   {
     "text": "yoga",
-    "color": "white"
+    "color": "white",
+    "category": "sport"
   },
   {
     "text": "frisbee",
-    "color": "#faebd7"
+    "color": "#faebd7",
+    "category": "entertainment"
   },
   {
     "text": "golf",
-    "color": "#f0fff0"
+    "color": "#f0fff0",
+    "category": "sport"
   },
   {
     "text": "gym",
-    "color": "#f08080"
+    "color": "#f08080",
+    "category": "sport"
   },
   {
     "text": "skiing",
-    "color": "#f5fffa"
+    "color": "#f5fffa",
+    "category": "sport"
   },
   {
     "text": "singing",
-    "color": "#da70d6"
+    "color": "#da70d6",
+    "category": "art"
   },
   {
     "text": "painting",
-    "color": "#ffc0cb"
+    "color": "#ffc0cb",
+    "category": "art"
   },
   {
     "text": "piano",
-    "color": "#c0c0c0"
+    "color": "#c0c0c0",
+    "category": "art"
   },
   {
     "text": "photography",
-    "color": "#e0ffff"
+    "color": "#e0ffff",
+    "category": "art"
   },
   {
     "text": "biking",
-    "color": "#afeeee"
+    "color": "#afeeee",
+    "category": "sport"
   },
   {
     "text": "coding",
-    "color": "#6495ed"
+    "color": "#6495ed",
+    "category": "study"
   }
 ]

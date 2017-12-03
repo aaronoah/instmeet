@@ -10,7 +10,8 @@ export default class Search extends Component {
     this.state = {
       content: '',
       text: '',
-      InterestsList: ['swimming', 'club', 'cooking', 'games', 'rock']
+      InterestsList: ['swimming', 'club', 'cooking', 'games', 'rock', 'yoga', 'frisbee', 
+      'golf', 'gym', 'skiing', 'singing', 'painting', 'piano', 'photography', 'biking', 'coding']
     };
     //bind the function to the class
     // this.getResult = this.getResult.bind(this);

@@ -16,7 +16,8 @@ import resetPassword from './settings/resetPassword';
 import History from './settings/History';
 import Searchpeople from './Searchpeople';
 import debounce from 'lodash/debounce';
-import Searchtag from './Searchtag';
+import SearchTag from './SearchTag';
+
 
 
 const Tabs = TabNavigator({
@@ -88,6 +89,9 @@ const MainNavigator = StackNavigator({
   MyEvents: {
     screen: MyEvents
   },
+  SearchTag: {
+    screen: SearchTag
+  },
   ProfileDetail: {
     screen: ProfileDetail
   },
@@ -96,9 +100,6 @@ const MainNavigator = StackNavigator({
   },
   userProfile: {
     screen: userProfile
-  },
-  Searchtag: {
-    screen: Searchtag
   },
   resetPassword: {
     screen: resetPassword

@@ -190,7 +190,7 @@ export default class NewEvent extends Component {
           <Card>
             <CardItem style={{flexDirection: 'row'}}>
               <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 8 }}>Tags: </Text>
-              <TagPicker onTagSelected={(newTag) => {this.__selected()}} />
+              <TagPicker onTagSelected={(newTag) => {this.__selected()}}/>
             </CardItem>
           </Card>
         </Form>
