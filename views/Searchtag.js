@@ -12,8 +12,7 @@ export default class Searchtag extends Component {
           };
     }
 
-    static navigationOptions = {
-    };
+    static navigationOptions = ({navigation}) => ({});
 
     render () {
         return (

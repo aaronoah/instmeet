@@ -8,6 +8,7 @@ import People from './views/People';
 import Settings from './views/Settings';
 import MainNavigator from './views/Main';
 import FillInfo from './views/auth/FillInfo';
+import Forgetpassword from './views/auth/Forgetpassword';
 import { Root } from 'native-base';
 
 import ReactNative from 'react-native';
@@ -44,6 +45,9 @@ const RootNavigator = StackNavigator({
   },
   FillInfo: {
     screen: FillInfo
+  },
+  Forgetpassword: {
+    screen: Forgetpassword
   },
   Main: {
     screen: MainNavigator,

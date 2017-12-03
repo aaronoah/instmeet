@@ -18,6 +18,7 @@ import Searchpeople from './Searchpeople';
 import debounce from 'lodash/debounce';
 import Searchtag from './Searchtag';
 
+
 const Tabs = TabNavigator({
   Home: { screen: Home },
   People: { screen: People },

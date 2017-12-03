@@ -14,6 +14,8 @@ export default class TagPicker extends React.Component{
     };
   }
 
+  static navigationOptions = ({navigation}) => ({});
+
   _addTags() {
     if(this.props.onTagSelected !== undefined){
       this.props.onTagSelected(newTag);
@@ -31,6 +33,7 @@ export default class TagPicker extends React.Component{
   }
 
   render(){
+    const { navigator } = this.props;
     return (
       <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
         {(this.state.badges !== undefined) ? this.state.badges.map((badge, key) => {
@@ -43,7 +46,7 @@ export default class TagPicker extends React.Component{
             </Badge>
           )
         }) : undefined}
-        <TouchableOpacity style={{ marginLeft: 8 }} onPress={() => this._addTags} >
+        <TouchableOpacity style={{ marginLeft: 8 }} onPress={() => this.props.navigation.navigate('Searchtag')} >
           <Icon style={{ fontSize: 30 }} name="add" />
         </TouchableOpacity>
         <CustomModal content="Are you sure you want to remove the tag?" visible={this.state.modalVisible} />
