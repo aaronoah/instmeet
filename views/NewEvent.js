@@ -190,7 +190,10 @@ export default class NewEvent extends Component {
           <Card>
             <CardItem style={{flexDirection: 'row'}}>
               <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 8 }}>Tags: </Text>
-              <TagPicker onTagSelected={(newTag) => {this.__selected()}}/>
+              {/* <TagPicker onTagSelected={(newTag) => {this.__selected()}}/> */}
+              <TouchableOpacity style={{ marginRight: 5 }} onPress={() => this.props.navigation.navigate('SearchTag')}>
+            <Icon style={{ fontSize: 35, lineHeight: 35 }} name="add" />
+          </TouchableOpacity>
             </CardItem>
           </Card>
         </Form>

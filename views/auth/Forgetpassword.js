@@ -98,7 +98,6 @@ export default class Forgetpassword extends React.Component {
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={{ color: 'red', marginTop: 2 }}>{this.state.message}</Text>
                     </View>
-
                     {statusB.bind(this)()}
                 </Form>
             </View>
