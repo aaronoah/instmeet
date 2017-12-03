@@ -10,6 +10,7 @@ export default class People extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      content: "",
       toggle: false,
       followingList: this.props.screenProps.token.user.following,
       followerList: this.props.screenProps.token.user.follower
@@ -17,27 +18,27 @@ export default class People extends Component {
     this.toggleState.bind(this);//bind the function to the class
   };
 
-  static navigationOptions =  ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     header: (
       <Header hasTabs>
         <Left></Left>
-        <Body style ={{alignItems: 'center'}}>
+        <Body style={{ alignItems: 'center' }}>
           <Title>People</Title>
         </Body>
         <Right>
-          <TouchableOpacity style={{marginRight: 5}} onPress={() => navigation.navigate('Searchpeople')}>
-            <Icon style={{fontSize: 35, lineHeight: 35 }} name="add" />
+          <TouchableOpacity style={{ marginRight: 5 }} onPress={() => navigation.navigate('Searchpeople')}>
+            <Icon style={{ fontSize: 35, lineHeight: 35 }} name="add" />
           </TouchableOpacity>
         </Right>
       </Header>
-      ),
+    ),
     tabBarIcon: ({ tintColor }) => (
       <Icon name="ios-list" style={{ fontSize: 30, color: tintColor }} />
     )
   });
 
 
-  componentDidMount(){
+  componentDidMount() {
   }
 
   toggleState(toggle) {
@@ -80,20 +81,16 @@ export default class People extends Component {
     return false;
   }
 
-  switchTab(){
-
+  findImg(name) {
+    switch (name) {
+      case 'Megha Smith': return require('../images/Megha.png');
+      case 'Jackie Jones': return require('../images/Jackie.png');
+      case 'John Smith': return require('../images/John.png');
+      case 'Jane Doe': return require('../images/Jane.png');
+    }
   }
 
   render() {
-    function findImg(name) {
-      switch (name) {
-        case 'Megha Smith': return require('../images/Megha.png');
-        case 'Jackie Jones': return require('../images/Jackie.png');
-        case 'John Smith': return require('../images/John.png');
-        case 'Jane Doe': return require('../images/Jane.png');
-      }
-    }
-
     return (
       <View style={{ backgroundColor: 'white', height: 667 }}>
         <Tabs initialPage={0}>
@@ -108,10 +105,9 @@ export default class People extends Component {
                     u = user;
                   }
                 });
-
                 return (
                   <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: u, toggle: true })}>
-                    <Thumbnail size={80} source={findImg(u.username)} />
+                    <Thumbnail size={80} source={this.findImg(u.username)} />
                     <Body>
                       <Text>{u.username}</Text>
                       <Text note>{u.notes}</Text>
@@ -127,27 +123,29 @@ export default class People extends Component {
             <FlatList
               data={this.state.followingList}
               keyExtractor={item => item}
-              renderItem={({item}) => {
-                let u2 = this.props.Others[0];
-                for(let i=0; i<this.props.Others.length; ++i){
-                  if(this.props.Others[i].username === item){
+              renderItem={({ item }) => {
+                let u2;
+                for (let i = 0; i < this.props.Others.length; ++i) {
+                  if (this.props.Others[i].username === item) {
                     u2 = this.props.Others[i];
                   }
                 }
                 return (
-                  <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: u2, toggle: false })}>
-                    <Thumbnail size={80} source={findImg(u2.username)} />
-                    <Body>
-                      <Text >{u2.username}</Text>
-                      <Text note >{u2.notes}</Text>
-                    </Body>
-                    <TouchableOpacity onPress={() => this.unfollow(u2.username)}>
-                      <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
-                    </TouchableOpacity>
-                  </ListItem>
+                  <List>
+                    <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: u2, toggle: false })}>
+                      <Thumbnail size={80} source={this.findImg(u2.username)} />
+                      <Body>
+                        <Text >{u2.username}</Text>
+                        <Text note >{u2.notes}</Text>
+                      </Body>
+                      <TouchableOpacity onPress={() => this.unfollow(u2.username)}>
+                        <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
+                      </TouchableOpacity>
+                    </ListItem>
+                  </List>
                 );
               }}
-              />
+            />
           </Tab>
         </Tabs>
       </View>

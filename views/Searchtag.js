@@ -56,8 +56,7 @@ export default class Search extends Component {
             <Button rounded style={{ backgroundColor: element.color, marginLeft: 27, marginTop: 15 }}>
                 <Text style={{ color: '#FFFFFF' }}>{element.text}</Text>
             </Button>;
-        this.setState({content: content1});
-       console.log("content1: " + content1);
+        return content1;
     }
 
     render() {
@@ -104,8 +103,7 @@ export default class Search extends Component {
                                 this.state.text = text;
                                 this.props.tag.map((element, key) => {
                                     if (element.text == this.state.text || element.category == this.state.text) {
-                                        this.getResult(key, element);
-                                        console.log(this.state.content);
+                                        this.setState({content: this.getResult(key, element)})
                                     }
                                     else {
                                         this.Noresult();
@@ -116,7 +114,7 @@ export default class Search extends Component {
                     </Item>
                 </Header>
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                        {this.state.content === '' ? hotTags : this.state.content}
+                        {this.state.content == '' ? hotTags : this.state.content}
                     </View>
             </Container>
         );

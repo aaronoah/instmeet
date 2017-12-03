@@ -10,8 +10,7 @@ export default class Search extends Component {
     this.state = {
       content: '',
       text: '',
-      InterestsList: ['swimming', 'club', 'cooking', 'games', 'rock', 'yoga', 'frisbee', 
-      'golf', 'gym', 'skiing', 'singing', 'painting', 'piano', 'photography', 'biking', 'coding']
+      InterestsList: ['swimming', 'club', 'cooking', 'games']
     };
     //bind the function to the class
     // this.getResult = this.getResult.bind(this);
@@ -195,7 +194,7 @@ findImg(name){
           </Item>
         </Header>
         <Content>
-          {this.state.content === '' ? hotTags : this.state.content}
+          {this.state.content == '' ? hotTags : this.state.content}
         </Content>
       </Container>
     );
