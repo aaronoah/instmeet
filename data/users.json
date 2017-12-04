@@ -15,9 +15,9 @@
       ],
       "notifications": [
         1, 3
-      ],
+      ], 
       "follower": ["John Smith", "Jane Doe"],
-      "following": ["Megha Smith", "Jackie Jones"],
+      "following": ["Megha Smith", "Jackie Jones", "empty"],
       "credit": 100,
       "events": {
         "past": [5],

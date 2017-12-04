@@ -46,19 +46,24 @@ export default class People extends Component {
   }
 
   unfollow(name) {
+    console.log("unfollow");
     var array = this.state.followingList;
     var index = array.indexOf(name)
     array.splice(index, 1);
     this.setState({ followingList: array });
+    this.forceUpdate();
   }
 
   follow(name) {
+    console.log("Want to follow: " + name);
     var array1 = this.state.followingList
     array1.push(name)
     // var array2 = this.state.followerList
     // var index = array2.indexOf(name)
     // array2.splice(index, 1);
-    this.setState({ followingList: array1 })
+    this.setState({ followingList: array1 });
+    console.log("Now the following is: " + this.state.followingList);
+    this.forceUpdate();
   }
 
   contains_following(name) {
@@ -124,6 +129,12 @@ export default class People extends Component {
               data={this.state.followingList}
               keyExtractor={item => item}
               renderItem={({ item }) => {
+                if (this.state.followingList.length === 1) {
+                  return (
+                    <List>
+                      </List>
+                  );
+                } else { if(item != "empty") {
                 let u2;
                 for (let i = 0; i < this.props.Others.length; ++i) {
                   if (this.props.Others[i].username === item) {
@@ -144,7 +155,7 @@ export default class People extends Component {
                     </ListItem>
                   </List>
                 );
-              }}
+              }}}}
             />
           </Tab>
         </Tabs>
@@ -152,6 +163,7 @@ export default class People extends Component {
     );
   }
 }
+
 
 var styles = StyleSheet.create({
   container: {
