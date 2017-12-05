@@ -17,8 +17,7 @@ import History from './settings/History';
 import Searchpeople from './Searchpeople';
 import debounce from 'lodash/debounce';
 import SearchTag from './SearchTag';
-
-
+import TagPicker from '../components/TagPicker';
 
 const Tabs = TabNavigator({
   Home: { screen: Home },
@@ -109,6 +108,9 @@ const MainNavigator = StackNavigator({
   },
   Notifications: {
     screen: Notifications
+  },
+  TagPicker: {
+    screen: TagPicker
   }
 }, {
   headerMode: 'none'
