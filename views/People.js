@@ -48,7 +48,7 @@ export default class People extends Component {
   unfollow(name) {
     console.log("unfollow");
     var array = this.state.followingList;
-    var index = array.indexOf(name)
+    var index = array.indexOf(name);
     array.splice(index, 1);
     this.setState({ followingList: array });
     this.forceUpdate();
@@ -56,8 +56,11 @@ export default class People extends Component {
 
   follow(name) {
     console.log("Want to follow: " + name);
-    var array1 = this.state.followingList
-    array1.push(name)
+    var array1 = this.state.followingList;
+    this.setState({
+      followingList: array1.push(name)
+    });
+    // array1.push(name)
     // var array2 = this.state.followerList
     // var index = array2.indexOf(name)
     // array2.splice(index, 1);
