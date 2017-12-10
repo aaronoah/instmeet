@@ -4,6 +4,7 @@ import { Container, Icon, Content, Card, CardItem, Body, Text, Button, Badge, Li
 import events from '../data/events.json';
 import sortBy from 'lodash/sortBy';
 import moment from 'moment';
+import { EventCard } from '../components/EventCard';
 
 class Home extends Component {
   constructor(props){
@@ -37,8 +38,8 @@ class Home extends Component {
     });
   }
 
-  showMyEvents(){
-    this.props.navigation.navigate('MyEvents', { eventIds: this.props.screenProps.token.user.events.incoming });
+  showMyEvents(events){
+    this.props.navigation.navigate('MyEvents', { eventIds: events });
   }
 
   componentDidMount(){
@@ -46,21 +47,6 @@ class Home extends Component {
   }
 
   render(){
-    /**
-     * find image path according to its name
-     * @param name string - image name
-     * @return object
-    */
-    function findImg(name){
-      switch(name){
-        case 'swim': return require('../images/swim.png');
-        case 'cook': return require('../images/cook.png');
-        case 'club': return require('../images/club.png');
-        case 'rock': return require('../images/music.png');
-        case 'games': return require("../images/xbox.png");
-
-      }
-    }
 
     let { user } = this.props.screenProps.token;
     let myEvents = (user.events !== undefined && user.events.incoming !== undefined) ? user.events.incoming : [];
@@ -71,7 +57,7 @@ class Home extends Component {
           <ListItem itemHeader first style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <View style={{flexDirection: 'row'}}>
               <Text>My Events: </Text>
-              <Button bordered style={{ height: 30 }} onPress={() => this.showMyEvents()}>
+              <Button bordered style={{ height: 30 }} onPress={() => this.showMyEvents(myEvents)}>
                 <Text>{myEvents.length}</Text>
               </Button>
             </View>
@@ -96,69 +82,12 @@ class Home extends Component {
           data={this.state.cards}
           keyExtractor={item => item.id}
           renderItem={({item}) => (
-            <Card style={{ backgroundColor: item.color }}>
-              <CardItem header style={{ backgroundColor: item.color, marginVertical: 0 }}>
-                <Text style={{ fontSize: 16, color: 'black' }}>{item.title}</Text>
-              </CardItem>
-              <CardItem button onPress={() => this.props.navigation.navigate('Event', { event: item })} style={{ backgroundColor: item.color }}>
-                <Body style={{ flexDirection: 'row' }}>
-                  <View>
-                    <View style={{ flexDirection: 'row' }}>
-                      <Icon name="time" style={styles.icon} />
-                      <Text style={styles.bodyText}>{item.time.start} - {item.time.end}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row' }}>
-                      <Icon name="pin" style={styles.icon} />
-                      <Text style={styles.bodyText}>{item.location.name}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row' }}>
-                      <Icon name="people" style={styles.icon} />
-                      <Text style={styles.bodyText}>{item.groupSize}</Text>
-                    </View>
-                  </View>
-                  <View>
-                    <Image style={{ width: 100, height: 100 }} source={findImg(item.thumbnail)} />
-                  </View>
-                </Body>
-              </CardItem>
-              <CardItem footer style={{ backgroundColor: item.color }}>
-                <Text>Tags: </Text>
-                {item.tags.map((tag, k) => {
-                  return (
-                    <Badge key={k} style={{ backgroundColor: 'white' }}>
-                      <Text style={{ color: 'gray' }}>{tag}</Text>
-                    </Badge>
-                  );
-                })}
-              </CardItem>
-            </Card>
+            <EventCard item={item} onPress={() => this.props.navigation.navigate('Event', {event: item})} />
           )}
         />
-        {/* <Content>
-          {this.props.card.map((element, key) => {
-            return (
-            );
-          })}
-        </Content> */}
       </Container>
     );
   }
-}
-
-const styles = StyleSheet.create({
-  icon: {
-    fontSize: 20,
-    margin: 3
-  },
-  bodyText: {
-    margin: 3,
-    fontSize: 14,
-    width: 190
-  }
-});
-
-Home.defaultProps = {
-  card: events
 }
 
 export default Home;

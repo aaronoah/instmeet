@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document, Item, Input } from 'native-base';
-import Others_profiles from '../data/Others_profiles.json';
+import users from '../data/users.json';
 
 export default class Searchpeople extends Component {
 
@@ -52,7 +52,7 @@ export default class Searchpeople extends Component {
   getResult(key, element) {
     var content1 =
     <List>
-      <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: element, toggle: true })}>
+      <ListItem onPress={() => this.props.navigation.navigate('Profile', { user: element, toggle: true })}>
         <Thumbnail size={80} source={this.findImg(element.username)} />
         <Body>
           <Text >{element.username}</Text>
@@ -66,7 +66,7 @@ export default class Searchpeople extends Component {
      this.setState({content: content1});
    }
 
-  render() { 
+  render() {
     let empty = (
       <View>
       </View>
@@ -127,5 +127,5 @@ var styles = StyleSheet.create({
 });
 
 Searchpeople.defaultProps = {
-  Searchitem: Others_profiles
+  Searchitem: users
 }

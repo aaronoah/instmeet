@@ -1,15 +1,17 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Container, Form, Item, Content, Card, CardItem, Input, List, ListItem, Picker,
         Icon, Button, Header, Left, Right, Body, Title, Badge } from 'native-base';
+import { EventCard } from '../../components/EventCard';
 import events from '../../data/events.json';
 
 export default class History extends React.Component {
   constructor(props){
     super(props);
+    this._fetchHistory = this._fetchHistory.bind(this);
     this.state = {
-      sort: "",
-      selectedSort: "key0"
+      selectedSort: "key0",
+      histories: this._fetchHistory()
     };
   }
 
@@ -28,6 +30,11 @@ export default class History extends React.Component {
     });
   }
 
+  _fetchHistory(){
+    const { history } = this.props.navigation.state.params;
+    return events.filter(event => history.indexOf(event.id) !== -1);
+  }
+
   render(){
     function findImg(name){
       switch(name){
@@ -37,8 +44,6 @@ export default class History extends React.Component {
         case 'rock': return require('../../images/music.png');
       }
     }
-
-  const { user } = this.props.screenProps.token;
 
   return(
     <Container>
@@ -53,16 +58,13 @@ export default class History extends React.Component {
         </Body>
         <Right></Right>
     </Header>
-
     <List>
       <ListItem itemHeader first style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'row'}}>
-          <Button bordered style={{ height: 30 }} >
-            <Text style={{ paddingHorizontal: 15}}>Total: {user.events.past.length}</Text>
-          </Button>
+          <Text style={{ paddingHorizontal: 15}}>Total: {this.state.histories.length}</Text>
         </View>
         <Form>
-          <Button disabled bordered style={{height: 30}}>
+          <Button bordered style={{height: 30}}>
             <Picker
               mode="dropdown"
               iosHeader="Sort History"
@@ -78,75 +80,21 @@ export default class History extends React.Component {
         </Form>
       </ListItem>
     </List>
-    <Content>
-      {this.props.card.filter(event => {
-        if(user.events.past.indexOf(event.id) !== -1){
-          return true;
-        }else{
-          return false;
-        }
-      }).map((element, key) => {
-        return (
-          <Card key={key} style={{ backgroundColor: element.color }}>
-            <CardItem bordered header style={{ backgroundColor: element.color, marginVertical: 0 }}>
-              <Text style={{ fontSize: 16, color: 'black' }}>{element.title}</Text>
-            </CardItem>
-            <CardItem button onPress={() => this.props.navigation.navigate('Event', {event: element})} style={{ backgroundColor: element.color }}>
-              <Body style={{ flexDirection: 'row' }}>
-                <View>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Icon name="time" style={styles.icon} />
-                    <Text style={styles.bodyText}>{element.time.start} - {element.time.end}</Text>
-                  </View>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Icon name="pin" style={styles.icon} />
-                    <Text style={styles.bodyText}>{element.location.name}</Text>
-                  </View>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Icon name="people" style={styles.icon} />
-                    <Text style={styles.bodyText}>{element.groupSize}</Text>
-                  </View>
-                </View>
-                <View>
-                  <Image style={{ width: 100, height: 100 }} source={findImg(element.thumbnail)} />
-                </View>
-              </Body>
-            </CardItem>
-            <CardItem footer style={{ backgroundColor: element.color }}>
-              <Text>Tags: </Text>
-              {element.tags.map((tag, k) => {
-                return (
-                  <Badge key={k} style={{ backgroundColor: 'white' }}>
-                    <Text style={{ color: 'gray' }}>{tag}</Text>
-                  </Badge>
-                );
-              })}
-            </CardItem>
-          </Card>
-        );
-      })}
-    </Content>
+      {(this.state.histories !== undefined && this.state.histories.length > 0) ? (
+        <FlatList
+          data={this.state.histories}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <EventCard item={item} onPress={() => this.props.navigation.navigate('Event', { event: item })} />
+          )} />
+        ) : (
+          <View>
+            <Text>You don't have any history events</Text>
+          </View>
+      )}
   </Container>
   );
 
-
-
   }
-
 }
 
-const styles = StyleSheet.create({
-  icon: {
-    fontSize: 20,
-    margin: 3
-  },
-  bodyText: {
-    margin: 3,
-    fontSize: 14,
-    width: 190
-  }
-});
-
-History.defaultProps = {
-  card: events
-}

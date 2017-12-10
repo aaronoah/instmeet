@@ -9,8 +9,7 @@ import Home from './Home';
 import Settings from './Settings';
 import Event from './event/Event';
 import MyEvents from './event/MyEvents';
-import ProfileDetail from './ProfileDetail';
-import userProfile from './settings/userProfile';
+import Profile from './settings/Profile';
 import Notifications from './settings/Notifications';
 import resetPassword from './settings/resetPassword';
 import History from './settings/History';
@@ -91,14 +90,11 @@ const MainNavigator = StackNavigator({
   SearchTag: {
     screen: SearchTag
   },
-  ProfileDetail: {
-    screen: ProfileDetail
-  },
   Searchpeople: {
     screen: Searchpeople
   },
-  userProfile: {
-    screen: userProfile
+  Profile: {
+    screen: Profile
   },
   resetPassword: {
     screen: resetPassword
@@ -165,7 +161,7 @@ export default class Main extends React.Component{
       }
     };
     return (
-      <MainNavigator screenProps={{ authNavigator: this.props.navigation, token: token, firebase: this.props.screenProps.firebase}} />
+      <MainNavigator screenProps={{ authNavigator: this.props.navigation, token: token }} />
     );
   }
 }

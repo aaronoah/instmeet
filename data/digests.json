@@ -1,0 +1,29 @@
+[
+  {
+    "eventId": 2,
+    "eventTitle": "Share your favorite recipe",
+    "thumbnail": "cook",
+    "announcements": {
+      "time": {
+        "start": "Monday, 27 Nov 11:30"
+      }
+    }
+  },
+  {
+    "eventId": 1,
+    "eventTitle": "Professional swimmer hangout",
+    "thumbnail": "swim",
+    "announcements": {
+      "groupSize": 20
+    }
+  },
+  {
+    "eventId": 3,
+    "eventTitle": "Club Night",
+    "thumbnail": "club",
+    "announcements": {
+      "description": "Group swimming and auatic exercise programme for college students: Freestyle, front/back craw, breast stroke, butterfly… ",
+      "groupSize": 100
+    }
+  }
+]

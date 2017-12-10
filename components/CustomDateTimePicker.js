@@ -12,8 +12,9 @@ export default class CustomDateTimePicker extends React.Component{
     this._handleDatePicked = this._handleDatePicked.bind(this);
     const vis = 'isDateTimePickerVisible' + this.props.number;
     this.state ={
-      date: "pick date",
-      time: "pick time",
+      year: new Date().getFullYear(),
+      date: this.props.date !== undefined ? this.props.date : "pick date",
+      time: this.props.time !== undefined ? this.props.time : "pick time",
       vis: false
     }
   }
@@ -38,7 +39,7 @@ export default class CustomDateTimePicker extends React.Component{
     }
 
     if(this.props.onDateSelected !== undefined){
-      this.props.onDateSelected(this.state.date, this.state.time);
+      this.props.onDateSelected(this.state.date, this.state.year, this.state.time);
     }
     this._hideDateTimePicker();
   }

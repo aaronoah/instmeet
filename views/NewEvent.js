@@ -12,6 +12,7 @@ export default class NewEvent extends Component {
     this._validateNumber = this._validateNumber.bind(this);
     this._saveEvent = this._saveEvent.bind(this);
     this._cancel = this._cancel.bind(this);
+    this._selected = this._selected.bind(this);
     this._toggleSizeInfinity = this._toggleSizeInfinity.bind(this);
     this.state = {
       showToast: false,
@@ -80,12 +81,11 @@ export default class NewEvent extends Component {
     }
   }
 
-  // __selected() {
-  //   this.props.screenProps.token.user = null;
-  //   this.props.screenProps.token.location = null;
-  //   this.props.screenProps.authNavigator.navigate('Searchtag');
-  //   this.props.screenProps.authNavigator = null;
-  // }
+  _selected(tag) {
+    this.setState(prev => ({
+      tags: prev.tags.push(tag)
+    }));
+  }
 
   _cancel(){
     this.props.navigation.goBack(null);
@@ -127,8 +127,8 @@ export default class NewEvent extends Component {
                 <CustomDateTimePicker
                   number={1}
                   fontSize={Number(18)}
-                  onDateSelected={(date, time) => {
-                    this.setState({timeStart: date + ' ' + time})
+                  onDateSelected={(date, year, time) => {
+                    this.setState({timeStart: date + ' ' + year + ' ' + time})
                   }}
                   maximumDate={this.state.timeEnd} />
               </Item>
@@ -139,8 +139,8 @@ export default class NewEvent extends Component {
                 <CustomDateTimePicker
                   number={2}
                   fontSize={Number(18)}
-                  onDateSelected={(date, time) => {
-                    this.setState({ timeEnd: date + ' ' + time})
+                  onDateSelected={(date, year, time) => {
+                    this.setState({ timeEnd: date + ' ' + year + ' ' + time})
                   }}
                   minimumDate={this.state.timeStart} />
               </Item>
@@ -181,8 +181,8 @@ export default class NewEvent extends Component {
                 <CustomDateTimePicker
                   number={3}
                   fontSize={Number(18)}
-                  onDateSelected={(date, time) => {
-                    this.setState({ registerDDL: date + ' ' + time })
+                  onDateSelected={(date, year, time) => {
+                    this.setState({ registerDDL: date + ' ' + year + ' ' + time })
                   }}
                   maximumDate={this.state.timeStart}/>
             </CardItem>
@@ -190,10 +190,7 @@ export default class NewEvent extends Component {
           <Card>
             <CardItem style={{flexDirection: 'row'}}>
               <Text style={{ flex: 0.3, fontSize: 18, marginLeft: 8 }}>Tags: </Text>
-              {/* <TagPicker onTagSelected={(newTag) => {this.__selected()}}/> */}
-              <TouchableOpacity style={{ marginRight: 5 }} onPress={() => this.props.navigation.navigate('SearchTag')}>
-            <Icon style={{ fontSize: 35, lineHeight: 35 }} name="add" />
-          </TouchableOpacity>
+              <TagPicker navigation={this.props.navigation} permitEdit={true} onTagSelected={(newTag) => {this._selected(newTag)}}/>
             </CardItem>
           </Card>
         </Form>

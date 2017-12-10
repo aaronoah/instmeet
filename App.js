@@ -13,17 +13,6 @@ import Forgetpassword from './views/auth/Forgetpassword';
 import { Root } from 'native-base';
 
 import ReactNative from 'react-native';
-import * as firebase from 'firebase';
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyBsmLMpLKrek0FnLSzby7jKORT8YTXbMJE",
-  authDomain: "instmeet.firebaseapp.com",
-  databaseURL: "https://instmeet.firebaseio.com",
-  projectId: "instmeet",
-  storageBucket: "instmeet.appspot.com",
-  messagingSenderId: "281725857803"
-};
-firebase.initializeApp(config);
 
 const RootNavigator = StackNavigator({
   Landing: {
@@ -66,6 +55,6 @@ const RootNavigator = StackNavigator({
 
 export default App = () => (
   <Root>
-    <RootNavigator screenProps={{ firebase: firebase}} />
+    <RootNavigator />
   </Root>
 );

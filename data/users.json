@@ -13,15 +13,101 @@
       "interests": [
         "coding"
       ],
-      "notifications": [
-        1, 3
-      ], 
+      "notifications": {
+        "read": [],
+        "unread": [1, 3]
+      },
       "follower": ["John Smith", "Jane Doe"],
-      "following": ["Megha Smith", "Jackie Jones", "empty"],
+      "following": ["Megha Smith", "Jackie Jones"],
       "credit": 100,
       "events": {
         "past": [5],
         "incoming": [1, 3]
       }
+  },
+  {
+    "id": 2,
+    "username": "Megha Smith",
+    "major": "Computer Science",
+    "notes": "Its time to build a difference . .",
+    "gender": "♀",
+    "phone": "(651)123-4567",
+    "birthday": "1990-01-01",
+    "interests": ["cooking"],
+    "color1": "#FBAD3D",
+    "width1": 93,
+    "credit": "90"
+  },
+  {
+    "id": 3,
+    "username": "Jackie Jones",
+    "major": "Economics",
+    "notes": "Hello.",
+    "gender": "♂",
+    "phone": "(800)123-4567",
+    "birthday": "1980-11-09",
+    "interests": ["swimming"],
+    "color1": "#4FADF9",
+    "credit": "95"
+  },
+  {
+    "id": 4,
+    "username": "Yuqi Zhou",
+    "major": "Computer Science",
+    "notes": "Carpe diem",
+    "gender": "♀",
+    "phone": "(612)123-0000",
+    "birthday": "1994-05-10",
+    "interests": ["hiking"],
+    "color1": "#D58C8C",
+    "credit": "100"
+  },
+  {
+    "id": 5,
+    "username": "John Smith",
+    "major": "Electrical Engineering",
+    "notes": "Nice to meet you",
+    "gender": "♂",
+    "phone": "(651)123-4567",
+    "birthday": "1995-10-01",
+    "interests": ["cooking"],
+    "color1": "#FBAD3D",
+    "credit": "100"
+  },
+  {
+    "id": 6,
+    "username": "Jane Doe",
+    "major": "Economics",
+    "notes": "Follow my nose.",
+    "gender": "♂",
+    "phone": "(800)123-4567",
+    "birthday": "1994-11-11",
+    "interests": ["swimming"],
+    "color1": "#4FADF9",
+    "credit": "95"
+  },
+  {
+    "id": 7,
+    "username": "Kumat Pratik",
+    "major": "Communication Study",
+    "notes": "Go fighting",
+    "gender": "♂",
+    "phone": "(800)321-4567",
+    "birthday": "1996-10-08",
+    "interests": ["club"],
+    "color1": "#EC3D40",
+    "credit": "100"
+  },
+  {
+    "id": 8,
+    "username": "Kumat Din",
+    "major": "Economics",
+    "notes": "Keep pushing",
+    "gender": "♂",
+    "phone": "(800)123-7654",
+    "birthday": "1995-01-09",
+    "interests": ["swimming"],
+    "color1": "#4FADF9",
+    "credit": "98"
   }
 ]

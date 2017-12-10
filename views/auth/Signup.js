@@ -49,6 +49,7 @@ export default class Signup extends React.Component {
       this.props.navigation.navigate('FillInfo', {
         user: {
           email: `${this.state.email}@umn.edu`,
+          username: this.state.email,
           password: this.state.password
         }
       });

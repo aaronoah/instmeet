@@ -4,7 +4,7 @@ import {
   Icon, Form, Container, Header, Content, Button, List, ListItem, Left, Right, Title,
   Thumbnail, Text, Body, Tab, Tabs
 } from 'native-base';
-import Others_profiles from '../data/Others_profiles.json';
+import users from '../data/users.json';
 
 export default class People extends Component {
   constructor(props) {
@@ -13,9 +13,13 @@ export default class People extends Component {
       content: "",
       toggle: false,
       followingList: this.props.screenProps.token.user.following,
-      followerList: this.props.screenProps.token.user.follower
+      followerList: this.props.screenProps.token.user.follower,
+
     };
     this.toggleState.bind(this);//bind the function to the class
+    this._follow = this._follow.bind(this);
+    this._unfollow = this._unfollow.bind(this);
+    this._toggleFollow = this._toggleFollow.bind(this);
   };
 
   static navigationOptions = ({ navigation }) => ({
@@ -33,20 +37,15 @@ export default class People extends Component {
       </Header>
     ),
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="ios-list" style={{ fontSize: 30, color: tintColor }} />
+      <Icon name="md-list" style={{ fontSize: 30, color: tintColor }} />
     )
   });
-
-
-  componentDidMount() {
-  }
 
   toggleState(toggle) {
     this.setState({ toggle: toggle }); // force a rerender
   }
 
-  unfollow(name) {
-    console.log("unfollow");
+  _unfollow(name) {
     var array = this.state.followingList;
     var index = array.indexOf(name);
     array.splice(index, 1);
@@ -54,39 +53,19 @@ export default class People extends Component {
     this.forceUpdate();
   }
 
-  follow(name) {
-    console.log("Want to follow: " + name);
+  _follow(name) {
     var array1 = this.state.followingList;
-    this.setState({
-      followingList: array1.push(name)
-    });
-    // array1.push(name)
-    // var array2 = this.state.followerList
-    // var index = array2.indexOf(name)
-    // array2.splice(index, 1);
+    array1.push(name);
     this.setState({ followingList: array1 });
-    console.log("Now the following is: " + this.state.followingList);
     this.forceUpdate();
   }
 
-  contains_following(name) {
-    var array = this.state.followingList;
-    for (var i = 0; i < array.length; i++) {
-      if (array[i] == name) {
-        return true;
-      }
+  _toggleFollow(username){
+    if(this.state.followingList.includes(username)){
+      this._unfollow(username);
+    }else{
+      this._follow(username);
     }
-    return false;
-  }
-
-  contains_follower(name) {
-    var array = this.state.followerList;
-    for (var i = 0; i < array.length; i++) {
-      if (array[i] == name) {
-        return true;
-      }
-    }
-    return false;
   }
 
   findImg(name) {
@@ -106,6 +85,7 @@ export default class People extends Component {
             <FlatList
               data={this.state.followerList}
               keyExtractor={item => item}
+              extraData={this.state}
               renderItem={({ item }) => {
                 let u;
                 this.props.Others.forEach(user => {
@@ -114,14 +94,18 @@ export default class People extends Component {
                   }
                 });
                 return (
-                  <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: u, toggle: true })}>
+                  <ListItem onPress={() => this.props.navigation.navigate('Profile', { user: u, toggle: true })}>
                     <Thumbnail size={80} source={this.findImg(u.username)} />
                     <Body>
                       <Text>{u.username}</Text>
                       <Text note>{u.notes}</Text>
                     </Body>
-                    <TouchableOpacity onPress={() => this.follow(u.username)}>
-                      <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
+                    <TouchableOpacity onPress={() => this._toggleFollow(u.username)}>
+                      {this.state.followingList.includes(u.username) ? (
+                        <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
+                      ) : (
+                          <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
+                      )}
                     </TouchableOpacity>
                   </ListItem>
                 );
@@ -131,34 +115,33 @@ export default class People extends Component {
             <FlatList
               data={this.state.followingList}
               keyExtractor={item => item}
+              extraData={this.state}
               renderItem={({ item }) => {
-                if (this.state.followingList.length === 1) {
-                  return (
-                    <List>
-                      </List>
-                  );
-                } else { if(item != "empty") {
-                let u2;
-                for (let i = 0; i < this.props.Others.length; ++i) {
-                  if (this.props.Others[i].username === item) {
-                    u2 = this.props.Others[i];
+                  let u2;
+                this.props.Others.forEach(user => {
+                  if (user.username == item) {
+                    u2 = user;
                   }
-                }
-                return (
+                });
+                  return (
                   <List>
-                    <ListItem onPress={() => this.props.navigation.navigate('ProfileDetail', { profile: u2, toggle: false })}>
+                    <ListItem onPress={() => this.props.navigation.navigate('Profile', { user: u2, toggle: false })}>
                       <Thumbnail size={80} source={this.findImg(u2.username)} />
                       <Body>
                         <Text >{u2.username}</Text>
                         <Text note >{u2.notes}</Text>
                       </Body>
-                      <TouchableOpacity onPress={() => this.unfollow(u2.username)}>
-                        <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
+                      <TouchableOpacity onPress={() => this._toggleFollow(u2.username)}>
+                          {this.state.followingList.indexOf(u2.username) !== -1 ? (
+                            <Text style={{ flex: 0.3, color: '#3F51B5' }}>Unfollow</Text>
+                          ): (
+                            <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
+                          )}
                       </TouchableOpacity>
                     </ListItem>
                   </List>
-                );
-              }}}}
+                  );
+            }}
             />
           </Tab>
         </Tabs>
@@ -193,5 +176,5 @@ var styles = StyleSheet.create({
 });
 
 People.defaultProps = {
-  Others: Others_profiles,
+  Others: users,
 }

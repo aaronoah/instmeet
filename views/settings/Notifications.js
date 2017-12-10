@@ -1,24 +1,45 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, Left, Right, Title } from 'native-base';
-import events from '../../data/events';
+import digests from '../../data/digests.json';
+import ViewMore from '../../components/ViewMore';
 
 export default class Notifications extends Component {
 
   constructor(props){
     super(props);
+    this.state = {
+      array: [],
+      unreadCount: 0
+    };
+  }
+
+  componentDidMount(){
+    let { notifications } = this.props.navigation.state.params;
+    this.setState({
+      array: [...notifications.unread, ...notifications.read],  //contains only ids
+      unreadCount: notifications.unread.length
+    });
+  }
+
+  _onRead(){
+    this.setState(prev => ({
+      unreadCount: prev.unreadCount--
+    }))
   }
 
   render(){
 
-    function findImg(name){
-      switch(name){
-        case 'swim': return require('../../images/swim.png');
-        case 'cook': return require('../../images/cook.png');
-        case 'club': return require('../../images/club.png');
-        case 'rock': return require('../../images/music.png');
-        case 'games': return require("../../images/xbox.png");
+    let detailedNotifications = [];
+    for(let i=0; i<this.state.array.length; ++i){
+      let tmp;
+      for(let j=0; j<digests.length; ++j){
+        if(digests[j].eventId === this.state.array[i]){
+          tmp = digests[j];
+          break;
+        }
       }
+      detailedNotifications.push(tmp);
     }
 
     return (
@@ -35,25 +56,27 @@ export default class Notifications extends Component {
         <Right></Right>
       </Header>
       <FlatList
-        data={this.props.navigation.state.params.notifications}
-        keyExtractor={item => item}
-        renderItem={({item}) => {
-          let event;
-          for(let i=0; i<events.length; ++i){
-            if(events[i].id === item){
-              event = events[i];
-            }
-          }
-          return (
+          data={detailedNotifications}
+          keyExtractor={item => item.eventId}
+          renderItem={({ item }) => {
+            return (
               <ListItem>
-                <Thumbnail source={findImg(event.thumbnail)} />
-                <Body>
-                  <Text style={{ flex: 0.3 }}>{event.title}</Text>
-                  <Text note style={{ flex: 0.3 }}>Haven‘t decided yet!</Text>
-                </Body>
+                <ViewMore
+                  thumbnail={item.thumbnail}
+                  title={item.eventTitle}
+                  note={`Change announcements: ${Object.keys(item.announcements).length}`}
+                  unread={this.state.array.indexOf(item.eventId) < this.state.unreadCount}
+                  onRead={this._onRead.bind(this)}
+                >
+                  {Object.keys(item.announcements).map((announcement, key) => {
+                    return (
+                      <Text key={key}>{`${announcement}: ${item.announcements[announcement]}`}</Text>
+                    );
+                  })}
+                </ViewMore>
               </ListItem>
-          );
-        }} />
+            );
+          }} />
     </Container>
     );
  }

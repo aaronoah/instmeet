@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation, Vibration } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, Badge, List, ListItem, Thumbnail, Text, Body, document, Item, Input, Card, CardItem } from 'native-base';
 import events from '../data/events';
-// import { element } from '../../../Library/Caches/typescript/2.6/node_modules/@types/prop-types';
+import { EventCard } from '../components/EventCard';
 
 export default class Search extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export default class Search extends Component {
   //   var content1 =
   //   this.setState({content:content1});
   // }
-  
+
 findImg(name){
     switch(name){
       case 'swim': return require('../images/swim.png');
@@ -70,44 +70,9 @@ findImg(name){
 
 
   getResult(key, element) {
-    var content1 =
-         <Card key={key} style={{ backgroundColor: element.color }}>
-           <CardItem header style={{ backgroundColor: element.color, marginVertical: 0 }}>
-             <Text style={{ fontSize: 16, color: 'black' }}>{element.title}</Text>
-           </CardItem>
-           <CardItem button onPress={() => this.props.navigation.navigate('Event', { event: element })}
-           style={{ backgroundColor: element.color }}>
-             <Body style={{ flexDirection: 'row' }}>
-               <View>
-                 <View style={{ flexDirection: 'row' }}>
-                   <Icon name="time" style={styles.icon} />
-                   <Text style={styles.bodyText}>{element.time.start} - {element.time.end}</Text>
-                 </View>
-                 <View style={{ flexDirection: 'row' }}>
-                   <Icon name="pin" style={styles.icon} />
-                   <Text style={styles.bodyText}>{element.location.name}</Text>
-                 </View>
-                 <View style={{ flexDirection: 'row' }}>
-                   <Icon name="people" style={styles.icon} />
-                   <Text style={styles.bodyText}>{element.groupSize}</Text>
-                 </View>
-               </View>
-               <View>
-                 <Image style={{ width: 100, height: 100 }} source={this.findImg(element.thumbnail)} />
-               </View>
-             </Body>
-           </CardItem>
-           <CardItem footer style={{ backgroundColor: element.color }}>
-             <Text>Tags: </Text>
-             {element.tags.map((tag, k) => {
-               return (
-                 <Badge key={k} style={{ backgroundColor: 'white' }}>
-                   <Text style={{ color: 'gray' }}>{tag}</Text>
-                 </Badge>
-               );
-             })}
-           </CardItem>
-         </Card>;
+    var content1 = (
+      <EventCard item={element} onPress={() => this.props.navigation.navigate('Event', { event: element })} />
+    );
      this.setState({content: content1});
    }
 
@@ -122,7 +87,7 @@ findImg(name){
             <Button rounded style={{ backgroundColor: '#4FADF9', marginLeft: 27, marginTop: 15 }} onPress={()=>{this.props.card.map((element, key) => {
                   if (this.contains(element.tags, "swimming")){
                 this.getResult(key, element);
-              } 
+              }
               this.setState({text: "swimming"});
               })}}>
               <Text style={{ color: '#FFFFFF' }}>Swimming</Text>
@@ -130,7 +95,7 @@ findImg(name){
             <Button rounded style={{ backgroundColor: '#FBAD3D', marginLeft: 27, marginTop: 15 }} onPress={()=>{this.props.card.map((element, key) => {
                   if (this.contains(element.tags, "cooking")){
                 this.getResult(key, element);
-              } 
+              }
             this.setState({text: "cooking"});
               })}}>
               <Text style={{ color: '#FFFFFF' }}>Cooking</Text>
@@ -140,7 +105,7 @@ findImg(name){
             <Button rounded style={{ backgroundColor: '#EC3D40', marginLeft: 27, marginTop: 15 }} onPress={()=>{this.props.card.map((element, key) => {
                   if (this.contains(element.tags, "club")){
                 this.getResult(key, element);
-              } 
+              }
             this.setState({text: "club"});
               })}}>
               <Text style={{ color: '#FFFFFF' }}>Club</Text>

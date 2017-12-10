@@ -16,8 +16,8 @@ export default class Settings extends React.Component {
     title: "Settings",
     tabBarIcon: ({ tintColor }) => {
       const { user } = screenProps.token;
-      let count = (user.notifications !== undefined) ? user.notifications.length : 0;
-      return <IconBadge name="ios-person" fontSize={30} tintColor={tintColor} notificationsCount={count} />;
+      let count = (user.notifications !== undefined) ? user.notifications.unread.length : 0;
+      return <IconBadge name="ios-person" fontSize={30} tintColor={tintColor} notificationsCount={Number(count)} />;
     }
   });
 
@@ -52,16 +52,16 @@ export default class Settings extends React.Component {
     //   }
     // }
 
-    const { username, major, notifications } = this.props.screenProps.token.user;
+    const { username, major, notifications, events } = this.props.screenProps.token.user;
 
     return (
       <View style={{backgroundColor: 'white'}}>
         <List>
-          <ListItem onPress={() => this.props.navigation.navigate('userProfile')}>
+          <ListItem onPress={() => this.props.navigation.navigate('Profile', {user: this.props.screenProps.token.user})}>
             <Thumbnail size={80} source={{ uri: `https://ui-avatars.com/api/?name=${username[0]}`}} />
              <Body>
               <Text style={{ flex: 0.3 }}>{username}</Text>
-              <Text note style={{ flex: 0.3 }}>{major}</Text>
+              <Text note style={{ flex: 0.3 }}>{(major !== undefined) ? major : "undecided"}</Text>
              </Body>
           </ListItem>
           <ListItem icon onPress={() => this.props.navigation.navigate('Notifications', {notifications: notifications})}>
@@ -72,12 +72,14 @@ export default class Settings extends React.Component {
               <Text style={{lineHeight: 30}}>Notifications</Text>
             </Body>
             <Right>
-              <Badge>
-                <Text>{notifications.length}</Text>
-              </Badge>
+              {(notifications !== undefined) ? (
+                <Badge>
+                  <Text>{notifications.unread.length}</Text>
+                </Badge>
+              ) : null}
             </Right>
           </ListItem>
-          <ListItem icon onPress={() => this.props.navigation.navigate('History')}>
+          <ListItem icon onPress={() => this.props.navigation.navigate('History', {history: (events !== undefined && events.past !== undefined) ? events.past : []})}>
             <Left>
               <Icon name="clock" />
             </Left>
