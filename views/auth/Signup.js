@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Form, Item, Icon, Button, Header, Left, Right, Body, Title } from 'native-base';
-import users from '../../data/users.json';
+// import users from '../../data/users.json';
 import { DebounceInput } from '../../components/DebounceInput';
 
 export default class Signup extends React.Component {
@@ -12,7 +12,10 @@ export default class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.signup = this.signup.bind(this);
+    this._signupFollowup = this._signupFollowup.bind(this);
+    this._retrieveUsers = this._retrieveUsers.bind(this);
     this.state = {
+      users: [],
       email: "",
       password: "",
       passwd: "",
@@ -20,6 +23,16 @@ export default class Signup extends React.Component {
       pin1Secure: true,
       pin2Secure: true
     };
+  }
+
+  async _retrieveUsers() {
+    try {
+      const u = await AsyncStorage.getItem('users');
+      return JSON.parse(u);
+
+    } catch (error) {
+      return error;
+    }
   }
 
   signup() {
@@ -38,24 +51,53 @@ export default class Signup extends React.Component {
       flag = false;
     }
 
-    for(let user of users){
-      if(user.email === this.state.email){
+    for (let i=0; i<this.state.users.length; ++i) {
+      if (this.state.users[i].email === this.state.email) {
         this.setState({ message: 'this email has been used' });
         flag = false;
       }
     }
 
-    if(flag){
-      this.props.navigation.navigate('FillInfo', {
-        user: {
-          email: `${this.state.email}@umn.edu`,
-          username: this.state.email,
-          password: this.state.password
-        }
-      });
+    if (flag) {
+          let newUser = {
+            email: this.state.email,
+            username: this.state.email.split("@")[0],
+            password: this.state.password
+          };
+
+          let ur = this.state.users;
+          ur.push(newUser);
+          this.setState(prev => ({
+            users: ur
+          }));
+          this._signupFollowup().then(val => {
+            if(val !== 'success'){
+              console.error(val);
+            }else{
+              this.props.navigation.navigate('FillInfo', { user: newUser });
+            }
+          });
     }
   }
 
+  async _signupFollowup(){
+    try{
+      await AsyncStorage.setItem('users', JSON.stringify(this.state.users));
+    }catch(error){
+      return error;
+    }
+    return 'success';
+  }
+
+  componentWillMount(){
+    this._retrieveUsers().then(val => {
+      if(Array.isArray(val)){
+        this.setState({
+          users: val
+        });
+      }
+    });
+  }
 
   render() {
     return (

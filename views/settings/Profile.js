@@ -54,6 +54,15 @@ export default class Profile extends Component {
 
   }
 
+  findImg(name) {
+    switch (name) {
+      case 'Megha Smith': return require('../../images/Megha.png');
+      case 'Jackie Jones': return require('../../images/Jackie.png');
+      case 'John Smith': return require('../../images/John.png');
+      case 'Jane Doe': return require('../../images/Jane.png');
+    }
+  }
+
   _toggleFollow(){
     this.setState(prev => ({
       followText: (prev.followText === 'Follow') ? 'Unfollow' : 'Follow'
@@ -100,9 +109,11 @@ export default class Profile extends Component {
           </Header>
           <ScrollView contentContainerStyle={styles.contentContainer}>
             <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-              <Image style={{width: 140, height: 140, borderRadius: 70}}
+              {/* <Image style={{width: 140, height: 140, borderRadius: 70}}
                 source={{ uri: `https://ui-avatars.com/api/?name=${this.state.username}&font-size=0.5&size=128` }}
-              />
+              /> */}
+              <Image style={{ width: 140, height: 140, borderRadius: 70}}
+                source={this.findImg(this.state.username)} />
             </View>
             <View style={{ marginVertical: 20, justifyContent: 'center'}}>
               <Input style={{fontSize: 30, textAlign: 'center'}} defaultValue={this.state.username} editable={this.state.editOn} onChangeText={(input) => this.setState({ major: input })} />

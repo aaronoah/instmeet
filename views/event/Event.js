@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
-import { Icon, Form, Container, Header, Content, Button, Text, Body, Left, Right, Title, Card, CardItem, Thumbnail, Item } from 'native-base';
+import { View, TouchableOpacity, Image, AsyncStorage, Alert } from 'react-native';
+import { Icon, Form, Container, Header, Content, Button, Text, Body, Left, Right, Title, Card, CardItem, Thumbnail, Item, Toast } from 'native-base';
 import moment from 'moment';
 import CustomDateTimePicker from '../../components/CustomDateTimePicker';
 import { DebounceInput } from '../../components/DebounceInput';
@@ -16,11 +16,13 @@ export default class Event extends Component {
       timeEnd: new Date(),
       location: "",
       description: "",
-      sizeLimit: Infinity
+      groupSize: Infinity,
+      btnTxt: "Join",
     }
     this._toggleEdit = this._toggleEdit.bind(this);
     this._save = this._save.bind(this);
     this._cancel = this._cancel.bind(this);
+    this._userAction = this._userAction.bind(this);
   }
 
   _toggleEdit(){
@@ -42,26 +44,77 @@ export default class Event extends Component {
     });
   }
 
+  _userAction(){
+    let { user } = this.props.screenProps.token;
+    let { event } = this.props.navigation.state.params;
+    if(this.state.btnTxt === 'Join'){
+      user.events.incoming.push(event.id);
+      event.participants.push(user.username);
+      this.setState({
+        btnTxt: 'Quit'
+      });
+    }else if(this.state.btnTxt === 'Quit'){
+      let index = user.events.incoming.indexOf(event.id);
+      user.events.incoming.splice(index, 1);
+      let index2 = event.participants.indexOf(user.username);
+      event.participants.splice(index2, 1);
+      this.setState({
+        btnTxt: 'Join'
+      });
+    }
+  }
+
+  componentDidMount(){
+    const { state } = this.props.navigation;
+    let { user } = this.props.screenProps.token;
+    const event = state.params.event;
+    // let txt = 'Join';
+    for (let i = 0; i < event.participants.length; ++i) {
+      if (event.participants[i] === user.username) {
+        // txt = 'Quit';
+        this.setState({
+          btnTxt: 'Quit'
+        });
+        break;
+      }
+    }
+    if (moment(event.time.end).isBefore(moment())) {
+      // txt = 'Event is Ended';
+      this.setState({
+        btnTxt: 'Event is Ended'
+      });
+    } else if (moment(event.registerDDL).isBefore(moment())) {
+      // txt = 'Registration Closed';
+      this.setState({
+        btnTxt: 'Registration Closed'
+      });
+    }
+  }
+
   render() {
     const { state } = this.props.navigation;
     let { user } = this.props.screenProps.token;
     const event = state.params.event;
-    let txt = 'Join';
-    for(let i=0; i<event.participants.length; ++i){
-      if(event.participants[i] === this.props.screenProps.token.user.username){
-        txt = 'Quit';
-        break;
-      }
-    }
-    if (moment(event.time.end).isBefore(moment())){
-      txt = 'Event is Ended';
-    }else if(moment(event.registerDDL).isBefore(moment())){
-      txt = 'Registration Closed';
-    }
+    // let txt = 'Join';
 
     let btn = (
-      <Button block dark={(txt === 'Registration Closed') ? true: false} light={(txt === 'Event is Ended') ? true : false} success={(txt === 'Join') ? true : false} danger={(txt === 'Quit') ? true : false}>
-        <Text>{txt}</Text>
+      <Button
+        style={{marginVertical: 20}}
+        onPress={() => {
+          if(this.state.btnTxt === 'Join' || this.state.btnTxt === 'Quit'){
+            Alert.alert(
+              `${this.state.btnTxt}`,
+              `Are you sure to ${this.state.btnTxt} this event?`,
+              [
+                { text: 'Cancel', style: 'cancel' },
+                { text: 'OK', onPress: () => this._userAction() },
+              ],
+              { cancelable: false }
+            )
+          }
+        }}
+        block dark={(this.state.btnTxt === 'Registration Closed') ? true: false} light={(this.state.btnTxt === 'Event is Ended') ? true : false} success={(this.state.btnTxt === 'Join') ? true : false} danger={(this.state.btnTxt === 'Quit') ? true : false}>
+        <Text>{this.state.btnTxt}</Text>
       </Button>
     );
 
@@ -102,7 +155,7 @@ export default class Event extends Component {
           </Right>
         </Header>
         <Content>
-          {txt !== 'Event is Ended' ? (
+          {this.state.btnTxt !== 'Event is Ended' ? (
             !this.state.editOn ? (
               <View style={{ backgroundColor: 'red', paddingVertical: 10 }}>
                 <Body>
@@ -234,7 +287,7 @@ export default class Event extends Component {
           <Card>
             <CardItem header bordered>
               <Icon name='people' style={{ fontSize: 35 }}/>
-              <Text style={{marginLeft: 3}}>({event.participants.length} / {event.sizeLimit})</Text>
+              <Text style={{marginLeft: 3}}>({event.participants.length} / {event.groupSize})</Text>
             </CardItem>
             <CardItem>
               <Body style={{flexDirection: 'row'}}>

@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Form, Item, Icon, Button, Header, Left, Body, Right, Title } from 'native-base';
-import users from '../../data/users.json';
+// import users from '../../data/users.json';
 import { DebounceInput } from '../../components/DebounceInput';
 
 export default class Login extends React.Component{
@@ -9,12 +9,28 @@ export default class Login extends React.Component{
   constructor(props){
     super(props);
     this.login = this.login.bind(this);
+    this._retrieveUser = this._retrieveUser.bind(this);
     this.state = {
       email: "",
       password: "",
       message: "",
       pinSecure: true
     };
+  }
+
+  async _retrieveUser(){
+    try{
+      const u = await AsyncStorage.getItem('users');
+      const users = JSON.parse(u);
+      for(let i=0; i<users.length; ++i){
+        if(users[i].email === this.state.email && users[i].password === this.state.password){
+          return users[i];
+        }
+      }
+      return "not found";
+    }catch(error){
+      return error;
+    }
   }
 
   login(){
@@ -24,18 +40,17 @@ export default class Login extends React.Component{
     }else if(this.state.password === ''){
       this.setState({message: 'password cannot be empty'});
     }else{
-      users.forEach(user => {
-        if(user.email === this.state.email && user.password === this.state.password){
-          this.setState({message: ''});
+      this._retrieveUser().then(val => {
+        if(typeof val !== "object"){
+          this.setState({
+            message: "invalid username or password"
+          });
+          throw new Error(val);
+        }else{
+          this.setState({ message: '' });
           flag = true;
-          this.props.navigation.navigate('Main', {user: user});
+          this.props.navigation.navigate('Main', {user: val});
         }
-      });
-    }
-
-    if(!flag){
-      this.setState({
-        message: "invalid username or password"
       });
     }
   }

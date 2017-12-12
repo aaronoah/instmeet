@@ -36,14 +36,14 @@ export default class History extends React.Component {
   }
 
   render(){
-    function findImg(name){
-      switch(name){
-        case 'swim': return require('../../images/swim.png');
-        case 'cook': return require('../../images/cook.png');
-        case 'club': return require('../../images/club.png');
-        case 'rock': return require('../../images/music.png');
-      }
-    }
+    // function findImg(name){
+    //   switch(name){
+    //     case 'swim': return require('../../images/swim.png');
+    //     case 'cook': return require('../../images/cook.png');
+    //     case 'club': return require('../../images/club.png');
+    //     case 'rock': return require('../../images/music.png');
+    //   }
+    // }
 
   return(
     <Container>

@@ -85,7 +85,7 @@ export default class Forgetpassword extends React.Component {
                 </Header>
                 <Form style={{ backgroundColor: 'white', height: 667 }}>
                     <View style={{ flexDirection: 'row'}}>
-                        <Text style={styles.bodyText}>Forgotten your password? Enter your e-mail address below, 
+                        <Text style={styles.bodyText}>Forgot your password? Enter your e-mail address below,
                         and we'll send you instructions for resetting it.</Text>
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>

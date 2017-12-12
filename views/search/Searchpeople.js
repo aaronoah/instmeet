@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, document, Item, Input } from 'native-base';
-import users from '../data/users.json';
+import users from '../../data/users.json';
+// import Autocompletion from '../../components/Autocompletion';
 
 export default class Searchpeople extends Component {
 
@@ -28,49 +29,47 @@ export default class Searchpeople extends Component {
   }
 
   Noresult() {
+    let content;
     if (this.state.text == '') {
-      var content1 = '';
-      this.setState({content: content1});
+      content = '';
+      this.setState({content: content});
     } else if (!this.contains(this.state.text)){
-      var constent1= <View></View>;
-      this.setState({content: content1});
+      content= <View></View>;
+      this.setState({content: content});
     }
   }
 
   findImg(name) {
     switch (name) {
-      case 'Kumat Pratik': return require('../images/face2.png');
-      case 'Kumat Din': return require('../images/face3.png');
-      case 'Megha Smith': return require('../images/Megha.png');
-      case 'Jackie Jones': return require('../images/Jackie.png');
-      case 'John Smith': return require('../images/John.png');
-      case 'Jane Doe': return require('../images/Jane.png');
-      case 'Yuqi Zhou': return require('../images/Yuqi.png');
+      case 'Kumat Pratik': return require('../../images/face2.png');
+      case 'Kumat Din': return require('../../images/face3.png');
+      case 'Megha Smith': return require('../../images/Megha.png');
+      case 'Jackie Jones': return require('../../images/Jackie.png');
+      case 'John Smith': return require('../../images/John.png');
+      case 'Jane Doe': return require('../../images/Jane.png');
+      case 'Yuqi Zhou': return require('../../images/Yuqi.png');
     }
   }
 
   getResult(key, element) {
-    var content1 =
-    <List>
-      <ListItem onPress={() => this.props.navigation.navigate('Profile', { user: element, toggle: true })}>
-        <Thumbnail size={80} source={this.findImg(element.username)} />
-        <Body>
-          <Text >{element.username}</Text>
-          <Text note >{element.notes}</Text>
-        </Body>
-        <TouchableOpacity>
-          <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
-        </TouchableOpacity>
-      </ListItem>
-    </List>;
+    var content1 = (
+      <List>
+        <ListItem onPress={() => this.props.navigation.navigate('Profile', { user: element })}>
+          <Thumbnail size={80} source={this.findImg(element.username)} />
+          <Body>
+            <Text >{element.username}</Text>
+            <Text note >{element.notes}</Text>
+          </Body>
+          <TouchableOpacity>
+            <Text style={{ flex: 0.3, color: '#3F51B5' }}>Follow</Text>
+          </TouchableOpacity>
+        </ListItem>
+      </List>
+    );
      this.setState({content: content1});
    }
 
   render() {
-    let empty = (
-      <View>
-      </View>
-    );
 
     return (
       <View style={{ backgroundColor: 'white', height: 667 }}>
@@ -81,9 +80,11 @@ export default class Searchpeople extends Component {
               placeholder="Search user"
               style={{ height: 40, flex: 1 }}
               onChangeText={(text) => {
-                this.state.text = text;
+                this.setState({
+                  text: text.toLowerCase()
+                });
                 this.props.Searchitem.map((element, key) => {
-                  if (element.username == this.state.text) {
+                  if (this.state.text !== "" && element.username.toLowerCase().indexOf(this.state.text) !== -1) {
                     this.getResult(key, element);
                   }
                   else {
@@ -92,10 +93,11 @@ export default class Searchpeople extends Component {
                 })
               }}
               maxLength={30} />
+            {/* <Autocompletion /> */}
           </Item>
         </Header>
         <Content>
-        {this.state.content === '' ? empty : this.state.content}
+        {this.state.content === '' ? null : this.state.content}
         </Content>
       </View>
     );

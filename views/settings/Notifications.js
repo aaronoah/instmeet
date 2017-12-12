@@ -68,11 +68,16 @@ export default class Notifications extends Component {
                   unread={this.state.array.indexOf(item.eventId) < this.state.unreadCount}
                   onRead={this._onRead.bind(this)}
                 >
-                  {Object.keys(item.announcements).map((announcement, key) => {
-                    return (
-                      <Text key={key}>{`${announcement}: ${item.announcements[announcement]}`}</Text>
-                    );
-                  })}
+                  <List>
+                    {Object.keys(item.announcements).map((announcement, key) => {
+                      return (
+                        <ListItem key={key} style={{flexDirection: 'column'}}>
+                          <Text style={{fontWeight: 'bold', textAlign: 'left'}}>{announcement.charAt(0).toUpperCase() + announcement.slice(1)}</Text>
+                          <Text>{item.announcements[announcement]}</Text>
+                        </ListItem>
+                      );
+                    })}
+                  </List>
                 </ViewMore>
               </ListItem>
             );

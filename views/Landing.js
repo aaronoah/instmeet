@@ -33,9 +33,10 @@ const styles = StyleSheet.create({
   },
   headline: {
     marginTop: 174,
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: 'bold',
     backgroundColor: 'transparent',
+    fontFamily: 'Noteworthy',
     color: 'white'
   },
   auth: {

@@ -6,7 +6,7 @@
         "start": "Tuesday, 26 Dec 2017 15:30",
         "end": "Tuesday, 26 Dec 2017 18:30"
       },
-      "registerDDL": "Tuesday, 28 Nov 2017 12:30",
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
       "location": {
         "name": "University Recreation and Wellness Center",
         "latitude": 39.9042,
@@ -19,7 +19,6 @@
         "test2",
         "test3"
       ],
-      "sizeLimit": 100,
       "color": "#5BC0EB",
       "thumbnail": "swim",
       "tags": ["swimming"]
@@ -28,10 +27,10 @@
       "id": 2,
       "title": "Share your favorite recipe",
       "time": {
-        "start": "Monday, 27 Nov 11:30",
-        "end": "Monday, 27 Nov 14:30"
+        "start": "Monday, 27 Nov 2017 11:30",
+        "end": "Monday, 27 Nov 2017 14:30"
       },
-      "registerDDL": "Tuesday, 28 Nov 12:30",
+      "registerDDL": "Monday, 27 Nov 2017 8:30",
       "location": {
         "name": "Wahu Student Apartment",
         "latitude": 44.9778,
@@ -51,10 +50,10 @@
       "id": 3,
       "title": "Club Night",
       "time": {
-        "start": "Saturday, 25 Nov 22:00",
-        "end": "Sunday, 26 Nov 1:30"
+        "start": "Saturday, 25 Nov 2017 22:00",
+        "end": "Sunday, 26 Nov 2017 1:30"
       },
-      "registerDDL": "Tuesday, 28 Nov 12:30",
+      "registerDDL": "Tuesday, 28 Nov 2017 12:30",
       "location": {
         "name": "Sally's Saloon",
         "latitude": 34.0522,
@@ -75,8 +74,8 @@
       "id": 4,
       "title": "Xbox Games",
       "time": {
-        "start": "Sunday, 26 Nov 22:00",
-        "end": "Sunday, 26 Nov 23:30"
+        "start": "Sunday, 26 Nov 2017 22:00",
+        "end": "Sunday, 26 Nov 2017 23:30"
       },
       "registerDDL": "Tuesday, 28 Nov 12:30",
       "location": {
@@ -98,10 +97,10 @@
       "id": 5, //primary key
       "title": "rockkkkkkk!",
       "time": {
-        "start": "20:30",
-        "end": "03:30"
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
       },
-      "registerDDL": "Tuesday, 28 Nov 12:30",
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
       "location": {
         "name": "Kitty Cat Klub",
         "latitude": -28.9068,
@@ -118,6 +117,348 @@
       "thumbnail": "rock",
       "tags": [
         "rock"
+      ]
+    },
+    {
+      "id": 6, //primary key
+      "title": "Hiking on Greater Minneapolis Area",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "Minneapolis Mountain",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Join hiking group in U of M",
+      "groupSize": 10,
+      "initiator": "test2",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "brown",
+      "thumbnail": "hiking",
+      "tags": [
+        "hiking"
+      ]
+    },
+    {
+      "id": 7, //primary key
+      "title": "Football Night vs USC",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "TCF Bank Stadium",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Cheer up for Gophers",
+      "groupSize": 200,
+      "initiator": "test2",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "green",
+      "thumbnail": "football",
+      "tags": [
+        "football"
+      ]
+    },
+    {
+      "id": 8, //primary key
+      "title": "Yoga in Rec Center",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "University Recreation and Wellness Center",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Yoga training",
+      "groupSize": 10,
+      "initiator": "test2",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "white",
+      "thumbnail": "yoga",
+      "tags": [
+        "yoga"
+      ]
+    },
+    {
+      "id": 9, //primary key
+      "title": "Golf meetup",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "Saint Paul Golf Area",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Come and golf with your friends!",
+      "groupSize": 4,
+      "initiator": "test2",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "#f0fff0",
+      "thumbnail": "golf",
+      "tags": [
+        "golf"
+      ]
+    },
+    {
+      "id": 10, //primary key
+      "title": "Frisbee",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "East Bank Main Campus Lawn",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Come and play frisbee!",
+      "groupSize": 35,
+      "initiator": "test2",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "#faebd7",
+      "thumbnail": "frisbee",
+      "tags": [
+        "frisbee"
+      ]
+    },
+    {
+      "id": 11, //primary key
+      "title": "Workout with your gym partners",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "University Recreation and Wellness Center",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Find your mates in the gatherings!",
+      "groupSize": 20,
+      "initiator": "test2",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "#f08080",
+      "thumbnail": "gym",
+      "tags": [
+        "gym"
+      ]
+    },
+    {
+      "id": 12, //primary key
+      "title": "Skiing in the U",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "Snow Area",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Practice your skiing skills",
+      "groupSize": 12,
+      "initiator": "test3",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "#f5fffa",
+      "thumbnail": "skiing",
+      "tags": [
+        "skiing"
+      ]
+    },
+    {
+      "id": 13, //primary key
+      "title": "Singing for the community",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "Coffman Memorial Union",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Show your singing and appreciate the communities!",
+      "groupSize": 20,
+      "initiator": "test3",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "#da70d6",
+      "thumbnail": "singing",
+      "tags": [
+        "singing"
+      ]
+    },
+    {
+      "id": 14, //primary key
+      "title": "Capturing the great moments in the U",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "Anywhere in the U",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Show your photos!",
+      "groupSize": 15,
+      "initiator": "test3",
+      "participants": [
+        "test",
+        "test3"
+      ],
+      "color": "#e0ffff",
+      "thumbnail": "photography",
+      "tags": [
+        "photography"
+      ]
+    },
+    {
+      "id": 15, //primary key
+      "title": "Biking in the Minneapolis Area",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "East Bank",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Are you a rider? come join us!",
+      "groupSize": 20,
+      "initiator": "test",
+      "participants": [
+        "test",
+        "test2",
+        "test3"
+      ],
+      "color": "#afeeee",
+      "thumbnail": "biking",
+      "tags": [
+        "biking"
+      ]
+    },
+    {
+      "id": 16, //primary key
+      "title": "Paint for the U",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "Coffman Memorial Union",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Paint whatever you think is the U!",
+      "groupSize": 30,
+      "initiator": "test",
+      "participants": [
+        "test",
+        "test2",
+        "test3"
+      ],
+      "color": "#ffc0cb",
+      "thumbnail": "painting",
+      "tags": [
+        "painting"
+      ]
+    },
+    {
+      "id": 17, //primary key
+      "title": "Playing piano for the children",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "Coffman Memorial Union",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Teenagers from Saint Paul areas are visiting the U of M, show your talents!",
+      "groupSize": 5,
+      "initiator": "test",
+      "participants": [
+        "test",
+        "test2",
+        "test3"
+      ],
+      "color": "#ffc0ff",
+      "thumbnail": "piano",
+      "tags": [
+        "piano"
+      ]
+    },
+    {
+      "id": 18, //primary key
+      "title": "MinneHack in the year 2018",
+      "time": {
+        "start": "Tuesday, 26 Dec 2017 20:30",
+        "end": "Tuesday, 26 Dec 2017 03:30"
+      },
+      "registerDDL": "Tuesday, 26 Dec 2017 12:30",
+      "location": {
+        "name": "Unknown",
+        "latitude": -28.9068,
+        "longitude": 47.1729
+      },
+      "description": "Come to hackathon with a team!",
+      "groupSize": 5,
+      "initiator": "test",
+      "participants": [
+        "test",
+        "test2",
+        "test3"
+      ],
+      "color": "#6495ed",
+      "thumbnail": "coding",
+      "tags": [
+        "coding"
       ]
     }
   ]

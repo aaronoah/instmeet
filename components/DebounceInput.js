@@ -4,7 +4,7 @@ import debounce from 'lodash/debounce';
 
 export const DebounceInput = (props) => ({
   render(){
-    const wait = (props.wait !== undefined) ? props.wait : 250;
+    const wait = (props.wait !== undefined) ? props.wait : 300;
     return (
       <Input {...props} onChangeText={debounce(props.onChangeText, wait)} />
     );

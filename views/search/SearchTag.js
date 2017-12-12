@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image, LayoutAnimation, Vibration } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, Badge, List, ListItem, Thumbnail, Text, Body, document, Item, Input, Card, CardItem } from 'native-base';
-import interests from '../data/interests';
+import interests from '../../data/interests';
 // import { element } from '../../../Library/Caches/typescript/2.6/node_modules/@types/prop-types';
 
 export default class Search extends Component {
@@ -100,7 +100,10 @@ export default class Search extends Component {
                             placeholder="Search tag"
                             style={{ height: 40, flex: 1 }}
                             onChangeText={(text) => {
-                                this.state.text = text;
+                                // this.state.text = text;
+                                this.setState({
+                                    text: text
+                                });
                                 this.props.tag.map((element, key) => {
                                     if (element.text == this.state.text || element.category == this.state.text) {
                                         this.setState({content: this.getResult(key, element)})

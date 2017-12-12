@@ -13,9 +13,9 @@ import Profile from './settings/Profile';
 import Notifications from './settings/Notifications';
 import resetPassword from './settings/resetPassword';
 import History from './settings/History';
-import Searchpeople from './Searchpeople';
+import Searchpeople from './search/Searchpeople';
 import debounce from 'lodash/debounce';
-import SearchTag from './SearchTag';
+import SearchTag from './search/SearchTag';
 import TagPicker from '../components/TagPicker';
 
 const Tabs = TabNavigator({

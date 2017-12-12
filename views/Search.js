@@ -48,15 +48,15 @@ export default class Search extends Component {
   //   this.setState({content:content1});
   // }
 
-findImg(name){
-    switch(name){
-      case 'swim': return require('../images/swim.png');
-      case 'cook': return require('../images/cook.png');
-      case 'club': return require('../images/club.png');
-      case 'rock': return require('../images/music.png');
-      case 'games': return require("../images/xbox.png");
-    }
-  }
+// findImg(name){
+//     switch(name){
+//       case 'swim': return require('../images/swim.png');
+//       case 'cook': return require('../images/cook.png');
+//       case 'club': return require('../images/club.png');
+//       case 'rock': return require('../images/music.png');
+//       case 'games': return require("../images/xbox.png");
+//     }
+//   }
 
   Noresult() {
     if (this.state.text == '') {

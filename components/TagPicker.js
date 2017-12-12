@@ -48,7 +48,7 @@ export default class TagPicker extends React.Component{
       <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
         {(this.state.badges !== undefined && this.state.badges.length > 0) ? this.state.badges.map((badge, key) => {
           return (
-            <Badge key={key} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: badge.color }}>
+            <Badge key={key} style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 3, backgroundColor: badge.color }}>
               <Text style={{ color: 'white', lineHeight: 15, fontSize: 15 }}>{badge.text}</Text>
               {(this.props.permitEdit) ? (
                 <TouchableOpacity style={{ marginLeft: 5 }} onPress={() => this._removeTags(badge.text)}>

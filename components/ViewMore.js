@@ -56,13 +56,32 @@ export default class ViewMore extends Component{
 
   render(){
 
+    /**
+     * find image path according to its name
+     * @param name string - image name
+     * @return object
+    */
     function findImg(name) {
       switch (name) {
-        case 'swim': return require('../images/swim.png');
-        case 'cook': return require('../images/cook.png');
-        case 'club': return require('../images/club.png');
-        case 'rock': return require('../images/music.png');
-        case 'games': return require("../images/xbox.png");
+        case 'swim': return require('../images/swimmer-landing.jpg');
+        case 'cook': return require('../images/cooking.jpg');
+        case 'club': return require('../images/club.jpg');
+        case 'rock': return require('../images/music-4.jpg');
+        case 'games': return require("../images/video-games.jpg");
+        case 'hiking': return require('../images/hiking.jpg');
+        case 'football': return require('../images/football.jpg');
+        case 'yoga': return require('../images/yoga.jpg');
+        case 'frisbee': return require('../images/frisbee.jpg');
+        case 'golf': return require('../images/golf.jpg');
+        case 'gym': return require('../images/gym.png');
+        case 'skiing': return require('../images/skiing.jpg');
+        case 'singing': return require('../images/singing.jpg');
+        case 'painting': return require('../images/painting.jpg');
+        case 'piano': return require('../images/piano.jpg');
+        case 'photography': return require('../images/photography.jpg');
+        case 'biking': return require('../images/biking.jpg');
+        case 'coding': return require('../images/coding.jpeg')
+        default: return require('../images/events.png');
       }
     }
 

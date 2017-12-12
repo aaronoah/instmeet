@@ -1,46 +1,56 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Image, StyleSheet, FlatList } from 'react-native';
+import { View, TouchableOpacity, Image, StyleSheet, FlatList, AsyncStorage } from 'react-native';
 import { Icon, Form, Container, Header, Content, Segment, Button, List, ListItem, Thumbnail, Text, Body, Tab, Tabs, Left, Right, Title, Card, CardItem, Badge } from 'native-base';
-import events from '../../data/events.json';
+// import events from '../../data/events.json';
 import { EventCard } from '../../components/EventCard';
 
 export default class MyEvents extends Component {
   constructor(props){
     super(props);
-    this.fetchEvents = this.fetchEvents.bind(this);
+    this._fetchEvents = this._fetchEvents.bind(this);
     this.state = {
-      events: this.fetchEvents(),
+      events: [],
       initiatedEvents: [],
       joinedEvents: []
     };
   }
 
-  fetchEvents(){
+  async _fetchEvents(){
     const { state } = this.props.navigation;
-    return events.filter(event => state.params.eventIds.indexOf(event.id) !== -1);
+    const e = await AsyncStorage.getItem('events');
+    return JSON.parse(e).filter(event => state.params.eventIds.indexOf(event.id) !== -1);
   }
 
-  componentDidMount(){
-    const { username } = this.props.screenProps.token.user;
-    this.setState(prev => ({
-      initiatedEvents: prev.events.filter(event => {
-        if (event.initiator === username) {
-          return true;
-        } else {
-          return false;
-        }
-      }),
-      joinedEvents: prev.events.filter(event => {
-          if (event.participants.indexOf(username) !== -1) {
-            return true;
-          } else {
-            return false;
-          }
-        })
-    }));
+  componentWillMount(){
+    this._fetchEvents().then(val => {
+      if(Array.isArray(val)){
+        this.setState({ events: val});
+        const { username } = this.props.screenProps.token.user;
+        this.setState({
+          initiatedEvents: val.filter(event => {
+            if (event.initiator === username) {
+              return true;
+            } else {
+              return false;
+            }
+          }),
+          joinedEvents: val.filter(event => {
+            if (event.participants.indexOf(username) !== -1) {
+              return true;
+            } else {
+              return false;
+            }
+          })
+        });
+        this.forceUpdate();
+      }
+    });
   }
 
   render() {
+    if(this.state.events.length == 0){
+      return false;
+    }
     const { state } = this.props.navigation;
     return (
       <Container>
@@ -88,6 +98,7 @@ const TabContent = (props) => ({
         {props.events.length > 0 ?
           (<FlatList
             data={props.events}
+            extraData={props.events}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <EventCard item={item} onPress={() => props.navigation.navigate('Event', { event: item })} />

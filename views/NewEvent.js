@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Image, Button } from 'react-native';
+import { View, TouchableOpacity, Image, Button, AsyncStorage } from 'react-native';
 import { Icon, Form, Container, Header, Content, List, Input, ListItem, Thumbnail, Text, Body, Item, Toast, Left, Right, Title, Badge, Card, CardItem } from 'native-base';
 // import DatePicker from 'react-native-datepicker';
 import TagPicker from '../components/TagPicker';
@@ -14,6 +14,7 @@ export default class NewEvent extends Component {
     this._cancel = this._cancel.bind(this);
     this._selected = this._selected.bind(this);
     this._toggleSizeInfinity = this._toggleSizeInfinity.bind(this);
+    this._saveToStorage = this._saveToStorage.bind(this);
     this.state = {
       showToast: false,
       message: "",
@@ -61,17 +62,77 @@ export default class NewEvent extends Component {
 
   }
 
+  async _saveToStorage(){
+    let newEvent = {
+      title: this.state.title,
+      time: {
+        start: this.state.timeStart,
+        end: this.state.timeEnd
+      },
+      registerDDL: this.state.registerDDL,
+      location: {
+        name: this.state.location
+      },
+      description: this.state.description,
+      groupSize: this.state.groupSize,
+      initiator: this.props.screenProps.token.user.username,
+      participants: [],
+      color: "white",
+      tags: this.state.tags
+    }
+
+    try {
+      let events;
+      await AsyncStorage.getItem('events').then(val => {
+        events = JSON.parse(val);
+      });
+      newEvent.id = events.length + 1;
+
+      events.push(newEvent);
+      AsyncStorage.setItem('events', JSON.stringify(events));
+
+      let users;
+      await AsyncStorage.getItem('users').then(val => {
+        users = JSON.parse(val);
+      });
+
+      for(let i=0; i<users.length; ++i){
+        if(users[i].username === this.props.screenProps.token.user.username){
+          users[i].events.incoming.push(newEvent.id);
+          AsyncStorage.setItem('users', JSON.stringify(users));
+        }
+      }
+
+    } catch (error) {
+      return error;
+    }
+
+    return "success";
+  }
+
   _saveEvent(){
     if(this.state.title !== '' && this.state.timeStart !== ''
     && this.state.timeEnd !== '' && this.state.location !== ''
-    && this.state.description !== '' && this.state.groupSize !== 0){
+    && this.state.description !== '' && this.state.groupSize !== 0 && this.state.registerDDL !== ""){
 
-      Toast.show({
-        text: 'Create Event Successfully!',
-        position: 'bottom',
-        buttonText: 'Okay'
+      this._saveToStorage().then(output => {
+        if(output !== 'success'){
+          Toast.show({
+            text: 'Sorry, new event is not created successfully, try again',
+            position: 'bottom',
+            buttonText: 'Okay'
+          });
+          throw new Error(output);
+        }else{
+          Toast.show({
+            text: 'Create Event Successfully!',
+            position: 'bottom',
+            buttonText: 'Okay'
+          });
+          this.props.navigation.goBack(null);
+        }
       });
-      this.props.navigation.goBack(null);
+
     }else{
       Toast.show({
         text: 'Sorry, all information should be filled out',
@@ -91,9 +152,6 @@ export default class NewEvent extends Component {
     this.props.navigation.goBack(null);
   }
 
-  componentDidMount(){
-    // this.timer = setImmediate();
-  }
 
   render(){
     return (
