@@ -7,7 +7,7 @@ import moment from 'moment';
 export default class CustomDateTimePicker extends React.Component{
   constructor(props){
     super(props);
-    this,_showDateTimePicker = this._showDateTimePicker.bind(this);
+    this._showDateTimePicker = this._showDateTimePicker.bind(this);
     this._hideDateTimePicker = this._hideDateTimePicker.bind(this);
     this._handleDatePicked = this._handleDatePicked.bind(this);
     const vis = 'isDateTimePickerVisible' + this.props.number;
